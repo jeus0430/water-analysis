@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('../sass/app.scss')
 
 import Vue from 'vue'
 

@@ -2,7 +2,7 @@ const home = () =>import ( '../components/app.vue')
 
 export default [
     {
-        path: '/home',
+        path: '/',
         component: home,
         name: 'home',
     },
