@@ -23259,11 +23259,15 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 #app {
   padding: 1rem;
+  height: 100%;
+}
+
+#components-layout-demo-basic {
+  height: 100%;
 }
 
 #components-layout-demo-basic .ant-layout-header {
-  background: #7dbcea;
-  color: #fff;
+  background: white;
 }
 
 #components-layout-demo-basic .ant-layout-sider {
@@ -23281,7 +23285,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 
 #components-layout-demo-basic > .ant-layout {
-  margin-bottom: 48px;
+  min-height: 100%;
 }
 
 #components-layout-demo-basic > .ant-layout:last-child {
