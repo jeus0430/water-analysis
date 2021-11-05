@@ -24,7 +24,6 @@
 <body>
     <div id="app">
         <main class="py-3">
-            <h3>Laravel Vue</h3>
             <router-view></router-view>
         </main>
     </div>
