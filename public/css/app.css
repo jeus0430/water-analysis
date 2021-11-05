@@ -23261,24 +23261,16 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   padding: 1rem;
 }
 
-#components-layout-demo-basic {
-  text-align: center;
-}
-
-#components-layout-demo-basic .ant-layout-header,
-#components-layout-demo-basic .ant-layout-footer {
+#components-layout-demo-basic .ant-layout-header {
   background: #7dbcea;
   color: #fff;
-}
-
-#components-layout-demo-basic .ant-layout-footer {
-  line-height: 1.5;
 }
 
 #components-layout-demo-basic .ant-layout-sider {
   background: #3ba0e9;
   color: #fff;
   line-height: 120px;
+  padding: 1rem;
 }
 
 #components-layout-demo-basic .ant-layout-content {

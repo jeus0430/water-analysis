@@ -11,6 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -76,36 +80,148 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var default_layout = "default";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: {},
   data: function data() {
     return {
-      message: "Hello World",
-      formLayout: "horizontal",
-      form: this.$form.createForm(this, {
-        name: "coordinated"
-      }),
-      zones: []
+      form: {},
+      data: [],
+      selectedZones: [],
+      zones: [],
+      groups: [],
+      selectedGroups: [],
+      selectedMoneavs: [],
+      mone_avs: [],
+      fetching: false,
+      dateRange: [],
+      delta_min: 0,
+      delta_max: 0,
+      delta: [0, 0],
+      per_cent_min: 0,
+      per_cent_max: 0,
+      per_cent: [0, 0],
+      plainOptions: ["date", "ezor", "group", "mone_av"],
+      selectedX: [],
+      sum: [],
+      sumOptions: ["daily", "weekly", "monthly", "yearly"],
+      graphType: [],
+      graphOptions: ["pie", "line", "bar", "area"],
+      dateChecked: false
     };
   },
   methods: {
+    moment: (moment__WEBPACK_IMPORTED_MODULE_1___default()),
     handleSubmit: function handleSubmit(e) {
+      e.preventDefault();
       this.form.validateFields(function (err, values) {
         if (!err) {
           console.log("Received values of form: ", values);
         }
       });
-      e.preventDefault();
     },
-    handleSelectChange: function handleSelectChange(value) {
-      this.form.setFieldsValue({
-        note: "Hi, ".concat(value === "male" ? "man" : "lady", "!")
-      });
+    handleZoneChange: function handleZoneChange(value) {
+      this.selectedZones = value;
     },
-    handleChange: function handleChange(value) {
-      console.log("selected ".concat(value));
-    }
+    handleGroupChange: function handleGroupChange(value) {
+      this.selectedGroups = value;
+    },
+    handleMoneavChange: function handleMoneavChange(value) {
+      this.selectedMoneavs = value;
+    },
+    handleDateRangeChange: function handleDateRangeChange(date, dateString) {
+      console.log(this.dateRange);
+    },
+    handleDeltaChange: function handleDeltaChange(value) {
+      console.log(this.delta);
+    },
+    handlePerCentChange: function handlePerCentChange(value) {
+      console.log(this.per_cent);
+    },
+    handleXAxisChange: function handleXAxisChange(checkedValues) {
+      if (typeof checkedValues.find(function (e) {
+        return e == "date";
+      }) == "undefined") this.dateChecked = false;else this.dateChecked = true;
+    },
+    handleSumChange: function handleSumChange(value) {},
+    handleGraphChange: function handleGraphChange(value) {}
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/zones").then(function (res) {
+      _this.zones = res.data;
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/groups").then(function (res) {
+      _this.groups = res.data;
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
+      _this.mone_avs = res.data;
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
+      _this.delta_min = parseFloat(res.data.min);
+      _this.delta_max = parseFloat(res.data.max);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/per_cent_range").then(function (res) {
+      _this.per_cent_min = parseFloat(res.data.min);
+      _this.per_cent_max = parseFloat(res.data.max);
+    });
   }
 });
 
@@ -211,34 +327,37 @@ var render = function() {
             [
               _c(
                 "a-layout-sider",
-                { attrs: { width: "400", collapsible: "" } },
+                { attrs: { width: "400" } },
                 [
                   _c(
                     "a-form",
                     {
-                      attrs: {
-                        form: _vm.form,
-                        "label-col": { span: 5 },
-                        "wrapper-col": { span: 15 }
-                      },
+                      attrs: { label: "Search Form", form: _vm.form },
                       on: { submit: _vm.handleSubmit }
                     },
                     [
                       _c(
                         "a-form-item",
-                        { attrs: { label: "Note" } },
+                        { attrs: { label: "Waste Zone:" } },
                         [
                           _c(
                             "a-select",
-                            { on: { change: _vm.handleChange } },
+                            {
+                              attrs: {
+                                mode: "multiple",
+                                value: _vm.selectedZones,
+                                placeholder: "Select zones"
+                              },
+                              on: { change: _vm.handleZoneChange }
+                            },
                             _vm._l(_vm.zones, function(zone) {
                               return _c(
                                 "a-select-option",
-                                { key: zone.id, attrs: { value: "zone.id" } },
+                                { key: zone.waste_zone },
                                 [
                                   _vm._v(
                                     "\n                                " +
-                                      _vm._s(zone.name) +
+                                      _vm._s(zone.waste_description) +
                                       "\n                            "
                                   )
                                 ]
@@ -252,59 +371,195 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "a-form-item",
-                        { attrs: { label: "Gender" } },
+                        { attrs: { label: "Belongs To:" } },
                         [
                           _c(
                             "a-select",
                             {
-                              directives: [
-                                {
-                                  name: "decorator",
-                                  rawName: "v-decorator",
-                                  value: [
-                                    "gender",
-                                    {
-                                      rules: [
-                                        {
-                                          required: true,
-                                          message: "Please select your gender!"
-                                        }
-                                      ]
-                                    }
-                                  ],
-                                  expression:
-                                    "[\n                                'gender',\n                                {\n                                    rules: [\n                                        {\n                                            required: true,\n                                            message:\n                                                'Please select your gender!'\n                                        }\n                                    ]\n                                }\n                            ]"
-                                }
-                              ],
                               attrs: {
-                                placeholder:
-                                  "Select a option and change input text above"
+                                mode: "multiple",
+                                value: _vm.selectedGroups,
+                                placeholder: "Select group"
                               },
-                              on: { change: _vm.handleSelectChange }
+                              on: { change: _vm.handleGroupChange }
                             },
-                            [
-                              _c(
+                            _vm._l(_vm.groups, function(group) {
+                              return _c(
                                 "a-select-option",
-                                { attrs: { value: "male" } },
+                                { key: group.waste_group },
                                 [
                                   _vm._v(
-                                    "\n                                male\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a-select-option",
-                                { attrs: { value: "female" } },
-                                [
-                                  _vm._v(
-                                    "\n                                female\n                            "
+                                    "\n                                " +
+                                      _vm._s(group.waste_description) +
+                                      "\n                            "
                                   )
                                 ]
                               )
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "Mone_av:" } },
+                        [
+                          _c(
+                            "a-select",
+                            {
+                              attrs: {
+                                mode: "multiple",
+                                value: _vm.selectedMoneavs,
+                                placeholder: "Select Mone_av"
+                              },
+                              on: { change: _vm.handleMoneavChange }
+                            },
+                            _vm._l(_vm.mone_avs, function(mone_av) {
+                              return _c(
+                                "a-select-option",
+                                { key: mone_av.mone_av },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(mone_av.mone_av) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "Mone_av:" } },
+                        [
+                          _c("a-range-picker", {
+                            on: { change: _vm.handleDateRangeChange },
+                            model: {
+                              value: _vm.dateRange,
+                              callback: function($$v) {
+                                _vm.dateRange = $$v
+                              },
+                              expression: "dateRange"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "delta:" } },
+                        [
+                          _c("a-slider", {
+                            attrs: {
+                              range: "",
+                              "default-value": [_vm.delta_min, _vm.delta_max],
+                              min: _vm.delta_min,
+                              max: _vm.delta_max,
+                              step: 0.0001
+                            },
+                            on: { afterChange: _vm.handleDeltaChange },
+                            model: {
+                              value: _vm.delta,
+                              callback: function($$v) {
+                                _vm.delta = $$v
+                              },
+                              expression: "delta"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "per_cent:" } },
+                        [
+                          _c("a-slider", {
+                            attrs: {
+                              range: "",
+                              "default-value": [
+                                _vm.per_cent_min,
+                                _vm.per_cent_max
+                              ],
+                              min: _vm.per_cent_min,
+                              max: _vm.per_cent_max
+                            },
+                            on: { afterChange: _vm.handlePerCentChange },
+                            model: {
+                              value: _vm.per_cent,
+                              callback: function($$v) {
+                                _vm.per_cent = $$v
+                              },
+                              expression: "per_cent"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "X-axis:" } },
+                        [
+                          _c("a-checkbox-group", {
+                            attrs: { name: "xaxis", options: _vm.plainOptions },
+                            on: { change: _vm.handleXAxisChange },
+                            model: {
+                              value: _vm.selectedX,
+                              callback: function($$v) {
+                                _vm.selectedX = $$v
+                              },
+                              expression: "selectedX"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm.dateChecked
+                        ? _c(
+                            "a-form-item",
+                            { attrs: { label: "Sum:" } },
+                            [
+                              _c("a-radio-group", {
+                                attrs: { options: _vm.sumOptions },
+                                on: { change: _vm.handleSumChange },
+                                model: {
+                                  value: _vm.sum,
+                                  callback: function($$v) {
+                                    _vm.sum = $$v
+                                  },
+                                  expression: "sum"
+                                }
+                              })
                             ],
                             1
                           )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "Graph:" } },
+                        [
+                          _c("a-radio-group", {
+                            attrs: { name: "graph", options: _vm.graphOptions },
+                            on: { change: _vm.handleGraphChange },
+                            model: {
+                              value: _vm.graphType,
+                              callback: function($$v) {
+                                _vm.graphType = $$v
+                              },
+                              expression: "graphType"
+                            }
+                          })
                         ],
                         1
                       ),
@@ -320,7 +575,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Submit\n                        "
+                                "\n                            Draw\n                        "
                               )
                             ]
                           )
@@ -337,13 +592,10 @@ var render = function() {
               _c("a-layout-content", [_vm._v("Content")])
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("a-layout-footer", [_vm._v("Footer")])
+          )
         ],
         1
-      ),
-      _vm._v("\n    " + _vm._s(_vm.message) + "\n")
+      )
     ],
     1
   )

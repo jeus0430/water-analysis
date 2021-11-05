@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use Facade\FlareClient\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/zones', [ApiController::class, 'zones']);
+Route::get('/groups', [ApiController::class, 'groups']);
+Route::get('/mone_avs', [ApiController::class, 'moneAvs']);
+Route::get('/delta_range', [ApiController::class, 'deltaRange']);
+Route::get('/per_cent_range', [ApiController::class, 'percentRange']);
