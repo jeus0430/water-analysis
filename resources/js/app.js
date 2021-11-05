@@ -15,6 +15,9 @@ import router from './routes.js';
 window.router = router;
 window.Fire = new Vue();
 
+import Antd from 'ant-design-vue';
+Vue.use(Antd)
+
 const app = new Vue({
     el: '#app',
     router,

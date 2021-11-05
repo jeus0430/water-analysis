@@ -16,13 +16,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var default_layout = "default";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {},
   data: function data() {
     return {
-      message: 'Hello World'
+      message: "Hello World",
+      formLayout: "horizontal",
+      form: this.$form.createForm(this, {
+        name: "coordinated"
+      }),
+      zones: []
     };
+  },
+  methods: {
+    handleSubmit: function handleSubmit(e) {
+      this.form.validateFields(function (err, values) {
+        if (!err) {
+          console.log("Received values of form: ", values);
+        }
+      });
+      e.preventDefault();
+    },
+    handleSelectChange: function handleSelectChange(value) {
+      this.form.setFieldsValue({
+        note: "Hi, ".concat(value === "male" ? "man" : "lady", "!")
+      });
+    },
+    handleChange: function handleChange(value) {
+      console.log("selected ".concat(value));
+    }
   }
 });
 
@@ -112,7 +195,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n  " + _vm._s(_vm.message) + "\n")])
+  return _c(
+    "div",
+    { attrs: { id: "components-layout-demo-basic" } },
+    [
+      _c(
+        "a-layout",
+        [
+          _c("a-layout-header", [
+            _c("h1", [_vm._v("Water Differences Analytics")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "a-layout",
+            [
+              _c(
+                "a-layout-sider",
+                { attrs: { width: "400", collapsible: "" } },
+                [
+                  _c(
+                    "a-form",
+                    {
+                      attrs: {
+                        form: _vm.form,
+                        "label-col": { span: 5 },
+                        "wrapper-col": { span: 15 }
+                      },
+                      on: { submit: _vm.handleSubmit }
+                    },
+                    [
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "Note" } },
+                        [
+                          _c(
+                            "a-select",
+                            { on: { change: _vm.handleChange } },
+                            _vm._l(_vm.zones, function(zone) {
+                              return _c(
+                                "a-select-option",
+                                { key: zone.id, attrs: { value: "zone.id" } },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(zone.name) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { label: "Gender" } },
+                        [
+                          _c(
+                            "a-select",
+                            {
+                              directives: [
+                                {
+                                  name: "decorator",
+                                  rawName: "v-decorator",
+                                  value: [
+                                    "gender",
+                                    {
+                                      rules: [
+                                        {
+                                          required: true,
+                                          message: "Please select your gender!"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  expression:
+                                    "[\n                                'gender',\n                                {\n                                    rules: [\n                                        {\n                                            required: true,\n                                            message:\n                                                'Please select your gender!'\n                                        }\n                                    ]\n                                }\n                            ]"
+                                }
+                              ],
+                              attrs: {
+                                placeholder:
+                                  "Select a option and change input text above"
+                              },
+                              on: { change: _vm.handleSelectChange }
+                            },
+                            [
+                              _c(
+                                "a-select-option",
+                                { attrs: { value: "male" } },
+                                [
+                                  _vm._v(
+                                    "\n                                male\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a-select-option",
+                                { attrs: { value: "female" } },
+                                [
+                                  _vm._v(
+                                    "\n                                female\n                            "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a-form-item",
+                        { attrs: { "wrapper-col": { span: 12, offset: 5 } } },
+                        [
+                          _c(
+                            "a-button",
+                            {
+                              attrs: { type: "primary", "html-type": "submit" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Submit\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("a-layout-content", [_vm._v("Content")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("a-layout-footer", [_vm._v("Footer")])
+        ],
+        1
+      ),
+      _vm._v("\n    " + _vm._s(_vm.message) + "\n")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

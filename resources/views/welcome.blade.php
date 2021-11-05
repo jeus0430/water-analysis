@@ -25,9 +25,7 @@
 
 <body>
     <div id="app">
-        <main class="py-3">
-            <router-view></router-view>
-        </main>
+        <router-view></router-view>
     </div>
 </body>
 

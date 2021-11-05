@@ -3,6 +3,8 @@
 
 // Variables
 @import 'variables';
- div {
-   color: red;
- }
+
+// antd
+@import 'ant-design-vue/dist/antd.css';
+
+@import 'custom';
