@@ -262,7 +262,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ant-design-vue/lib/locale-provider/he_IL */ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js");
+/* harmony import */ var ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ant-design-vue/lib/locale-provider/he_IL */ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js");
+/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
+/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -389,13 +391,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_2__["default"],
+      locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
       form: {},
       data: [],
       selectedZones: [],
@@ -419,18 +428,18 @@ __webpack_require__.r(__webpack_exports__);
       graphType: [],
       graphOptions: ["pie", "line", "bar", "area"],
       dateChecked: false,
-      datacollection: {
-        labels: [18, 28],
-        datasets: [{
-          label: "Data One",
-          backgroundColor: "#f87979",
-          data: [3, 4]
-        }, {
-          label: "Data Two",
-          backgroundColor: "#f87979",
-          data: [3, 23]
-        }]
-      }
+      chartOptions: {
+        chart: {
+          id: "vuechart-example"
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        }
+      },
+      series: [{
+        name: "Vue Chart",
+        data: [30, 40, 45, 50, 49, 60, 70, 81]
+      }]
     };
   },
   methods: {
@@ -467,7 +476,18 @@ __webpack_require__.r(__webpack_exports__);
       }) == "undefined") this.dateChecked = false;else this.dateChecked = true;
     },
     handleSumChange: function handleSumChange(value) {},
-    handleGraphChange: function handleGraphChange(value) {}
+    handleGraphChange: function handleGraphChange(value) {},
+    updateChart: function updateChart() {
+      var max = 90;
+      var min = 20;
+      var newData = this.series[0].data.map(function () {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }); // In the same way, update the series option
+
+      this.series = [{
+        data: newData
+      }];
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -866,7 +886,19 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("a-layout-content")
+                _c(
+                  "a-layout-content",
+                  [
+                    _c("apexchart", {
+                      attrs: {
+                        type: "bar",
+                        options: _vm.chartOptions,
+                        series: _vm.series
+                      }
+                    })
+                  ],
+                  1
+                )
               ],
               1
             )

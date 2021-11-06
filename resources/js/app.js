@@ -16,7 +16,10 @@ window.router = router
 window.Fire = new Vue()
 
 import Antd from "ant-design-vue"
+import VueApexCharts from "vue-apexcharts"
 Vue.use(Antd)
+Vue.use(VueApexCharts)
+Vue.component("apexchart", VueApexCharts)
 
 const app = new Vue({
     el: "#app",

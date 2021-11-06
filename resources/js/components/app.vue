@@ -117,7 +117,13 @@
                             </a-form-item>
                         </a-form>
                     </a-layout-sider>
-                    <a-layout-content></a-layout-content>
+                    <a-layout-content>
+                        <apexchart
+                            type="bar"
+                            :options="chartOptions"
+                            :series="series"
+                        ></apexchart>
+                    </a-layout-content>
                 </a-layout>
             </a-layout>
         </div>
@@ -128,6 +134,8 @@
 import axios from "axios"
 import moment from "moment"
 import heIL from "ant-design-vue/lib/locale-provider/he_IL"
+import VueApexCharts from "vue-apexcharts"
+
 export default {
     data() {
         return {
@@ -155,21 +163,20 @@ export default {
             graphType: [],
             graphOptions: ["pie", "line", "bar", "area"],
             dateChecked: false,
-            datacollection: {
-                labels: [18, 28],
-                datasets: [
-                    {
-                        label: "Data One",
-                        backgroundColor: "#f87979",
-                        data: [3, 4]
-                    },
-                    {
-                        label: "Data Two",
-                        backgroundColor: "#f87979",
-                        data: [3, 23]
-                    }
-                ]
-            }
+            chartOptions: {
+                chart: {
+                    id: "vuechart-example"
+                },
+                xaxis: {
+                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                }
+            },
+            series: [
+                {
+                    name: "Vue Chart",
+                    data: [30, 40, 45, 50, 49, 60, 70, 81]
+                }
+            ]
         }
     },
     methods: {
@@ -206,7 +213,20 @@ export default {
             else this.dateChecked = true
         },
         handleSumChange(value) {},
-        handleGraphChange(value) {}
+        handleGraphChange(value) {},
+        updateChart() {
+            const max = 90
+            const min = 20
+            const newData = this.series[0].data.map(() => {
+                return Math.floor(Math.random() * (max - min + 1)) + min
+            })
+            // In the same way, update the series option
+            this.series = [
+                {
+                    data: newData
+                }
+            ]
+        }
     },
     mounted: function() {
         axios.get("/api/zones").then(res => {

@@ -1,10 +1,13 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // antd
-@import 'ant-design-vue/dist/antd.css';
+@import "ant-design-vue/dist/antd.css";
 
-@import 'custom';
+// apexcharts
+@import "apexcharts/dist/apexcharts.css";
+
+@import "custom";
