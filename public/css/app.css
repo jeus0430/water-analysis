@@ -23263,6 +23263,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 
 #components-layout-demo-basic {
+  direction: rtl;
   height: 100%;
 }
 

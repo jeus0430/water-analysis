@@ -1,6 +1,253 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_app_vue"],{
 
+/***/ "./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _he_IL = __webpack_require__(/*! ../../date-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js");
+
+var _he_IL2 = _interopRequireDefault(_he_IL);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+exports["default"] = _he_IL2['default'];
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _he_IL = __webpack_require__(/*! ../../vc-calendar/src/locale/he_IL */ "./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js");
+
+var _he_IL2 = _interopRequireDefault(_he_IL);
+
+var _he_IL3 = __webpack_require__(/*! ../../time-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js");
+
+var _he_IL4 = _interopRequireDefault(_he_IL3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+// Merge into a locale object
+var locale = {
+  lang: (0, _extends3['default'])({
+    placeholder: 'בחר תאריך',
+    rangePlaceholder: ['תאריך התחלה', 'תאריך סיום']
+  }, _he_IL2['default']),
+  timePickerLocale: (0, _extends3['default'])({}, _he_IL4['default'])
+};
+
+// All settings at:
+// https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json
+
+exports["default"] = locale;
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/locale-provider/he_IL.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _he_IL = __webpack_require__(/*! ../locale/he_IL */ "./node_modules/ant-design-vue/lib/locale/he_IL.js");
+
+var _he_IL2 = _interopRequireDefault(_he_IL);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+exports["default"] = _he_IL2['default'];
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/locale/he_IL.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/locale/he_IL.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _he_IL = __webpack_require__(/*! ../vc-pagination/locale/he_IL */ "./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js");
+
+var _he_IL2 = _interopRequireDefault(_he_IL);
+
+var _he_IL3 = __webpack_require__(/*! ../date-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js");
+
+var _he_IL4 = _interopRequireDefault(_he_IL3);
+
+var _he_IL5 = __webpack_require__(/*! ../time-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js");
+
+var _he_IL6 = _interopRequireDefault(_he_IL5);
+
+var _he_IL7 = __webpack_require__(/*! ../calendar/locale/he_IL */ "./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js");
+
+var _he_IL8 = _interopRequireDefault(_he_IL7);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+exports["default"] = {
+  locale: 'he',
+  Pagination: _he_IL2['default'],
+  DatePicker: _he_IL4['default'],
+  TimePicker: _he_IL6['default'],
+  Calendar: _he_IL8['default'],
+  Table: {
+    filterTitle: 'תפריט סינון',
+    filterConfirm: 'אישור',
+    filterReset: 'איפוס',
+    selectAll: 'בחר הכל',
+    selectInvert: 'הפוך בחירה'
+  },
+  Modal: {
+    okText: 'אישור',
+    cancelText: 'ביטול',
+    justOkText: 'אישור'
+  },
+  Popconfirm: {
+    okText: 'אישור',
+    cancelText: 'ביטול'
+  },
+  Transfer: {
+    searchPlaceholder: 'חפש כאן',
+    itemUnit: 'פריט',
+    itemsUnit: 'פריטים'
+  },
+  Upload: {
+    uploading: 'מעלה...',
+    removeFile: 'הסר קובץ',
+    uploadError: 'שגיאת העלאה',
+    previewFile: 'הצג קובץ',
+    downloadFile: 'הורד קובץ'
+  },
+  Empty: {
+    description: 'אין מידע'
+  }
+};
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var locale = {
+  placeholder: 'בחר שעה'
+};
+
+exports["default"] = locale;
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = {
+  today: 'היום',
+  now: 'עכשיו',
+  backToToday: 'חזור להיום',
+  ok: 'אישור',
+  clear: 'איפוס',
+  month: 'חודש',
+  year: 'שנה',
+  timeSelect: 'בחר שעה',
+  dateSelect: 'בחר תאריך',
+  weekSelect: 'בחר שבוע',
+  monthSelect: 'בחר חודש',
+  yearSelect: 'בחר שנה',
+  decadeSelect: 'בחר עשור',
+  yearFormat: 'YYYY',
+  dateFormat: 'M/D/YYYY',
+  dayFormat: 'D',
+  dateTimeFormat: 'M/D/YYYY HH:mm:ss',
+  monthBeforeYear: true,
+  previousMonth: 'חודש קודם (PageUp)',
+  nextMonth: 'חודש הבא (PageDown)',
+  previousYear: 'שנה שעברה (Control + left)',
+  nextYear: 'שנה הבאה (Control + right)',
+  previousDecade: 'העשור הקודם',
+  nextDecade: 'העשור הבא',
+  previousCentury: 'המאה הקודמת',
+  nextCentury: 'המאה הבאה'
+};
+
+/***/ }),
+
+/***/ "./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = {
+  // Options.jsx
+  items_per_page: '/ עמוד',
+  jump_to: 'עבור אל',
+  jump_to_confirm: 'אישור',
+  page: '',
+
+  // Pagination.jsx
+  prev_page: 'העמוד הקודם',
+  next_page: 'העמוד הבא',
+  prev_5: '5 עמודים קודמים',
+  next_5: '5 עמודים הבאים',
+  prev_3: '3 עמודים קודמים',
+  next_3: '3 עמודים הבאים'
+};
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/app.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/app.vue?vue&type=script&lang=js& ***!
@@ -15,6 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ant-design-vue/lib/locale-provider/he_IL */ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js");
 //
 //
 //
@@ -136,11 +384,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_2__["default"],
       form: {},
       data: [],
       selectedZones: [],
@@ -311,294 +566,305 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "components-layout-demo-basic" } },
-    [
-      _c(
-        "a-layout",
-        [
-          _c("a-layout-header", [
-            _c("h1", [_vm._v("Water Differences Analytics")])
-          ]),
-          _vm._v(" "),
-          _c(
-            "a-layout",
-            [
-              _c(
-                "a-layout-sider",
-                { attrs: { width: "400" } },
-                [
-                  _c(
-                    "a-form",
-                    {
-                      attrs: { label: "Search Form", form: _vm.form },
-                      on: { submit: _vm.handleSubmit }
-                    },
-                    [
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "Waste Zone:" } },
-                        [
-                          _c(
-                            "a-select",
-                            {
+  return _c("a-config-provider", { attrs: { locale: _vm.locale } }, [
+    _c(
+      "div",
+      { attrs: { id: "components-layout-demo-basic" } },
+      [
+        _c(
+          "a-layout",
+          [
+            _c("a-layout-header", [
+              _c("h1", [_vm._v("Water Differences Analytics")])
+            ]),
+            _vm._v(" "),
+            _c(
+              "a-layout",
+              [
+                _c(
+                  "a-layout-sider",
+                  { attrs: { width: "400" } },
+                  [
+                    _c(
+                      "a-form",
+                      {
+                        attrs: { label: "Search Form", form: _vm.form },
+                        on: { submit: _vm.handleSubmit }
+                      },
+                      [
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Waste Zone:" } },
+                          [
+                            _c(
+                              "a-select",
+                              {
+                                attrs: {
+                                  mode: "multiple",
+                                  value: _vm.selectedZones,
+                                  placeholder: "Select zones"
+                                },
+                                on: { change: _vm.handleZoneChange }
+                              },
+                              _vm._l(_vm.zones, function(zone) {
+                                return _c(
+                                  "a-select-option",
+                                  { key: zone.waste_zone },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(zone.waste_description) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              }),
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Belongs To:" } },
+                          [
+                            _c(
+                              "a-select",
+                              {
+                                attrs: {
+                                  mode: "multiple",
+                                  value: _vm.selectedGroups,
+                                  placeholder: "Select group"
+                                },
+                                on: { change: _vm.handleGroupChange }
+                              },
+                              _vm._l(_vm.groups, function(group) {
+                                return _c(
+                                  "a-select-option",
+                                  { key: group.waste_group },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(group.waste_description) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              }),
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Mone_av:" } },
+                          [
+                            _c(
+                              "a-select",
+                              {
+                                attrs: {
+                                  mode: "multiple",
+                                  value: _vm.selectedMoneavs,
+                                  placeholder: "Select Mone_av"
+                                },
+                                on: { change: _vm.handleMoneavChange }
+                              },
+                              _vm._l(_vm.mone_avs, function(mone_av) {
+                                return _c(
+                                  "a-select-option",
+                                  { key: mone_av.mone_av },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(mone_av.mone_av) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              }),
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Mone_av:" } },
+                          [
+                            _c("a-range-picker", {
+                              on: { change: _vm.handleDateRangeChange },
+                              model: {
+                                value: _vm.dateRange,
+                                callback: function($$v) {
+                                  _vm.dateRange = $$v
+                                },
+                                expression: "dateRange"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "delta:" } },
+                          [
+                            _c("a-slider", {
                               attrs: {
-                                mode: "multiple",
-                                value: _vm.selectedZones,
-                                placeholder: "Select zones"
+                                range: "",
+                                "default-value": [_vm.delta_min, _vm.delta_max],
+                                min: _vm.delta_min,
+                                max: _vm.delta_max,
+                                step: 0.0001
                               },
-                              on: { change: _vm.handleZoneChange }
-                            },
-                            _vm._l(_vm.zones, function(zone) {
-                              return _c(
-                                "a-select-option",
-                                { key: zone.waste_zone },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(zone.waste_description) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            }),
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "Belongs To:" } },
-                        [
-                          _c(
-                            "a-select",
-                            {
+                              on: { afterChange: _vm.handleDeltaChange },
+                              model: {
+                                value: _vm.delta,
+                                callback: function($$v) {
+                                  _vm.delta = $$v
+                                },
+                                expression: "delta"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "per_cent:" } },
+                          [
+                            _c("a-slider", {
                               attrs: {
-                                mode: "multiple",
-                                value: _vm.selectedGroups,
-                                placeholder: "Select group"
+                                range: "",
+                                "default-value": [
+                                  _vm.per_cent_min,
+                                  _vm.per_cent_max
+                                ],
+                                min: _vm.per_cent_min,
+                                max: _vm.per_cent_max
                               },
-                              on: { change: _vm.handleGroupChange }
-                            },
-                            _vm._l(_vm.groups, function(group) {
-                              return _c(
-                                "a-select-option",
-                                { key: group.waste_group },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(group.waste_description) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            }),
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "Mone_av:" } },
-                        [
-                          _c(
-                            "a-select",
-                            {
+                              on: { afterChange: _vm.handlePerCentChange },
+                              model: {
+                                value: _vm.per_cent,
+                                callback: function($$v) {
+                                  _vm.per_cent = $$v
+                                },
+                                expression: "per_cent"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "X-axis:" } },
+                          [
+                            _c("a-checkbox-group", {
                               attrs: {
-                                mode: "multiple",
-                                value: _vm.selectedMoneavs,
-                                placeholder: "Select Mone_av"
+                                name: "xaxis",
+                                options: _vm.plainOptions
                               },
-                              on: { change: _vm.handleMoneavChange }
-                            },
-                            _vm._l(_vm.mone_avs, function(mone_av) {
-                              return _c(
-                                "a-select-option",
-                                { key: mone_av.mone_av },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(mone_av.mone_av) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            }),
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "Mone_av:" } },
-                        [
-                          _c("a-range-picker", {
-                            on: { change: _vm.handleDateRangeChange },
-                            model: {
-                              value: _vm.dateRange,
-                              callback: function($$v) {
-                                _vm.dateRange = $$v
-                              },
-                              expression: "dateRange"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "delta:" } },
-                        [
-                          _c("a-slider", {
-                            attrs: {
-                              range: "",
-                              "default-value": [_vm.delta_min, _vm.delta_max],
-                              min: _vm.delta_min,
-                              max: _vm.delta_max,
-                              step: 0.0001
-                            },
-                            on: { afterChange: _vm.handleDeltaChange },
-                            model: {
-                              value: _vm.delta,
-                              callback: function($$v) {
-                                _vm.delta = $$v
-                              },
-                              expression: "delta"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "per_cent:" } },
-                        [
-                          _c("a-slider", {
-                            attrs: {
-                              range: "",
-                              "default-value": [
-                                _vm.per_cent_min,
-                                _vm.per_cent_max
+                              on: { change: _vm.handleXAxisChange },
+                              model: {
+                                value: _vm.selectedX,
+                                callback: function($$v) {
+                                  _vm.selectedX = $$v
+                                },
+                                expression: "selectedX"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm.dateChecked
+                          ? _c(
+                              "a-form-item",
+                              { attrs: { label: "Sum:" } },
+                              [
+                                _c("a-radio-group", {
+                                  attrs: { options: _vm.sumOptions },
+                                  on: { change: _vm.handleSumChange },
+                                  model: {
+                                    value: _vm.sum,
+                                    callback: function($$v) {
+                                      _vm.sum = $$v
+                                    },
+                                    expression: "sum"
+                                  }
+                                })
                               ],
-                              min: _vm.per_cent_min,
-                              max: _vm.per_cent_max
-                            },
-                            on: { afterChange: _vm.handlePerCentChange },
-                            model: {
-                              value: _vm.per_cent,
-                              callback: function($$v) {
-                                _vm.per_cent = $$v
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Graph:" } },
+                          [
+                            _c("a-radio-group", {
+                              attrs: {
+                                name: "graph",
+                                options: _vm.graphOptions
                               },
-                              expression: "per_cent"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "X-axis:" } },
-                        [
-                          _c("a-checkbox-group", {
-                            attrs: { name: "xaxis", options: _vm.plainOptions },
-                            on: { change: _vm.handleXAxisChange },
-                            model: {
-                              value: _vm.selectedX,
-                              callback: function($$v) {
-                                _vm.selectedX = $$v
-                              },
-                              expression: "selectedX"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm.dateChecked
-                        ? _c(
-                            "a-form-item",
-                            { attrs: { label: "Sum:" } },
-                            [
-                              _c("a-radio-group", {
-                                attrs: { options: _vm.sumOptions },
-                                on: { change: _vm.handleSumChange },
-                                model: {
-                                  value: _vm.sum,
-                                  callback: function($$v) {
-                                    _vm.sum = $$v
-                                  },
-                                  expression: "sum"
+                              on: { change: _vm.handleGraphChange },
+                              model: {
+                                value: _vm.graphType,
+                                callback: function($$v) {
+                                  _vm.graphType = $$v
+                                },
+                                expression: "graphType"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-form-item",
+                          { attrs: { "wrapper-col": { span: 12, offset: 5 } } },
+                          [
+                            _c(
+                              "a-button",
+                              {
+                                attrs: {
+                                  type: "primary",
+                                  "html-type": "submit"
                                 }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { label: "Graph:" } },
-                        [
-                          _c("a-radio-group", {
-                            attrs: { name: "graph", options: _vm.graphOptions },
-                            on: { change: _vm.handleGraphChange },
-                            model: {
-                              value: _vm.graphType,
-                              callback: function($$v) {
-                                _vm.graphType = $$v
                               },
-                              expression: "graphType"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a-form-item",
-                        { attrs: { "wrapper-col": { span: 12, offset: 5 } } },
-                        [
-                          _c(
-                            "a-button",
-                            {
-                              attrs: { type: "primary", "html-type": "submit" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            Draw\n                        "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("a-layout-content", [_vm._v("Content")])
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+                              [
+                                _vm._v(
+                                  "\n                                Draw\n                            "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("a-layout-content", [_vm._v("Content")])
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

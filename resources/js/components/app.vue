@@ -1,131 +1,138 @@
 <template>
-    <div id="components-layout-demo-basic">
-        <a-layout>
-            <a-layout-header>
-                <h1>Water Differences Analytics</h1>
-            </a-layout-header>
+    <a-config-provider :locale="locale">
+        <div id="components-layout-demo-basic">
             <a-layout>
-                <a-layout-sider width="400">
-                    <a-form
-                        label="Search Form"
-                        :form="form"
-                        @submit="handleSubmit"
-                    >
-                        <a-form-item label="Waste Zone:">
-                            <a-select
-                                mode="multiple"
-                                :value="selectedZones"
-                                placeholder="Select zones"
-                                @change="handleZoneChange"
-                            >
-                                <a-select-option
-                                    v-for="zone in zones"
-                                    :key="zone.waste_zone"
+                <a-layout-header>
+                    <h1>Water Differences Analytics</h1>
+                </a-layout-header>
+                <a-layout>
+                    <a-layout-sider width="400">
+                        <a-form
+                            label="Search Form"
+                            :form="form"
+                            @submit="handleSubmit"
+                        >
+                            <a-form-item label="Waste Zone:">
+                                <a-select
+                                    mode="multiple"
+                                    :value="selectedZones"
+                                    placeholder="Select zones"
+                                    @change="handleZoneChange"
                                 >
-                                    {{ zone.waste_description }}
-                                </a-select-option>
-                            </a-select>
-                        </a-form-item>
-                        <a-form-item label="Belongs To:">
-                            <a-select
-                                mode="multiple"
-                                :value="selectedGroups"
-                                placeholder="Select group"
-                                @change="handleGroupChange"
-                            >
-                                <a-select-option
-                                    v-for="group in groups"
-                                    :key="group.waste_group"
+                                    <a-select-option
+                                        v-for="zone in zones"
+                                        :key="zone.waste_zone"
+                                    >
+                                        {{ zone.waste_description }}
+                                    </a-select-option>
+                                </a-select>
+                            </a-form-item>
+                            <a-form-item label="Belongs To:">
+                                <a-select
+                                    mode="multiple"
+                                    :value="selectedGroups"
+                                    placeholder="Select group"
+                                    @change="handleGroupChange"
                                 >
-                                    {{ group.waste_description }}
-                                </a-select-option>
-                            </a-select>
-                        </a-form-item>
-                        <a-form-item label="Mone_av:">
-                            <a-select
-                                mode="multiple"
-                                :value="selectedMoneavs"
-                                placeholder="Select Mone_av"
-                                @change="handleMoneavChange"
-                            >
-                                <a-select-option
-                                    v-for="mone_av in mone_avs"
-                                    :key="mone_av.mone_av"
+                                    <a-select-option
+                                        v-for="group in groups"
+                                        :key="group.waste_group"
+                                    >
+                                        {{ group.waste_description }}
+                                    </a-select-option>
+                                </a-select>
+                            </a-form-item>
+                            <a-form-item label="Mone_av:">
+                                <a-select
+                                    mode="multiple"
+                                    :value="selectedMoneavs"
+                                    placeholder="Select Mone_av"
+                                    @change="handleMoneavChange"
                                 >
-                                    {{ mone_av.mone_av }}
-                                </a-select-option>
-                            </a-select>
-                        </a-form-item>
-                        <a-form-item label="Mone_av:">
-                            <a-range-picker
-                                v-model="dateRange"
-                                @change="handleDateRangeChange"
-                            />
-                        </a-form-item>
-                        <a-form-item label="delta:">
-                            <a-slider
-                                range
-                                :default-value="[delta_min, delta_max]"
-                                :min="delta_min"
-                                :max="delta_max"
-                                :step="0.0001"
-                                v-model="delta"
-                                @afterChange="handleDeltaChange"
-                            />
-                        </a-form-item>
-                        <a-form-item label="per_cent:">
-                            <a-slider
-                                range
-                                :default-value="[per_cent_min, per_cent_max]"
-                                :min="per_cent_min"
-                                :max="per_cent_max"
-                                v-model="per_cent"
-                                @afterChange="handlePerCentChange"
-                            />
-                        </a-form-item>
-                        <a-form-item label="X-axis:">
-                            <a-checkbox-group
-                                name="xaxis"
-                                v-model="selectedX"
-                                :options="plainOptions"
-                                @change="handleXAxisChange"
-                            />
-                        </a-form-item>
-                        <a-form-item label="Sum:" v-if="dateChecked">
-                            <a-radio-group
-                                v-model="sum"
-                                :options="sumOptions"
-                                @change="handleSumChange"
-                            />
-                        </a-form-item>
-                        <a-form-item label="Graph:">
-                            <a-radio-group
-                                name="graph"
-                                v-model="graphType"
-                                :options="graphOptions"
-                                @change="handleGraphChange"
-                            />
-                        </a-form-item>
-                        <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                            <a-button type="primary" html-type="submit">
-                                Draw
-                            </a-button>
-                        </a-form-item>
-                    </a-form>
-                </a-layout-sider>
-                <a-layout-content>Content</a-layout-content>
+                                    <a-select-option
+                                        v-for="mone_av in mone_avs"
+                                        :key="mone_av.mone_av"
+                                    >
+                                        {{ mone_av.mone_av }}
+                                    </a-select-option>
+                                </a-select>
+                            </a-form-item>
+                            <a-form-item label="Mone_av:">
+                                <a-range-picker
+                                    v-model="dateRange"
+                                    @change="handleDateRangeChange"
+                                />
+                            </a-form-item>
+                            <a-form-item label="delta:">
+                                <a-slider
+                                    range
+                                    :default-value="[delta_min, delta_max]"
+                                    :min="delta_min"
+                                    :max="delta_max"
+                                    :step="0.0001"
+                                    v-model="delta"
+                                    @afterChange="handleDeltaChange"
+                                />
+                            </a-form-item>
+                            <a-form-item label="per_cent:">
+                                <a-slider
+                                    range
+                                    :default-value="[
+                                        per_cent_min,
+                                        per_cent_max
+                                    ]"
+                                    :min="per_cent_min"
+                                    :max="per_cent_max"
+                                    v-model="per_cent"
+                                    @afterChange="handlePerCentChange"
+                                />
+                            </a-form-item>
+                            <a-form-item label="X-axis:">
+                                <a-checkbox-group
+                                    name="xaxis"
+                                    v-model="selectedX"
+                                    :options="plainOptions"
+                                    @change="handleXAxisChange"
+                                />
+                            </a-form-item>
+                            <a-form-item label="Sum:" v-if="dateChecked">
+                                <a-radio-group
+                                    v-model="sum"
+                                    :options="sumOptions"
+                                    @change="handleSumChange"
+                                />
+                            </a-form-item>
+                            <a-form-item label="Graph:">
+                                <a-radio-group
+                                    name="graph"
+                                    v-model="graphType"
+                                    :options="graphOptions"
+                                    @change="handleGraphChange"
+                                />
+                            </a-form-item>
+                            <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+                                <a-button type="primary" html-type="submit">
+                                    Draw
+                                </a-button>
+                            </a-form-item>
+                        </a-form>
+                    </a-layout-sider>
+                    <a-layout-content>Content</a-layout-content>
+                </a-layout>
             </a-layout>
-        </a-layout>
-    </div>
+        </div>
+    </a-config-provider>
 </template>
 
 <script>
 import axios from "axios"
 import moment from "moment"
+import heIL from "ant-design-vue/lib/locale-provider/he_IL"
 
 export default {
     data() {
         return {
+            locale: heIL,
             form: {},
             data: [],
             selectedZones: [],
