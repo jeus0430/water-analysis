@@ -15,9 +15,20 @@
                             <a-form-item label="Waste Zone:">
                                 <a-select
                                     mode="multiple"
-                                    :value="selectedZones"
                                     placeholder="Select zones"
                                     @change="handleZoneChange"
+                                    v-decorator="[
+                                        'selectedZones',
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        'Please select waste zones!'
+                                                }
+                                            ]
+                                        }
+                                    ]"
                                 >
                                     <a-select-option
                                         v-for="zone in zones"
@@ -30,9 +41,20 @@
                             <a-form-item label="Belongs To:">
                                 <a-select
                                     mode="multiple"
-                                    :value="selectedGroups"
                                     placeholder="Select group"
                                     @change="handleGroupChange"
+                                    v-decorator="[
+                                        'selectedGroups',
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        'Please select groups!'
+                                                }
+                                            ]
+                                        }
+                                    ]"
                                 >
                                     <a-select-option
                                         v-for="group in groups"
@@ -45,9 +67,20 @@
                             <a-form-item label="Mone_av:">
                                 <a-select
                                     mode="multiple"
-                                    :value="selectedMoneavs"
                                     placeholder="Select Mone_av"
                                     @change="handleMoneavChange"
+                                    v-decorator="[
+                                        'selectedMoneavs',
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        'Please select move_avs!'
+                                                }
+                                            ]
+                                        }
+                                    ]"
                                 >
                                     <a-select-option
                                         v-for="mone_av in mone_avs"
@@ -57,10 +90,21 @@
                                     </a-select-option>
                                 </a-select>
                             </a-form-item>
-                            <a-form-item label="Mone_av:">
+                            <a-form-item label="Date Range:">
                                 <a-range-picker
-                                    v-model="dateRange"
                                     @change="handleDateRangeChange"
+                                    v-decorator="[
+                                        'dateRange',
+                                        {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        'Please select date range!'
+                                                }
+                                            ]
+                                        }
+                                    ]"
                                 />
                             </a-form-item>
                             <a-form-item label="delta:">
@@ -90,9 +134,12 @@
                             <a-form-item label="X-axis:">
                                 <a-checkbox-group
                                     name="xaxis"
-                                    v-model="selectedX"
-                                    :options="plainOptions"
+                                    :options="xOptions"
                                     @change="handleXAxisChange"
+                                    v-decorator="[
+                                        'selectedX',
+                                        { rules: [{ required: true }] }
+                                    ]"
                                 />
                             </a-form-item>
                             <a-form-item label="Sum:" v-if="dateChecked">
@@ -140,7 +187,7 @@ export default {
     data() {
         return {
             locale: heIL,
-            form: {},
+            form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
             selectedZones: [],
             zones: [],
@@ -156,13 +203,13 @@ export default {
             per_cent_min: 0,
             per_cent_max: 0,
             per_cent: [0, 0],
-            plainOptions: ["date", "ezor", "group", "mone_av"],
-            selectedX: [],
-            sum: [],
+            xOptions: ["date", "ezor", "group", "mone_av"],
+            selectedX: ["date"],
+            sum: "daily",
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
-            graphType: [],
+            graphType: "area",
             graphOptions: ["pie", "line", "bar", "area"],
-            dateChecked: false,
+            dateChecked: true,
             chartOptions: {
                 chart: {
                     id: "vuechart-example"
@@ -182,12 +229,13 @@ export default {
     methods: {
         moment,
         handleSubmit(e) {
-            e.preventDefault()
             this.form.validateFields((err, values) => {
                 if (!err) {
                     console.log("Received values of form: ", values)
                 }
             })
+            console.log(this.selectedZones)
+            e.preventDefault()
         },
         handleZoneChange(value) {
             this.selectedZones = value
@@ -199,15 +247,17 @@ export default {
             this.selectedMoneavs = value
         },
         handleDateRangeChange(date, dateString) {
-            console.log(this.dateRange)
+            this.dateRange = date
         },
         handleDeltaChange(value) {
             console.log(this.delta)
         },
         handlePerCentChange(value) {
             console.log(this.per_cent)
+            console.log(this.selectedX)
         },
         handleXAxisChange(checkedValues) {
+            this.selectedX = checkedValues
             if (typeof checkedValues.find(e => e == "date") == "undefined")
                 this.dateChecked = false
             else this.dateChecked = true
@@ -229,6 +279,9 @@ export default {
         }
     },
     mounted: function() {
+        this.form.setFieldsValue({
+            selectedX: ["date"]
+        })
         axios.get("/api/zones").then(res => {
             this.zones = res.data
         })

@@ -397,6 +397,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -405,7 +452,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
-      form: {},
+      form: this.$form.createForm(this, {
+        name: "coordinated"
+      }),
       data: [],
       selectedZones: [],
       zones: [],
@@ -421,13 +470,13 @@ __webpack_require__.r(__webpack_exports__);
       per_cent_min: 0,
       per_cent_max: 0,
       per_cent: [0, 0],
-      plainOptions: ["date", "ezor", "group", "mone_av"],
-      selectedX: [],
-      sum: [],
+      xOptions: ["date", "ezor", "group", "mone_av"],
+      selectedX: ["date"],
+      sum: "daily",
       sumOptions: ["daily", "weekly", "monthly", "yearly"],
-      graphType: [],
+      graphType: "area",
       graphOptions: ["pie", "line", "bar", "area"],
-      dateChecked: false,
+      dateChecked: true,
       chartOptions: {
         chart: {
           id: "vuechart-example"
@@ -445,12 +494,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     moment: (moment__WEBPACK_IMPORTED_MODULE_1___default()),
     handleSubmit: function handleSubmit(e) {
-      e.preventDefault();
       this.form.validateFields(function (err, values) {
         if (!err) {
           console.log("Received values of form: ", values);
         }
       });
+      console.log(this.selectedZones);
+      e.preventDefault();
     },
     handleZoneChange: function handleZoneChange(value) {
       this.selectedZones = value;
@@ -462,15 +512,17 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedMoneavs = value;
     },
     handleDateRangeChange: function handleDateRangeChange(date, dateString) {
-      console.log(this.dateRange);
+      this.dateRange = date;
     },
     handleDeltaChange: function handleDeltaChange(value) {
       console.log(this.delta);
     },
     handlePerCentChange: function handlePerCentChange(value) {
       console.log(this.per_cent);
+      console.log(this.selectedX);
     },
     handleXAxisChange: function handleXAxisChange(checkedValues) {
+      this.selectedX = checkedValues;
       if (typeof checkedValues.find(function (e) {
         return e == "date";
       }) == "undefined") this.dateChecked = false;else this.dateChecked = true;
@@ -492,6 +544,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    this.form.setFieldsValue({
+      selectedX: ["date"]
+    });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/zones").then(function (res) {
       _this.zones = res.data;
     });
@@ -631,9 +686,28 @@ var render = function() {
                             _c(
                               "a-select",
                               {
+                                directives: [
+                                  {
+                                    name: "decorator",
+                                    rawName: "v-decorator",
+                                    value: [
+                                      "selectedZones",
+                                      {
+                                        rules: [
+                                          {
+                                            required: true,
+                                            message:
+                                              "Please select waste zones!"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    expression:
+                                      "[\n                                    'selectedZones',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select waste zones!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                  }
+                                ],
                                 attrs: {
                                   mode: "multiple",
-                                  value: _vm.selectedZones,
                                   placeholder: "Select zones"
                                 },
                                 on: { change: _vm.handleZoneChange }
@@ -664,9 +738,27 @@ var render = function() {
                             _c(
                               "a-select",
                               {
+                                directives: [
+                                  {
+                                    name: "decorator",
+                                    rawName: "v-decorator",
+                                    value: [
+                                      "selectedGroups",
+                                      {
+                                        rules: [
+                                          {
+                                            required: true,
+                                            message: "Please select groups!"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    expression:
+                                      "[\n                                    'selectedGroups',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select groups!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                  }
+                                ],
                                 attrs: {
                                   mode: "multiple",
-                                  value: _vm.selectedGroups,
                                   placeholder: "Select group"
                                 },
                                 on: { change: _vm.handleGroupChange }
@@ -697,9 +789,27 @@ var render = function() {
                             _c(
                               "a-select",
                               {
+                                directives: [
+                                  {
+                                    name: "decorator",
+                                    rawName: "v-decorator",
+                                    value: [
+                                      "selectedMoneavs",
+                                      {
+                                        rules: [
+                                          {
+                                            required: true,
+                                            message: "Please select move_avs!"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    expression:
+                                      "[\n                                    'selectedMoneavs',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select move_avs!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                  }
+                                ],
                                 attrs: {
                                   mode: "multiple",
-                                  value: _vm.selectedMoneavs,
                                   placeholder: "Select Mone_av"
                                 },
                                 on: { change: _vm.handleMoneavChange }
@@ -725,17 +835,29 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "a-form-item",
-                          { attrs: { label: "Mone_av:" } },
+                          { attrs: { label: "Date Range:" } },
                           [
                             _c("a-range-picker", {
-                              on: { change: _vm.handleDateRangeChange },
-                              model: {
-                                value: _vm.dateRange,
-                                callback: function($$v) {
-                                  _vm.dateRange = $$v
-                                },
-                                expression: "dateRange"
-                              }
+                              directives: [
+                                {
+                                  name: "decorator",
+                                  rawName: "v-decorator",
+                                  value: [
+                                    "dateRange",
+                                    {
+                                      rules: [
+                                        {
+                                          required: true,
+                                          message: "Please select date range!"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  expression:
+                                    "[\n                                    'dateRange',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select date range!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                }
+                              ],
+                              on: { change: _vm.handleDateRangeChange }
                             })
                           ],
                           1
@@ -798,18 +920,20 @@ var render = function() {
                           { attrs: { label: "X-axis:" } },
                           [
                             _c("a-checkbox-group", {
-                              attrs: {
-                                name: "xaxis",
-                                options: _vm.plainOptions
-                              },
-                              on: { change: _vm.handleXAxisChange },
-                              model: {
-                                value: _vm.selectedX,
-                                callback: function($$v) {
-                                  _vm.selectedX = $$v
-                                },
-                                expression: "selectedX"
-                              }
+                              directives: [
+                                {
+                                  name: "decorator",
+                                  rawName: "v-decorator",
+                                  value: [
+                                    "selectedX",
+                                    { rules: [{ required: true }] }
+                                  ],
+                                  expression:
+                                    "[\n                                    'selectedX',\n                                    { rules: [{ required: true }] }\n                                ]"
+                                }
+                              ],
+                              attrs: { name: "xaxis", options: _vm.xOptions },
+                              on: { change: _vm.handleXAxisChange }
                             })
                           ],
                           1
