@@ -13,10 +13,14 @@
                             @submit="handleSubmit"
                         >
                             <a-form-item label="Waste Zone:">
+                                <a-checkbox v-model="zoneChecked">
+                                    Select All
+                                </a-checkbox>
                                 <a-select
                                     mode="multiple"
                                     placeholder="Select zones"
                                     @change="handleZoneChange"
+                                    :disabled="zoneChecked"
                                     v-decorator="[
                                         'selectedZones',
                                         {
@@ -39,10 +43,14 @@
                                 </a-select>
                             </a-form-item>
                             <a-form-item label="Belongs To:">
+                                <a-checkbox v-model="groupChecked">
+                                    Select All
+                                </a-checkbox>
                                 <a-select
                                     mode="multiple"
                                     placeholder="Select group"
                                     @change="handleGroupChange"
+                                    :disabled="groupChecked"
                                     v-decorator="[
                                         'selectedGroups',
                                         {
@@ -65,10 +73,14 @@
                                 </a-select>
                             </a-form-item>
                             <a-form-item label="Mone_av:">
+                                <a-checkbox v-model="moneavChecked">
+                                    Select All
+                                </a-checkbox>
                                 <a-select
                                     mode="multiple"
                                     placeholder="Select Mone_av"
                                     @change="handleMoneavChange"
+                                    :disabled="moneavChecked"
                                     v-decorator="[
                                         'selectedMoneavs',
                                         {
@@ -132,14 +144,12 @@
                                 />
                             </a-form-item>
                             <a-form-item label="X-axis:">
-                                <a-checkbox-group
+                                <a-radio-group
                                     name="xaxis"
+                                    :value="selectedX"
+                                    ref="xs"
                                     :options="xOptions"
                                     @change="handleXAxisChange"
-                                    v-decorator="[
-                                        'selectedX',
-                                        { rules: [{ required: true }] }
-                                    ]"
                                 />
                             </a-form-item>
                             <a-form-item label="Sum:" v-if="dateChecked">
@@ -166,7 +176,6 @@
                     </a-layout-sider>
                     <a-layout-content>
                         <apexchart
-                            type="bar"
                             :options="chartOptions"
                             :series="series"
                         ></apexchart>
@@ -189,11 +198,14 @@ export default {
             locale: heIL,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
+            zoneChecked: false,
             selectedZones: [],
             zones: [],
             groups: [],
+            groupChecked: false,
             selectedGroups: [],
             selectedMoneavs: [],
+            moneavChecked: false,
             mone_avs: [],
             fetching: false,
             dateRange: [],
@@ -204,7 +216,7 @@ export default {
             per_cent_max: 0,
             per_cent: [0, 0],
             xOptions: ["date", "ezor", "group", "mone_av"],
-            selectedX: ["date"],
+            selectedX: "date",
             sum: "daily",
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
             graphType: "area",
@@ -212,7 +224,12 @@ export default {
             dateChecked: true,
             chartOptions: {
                 chart: {
-                    id: "vuechart-example"
+                    id: "vuechart-example",
+                    type: "area",
+                    zoom: {
+                        type: "x",
+                        enabled: true
+                    }
                 },
                 xaxis: {
                     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
@@ -229,13 +246,23 @@ export default {
     methods: {
         moment,
         handleSubmit(e) {
-            this.form.validateFields((err, values) => {
+            let toCheck = []
+            if (!this.zoneChecked) toCheck.push("selectedZones")
+            if (!this.groupChecked) toCheck.push("selectedGroups")
+            if (!this.moneavChecked) toCheck.push("selectedMoneavs")
+            toCheck.push("dateRange")
+            this.form.validateFields(toCheck, (err, values) => {
                 if (!err) {
                     console.log("Received values of form: ", values)
+                    this.updateChart()
                 }
             })
-            console.log(this.selectedZones)
             e.preventDefault()
+        },
+        handleZoneCheck(e) {
+            if (e.target.checked) {
+            } else {
+            }
         },
         handleZoneChange(value) {
             this.selectedZones = value
@@ -247,24 +274,45 @@ export default {
             this.selectedMoneavs = value
         },
         handleDateRangeChange(date, dateString) {
-            this.dateRange = date
+            this.dateRange = dateString
         },
         handleDeltaChange(value) {
             console.log(this.delta)
         },
-        handlePerCentChange(value) {
-            console.log(this.per_cent)
-            console.log(this.selectedX)
-        },
-        handleXAxisChange(checkedValues) {
-            this.selectedX = checkedValues
-            if (typeof checkedValues.find(e => e == "date") == "undefined")
-                this.dateChecked = false
-            else this.dateChecked = true
+        handlePerCentChange(value) {},
+        handleXAxisChange(e) {
+            this.selectedX = e.target.value
+            if (e.target.value == "date") this.dateChecked = true
+            else this.dateChecked = false
         },
         handleSumChange(value) {},
         handleGraphChange(value) {},
         updateChart() {
+            let zones = this.selectedZones
+            if (this.zoneChecked) zones = []
+
+            let groups = this.selectedGroups
+            if (this.groupChecked) groups = this.selectedGroups
+
+            let moneavs = this.selectedMoneavs
+            if (this.moneavChecked) moneavs = this.selectedMoneavs
+
+            let dateRange = this.dateRange
+            let delta = this.delta
+            let per_cent = this.per_cent
+            let xaxis = this.selectedX
+            let sum = this.sum
+            let graphType = this.graphType
+            console.info(zones)
+            console.info(groups)
+            console.info(moneavs)
+            console.info(dateRange)
+            console.info(delta)
+            console.info(per_cent)
+            console.info(xaxis)
+            console.info(sum)
+            console.info(graphType)
+
             const max = 90
             const min = 20
             const newData = this.series[0].data.map(() => {
@@ -279,11 +327,10 @@ export default {
         }
     },
     mounted: function() {
-        this.form.setFieldsValue({
-            selectedX: ["date"]
-        })
+        this.$refs.xs.value = "date"
         axios.get("/api/zones").then(res => {
-            this.zones = res.data
+            let data = res.data
+            this.zones = data
         })
         axios.get("/api/groups").then(res => {
             this.groups = res.data

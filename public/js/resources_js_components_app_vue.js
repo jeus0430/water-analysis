@@ -444,6 +444,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -456,11 +465,14 @@ __webpack_require__.r(__webpack_exports__);
         name: "coordinated"
       }),
       data: [],
+      zoneChecked: false,
       selectedZones: [],
       zones: [],
       groups: [],
+      groupChecked: false,
       selectedGroups: [],
       selectedMoneavs: [],
+      moneavChecked: false,
       mone_avs: [],
       fetching: false,
       dateRange: [],
@@ -471,7 +483,7 @@ __webpack_require__.r(__webpack_exports__);
       per_cent_max: 0,
       per_cent: [0, 0],
       xOptions: ["date", "ezor", "group", "mone_av"],
-      selectedX: ["date"],
+      selectedX: "date",
       sum: "daily",
       sumOptions: ["daily", "weekly", "monthly", "yearly"],
       graphType: "area",
@@ -479,7 +491,12 @@ __webpack_require__.r(__webpack_exports__);
       dateChecked: true,
       chartOptions: {
         chart: {
-          id: "vuechart-example"
+          id: "vuechart-example",
+          type: "area",
+          zoom: {
+            type: "x",
+            enabled: true
+          }
         },
         xaxis: {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
@@ -494,13 +511,24 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     moment: (moment__WEBPACK_IMPORTED_MODULE_1___default()),
     handleSubmit: function handleSubmit(e) {
-      this.form.validateFields(function (err, values) {
+      var _this = this;
+
+      var toCheck = [];
+      if (!this.zoneChecked) toCheck.push("selectedZones");
+      if (!this.groupChecked) toCheck.push("selectedGroups");
+      if (!this.moneavChecked) toCheck.push("selectedMoneavs");
+      toCheck.push("dateRange");
+      this.form.validateFields(toCheck, function (err, values) {
         if (!err) {
           console.log("Received values of form: ", values);
+
+          _this.updateChart();
         }
       });
-      console.log(this.selectedZones);
       e.preventDefault();
+    },
+    handleZoneCheck: function handleZoneCheck(e) {
+      if (e.target.checked) {} else {}
     },
     handleZoneChange: function handleZoneChange(value) {
       this.selectedZones = value;
@@ -512,24 +540,40 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedMoneavs = value;
     },
     handleDateRangeChange: function handleDateRangeChange(date, dateString) {
-      this.dateRange = date;
+      this.dateRange = dateString;
     },
     handleDeltaChange: function handleDeltaChange(value) {
       console.log(this.delta);
     },
-    handlePerCentChange: function handlePerCentChange(value) {
-      console.log(this.per_cent);
-      console.log(this.selectedX);
-    },
-    handleXAxisChange: function handleXAxisChange(checkedValues) {
-      this.selectedX = checkedValues;
-      if (typeof checkedValues.find(function (e) {
-        return e == "date";
-      }) == "undefined") this.dateChecked = false;else this.dateChecked = true;
+    handlePerCentChange: function handlePerCentChange(value) {},
+    handleXAxisChange: function handleXAxisChange(e) {
+      this.selectedX = e.target.value;
+      if (e.target.value == "date") this.dateChecked = true;else this.dateChecked = false;
     },
     handleSumChange: function handleSumChange(value) {},
     handleGraphChange: function handleGraphChange(value) {},
     updateChart: function updateChart() {
+      var zones = this.selectedZones;
+      if (this.zoneChecked) zones = [];
+      var groups = this.selectedGroups;
+      if (this.groupChecked) groups = this.selectedGroups;
+      var moneavs = this.selectedMoneavs;
+      if (this.moneavChecked) moneavs = this.selectedMoneavs;
+      var dateRange = this.dateRange;
+      var delta = this.delta;
+      var per_cent = this.per_cent;
+      var xaxis = this.selectedX;
+      var sum = this.sum;
+      var graphType = this.graphType;
+      console.info(zones);
+      console.info(groups);
+      console.info(moneavs);
+      console.info(dateRange);
+      console.info(delta);
+      console.info(per_cent);
+      console.info(xaxis);
+      console.info(sum);
+      console.info(graphType);
       var max = 90;
       var min = 20;
       var newData = this.series[0].data.map(function () {
@@ -542,27 +586,26 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
-    this.form.setFieldsValue({
-      selectedX: ["date"]
-    });
+    this.$refs.xs.value = "date";
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/zones").then(function (res) {
-      _this.zones = res.data;
+      var data = res.data;
+      _this2.zones = data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/groups").then(function (res) {
-      _this.groups = res.data;
+      _this2.groups = res.data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
-      _this.mone_avs = res.data;
+      _this2.mone_avs = res.data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
-      _this.delta_min = parseFloat(res.data.min);
-      _this.delta_max = parseFloat(res.data.max);
+      _this2.delta_min = parseFloat(res.data.min);
+      _this2.delta_max = parseFloat(res.data.max);
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/per_cent_range").then(function (res) {
-      _this.per_cent_min = parseFloat(res.data.min);
-      _this.per_cent_max = parseFloat(res.data.max);
+      _this2.per_cent_min = parseFloat(res.data.min);
+      _this2.per_cent_max = parseFloat(res.data.max);
     });
   }
 });
@@ -684,6 +727,24 @@ var render = function() {
                           { attrs: { label: "Waste Zone:" } },
                           [
                             _c(
+                              "a-checkbox",
+                              {
+                                model: {
+                                  value: _vm.zoneChecked,
+                                  callback: function($$v) {
+                                    _vm.zoneChecked = $$v
+                                  },
+                                  expression: "zoneChecked"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Select All\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
                               "a-select",
                               {
                                 directives: [
@@ -708,7 +769,8 @@ var render = function() {
                                 ],
                                 attrs: {
                                   mode: "multiple",
-                                  placeholder: "Select zones"
+                                  placeholder: "Select zones",
+                                  disabled: _vm.zoneChecked
                                 },
                                 on: { change: _vm.handleZoneChange }
                               },
@@ -736,6 +798,24 @@ var render = function() {
                           { attrs: { label: "Belongs To:" } },
                           [
                             _c(
+                              "a-checkbox",
+                              {
+                                model: {
+                                  value: _vm.groupChecked,
+                                  callback: function($$v) {
+                                    _vm.groupChecked = $$v
+                                  },
+                                  expression: "groupChecked"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Select All\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
                               "a-select",
                               {
                                 directives: [
@@ -759,7 +839,8 @@ var render = function() {
                                 ],
                                 attrs: {
                                   mode: "multiple",
-                                  placeholder: "Select group"
+                                  placeholder: "Select group",
+                                  disabled: _vm.groupChecked
                                 },
                                 on: { change: _vm.handleGroupChange }
                               },
@@ -787,6 +868,24 @@ var render = function() {
                           { attrs: { label: "Mone_av:" } },
                           [
                             _c(
+                              "a-checkbox",
+                              {
+                                model: {
+                                  value: _vm.moneavChecked,
+                                  callback: function($$v) {
+                                    _vm.moneavChecked = $$v
+                                  },
+                                  expression: "moneavChecked"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Select All\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
                               "a-select",
                               {
                                 directives: [
@@ -810,7 +909,8 @@ var render = function() {
                                 ],
                                 attrs: {
                                   mode: "multiple",
-                                  placeholder: "Select Mone_av"
+                                  placeholder: "Select Mone_av",
+                                  disabled: _vm.moneavChecked
                                 },
                                 on: { change: _vm.handleMoneavChange }
                               },
@@ -919,20 +1019,13 @@ var render = function() {
                           "a-form-item",
                           { attrs: { label: "X-axis:" } },
                           [
-                            _c("a-checkbox-group", {
-                              directives: [
-                                {
-                                  name: "decorator",
-                                  rawName: "v-decorator",
-                                  value: [
-                                    "selectedX",
-                                    { rules: [{ required: true }] }
-                                  ],
-                                  expression:
-                                    "[\n                                    'selectedX',\n                                    { rules: [{ required: true }] }\n                                ]"
-                                }
-                              ],
-                              attrs: { name: "xaxis", options: _vm.xOptions },
+                            _c("a-radio-group", {
+                              ref: "xs",
+                              attrs: {
+                                name: "xaxis",
+                                value: _vm.selectedX,
+                                options: _vm.xOptions
+                              },
                               on: { change: _vm.handleXAxisChange }
                             })
                           ],
@@ -1014,11 +1107,7 @@ var render = function() {
                   "a-layout-content",
                   [
                     _c("apexchart", {
-                      attrs: {
-                        type: "bar",
-                        options: _vm.chartOptions,
-                        series: _vm.series
-                      }
+                      attrs: { options: _vm.chartOptions, series: _vm.series }
                     })
                   ],
                   1
