@@ -4,21 +4,21 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap")
 
-import Vue from 'vue'
+import Vue from "vue"
 
-window.Vue = require('vue');
+window.Vue = require("vue")
 
 // router
-import router from './routes.js';
-window.router = router;
-window.Fire = new Vue();
+import router from "./routes.js"
+window.router = router
+window.Fire = new Vue()
 
-import Antd from 'ant-design-vue';
+import Antd from "ant-design-vue"
 Vue.use(Antd)
 
 const app = new Vue({
-    el: '#app',
-    router,
-}).$mount('#app');
+    el: "#app",
+    router
+}).$mount("#app")

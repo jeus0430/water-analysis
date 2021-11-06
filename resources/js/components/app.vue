@@ -117,7 +117,7 @@
                             </a-form-item>
                         </a-form>
                     </a-layout-sider>
-                    <a-layout-content>Content</a-layout-content>
+                    <a-layout-content></a-layout-content>
                 </a-layout>
             </a-layout>
         </div>
@@ -128,7 +128,6 @@
 import axios from "axios"
 import moment from "moment"
 import heIL from "ant-design-vue/lib/locale-provider/he_IL"
-
 export default {
     data() {
         return {
@@ -155,7 +154,22 @@ export default {
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
             graphType: [],
             graphOptions: ["pie", "line", "bar", "area"],
-            dateChecked: false
+            dateChecked: false,
+            datacollection: {
+                labels: [18, 28],
+                datasets: [
+                    {
+                        label: "Data One",
+                        backgroundColor: "#f87979",
+                        data: [3, 4]
+                    },
+                    {
+                        label: "Data Two",
+                        backgroundColor: "#f87979",
+                        data: [3, 23]
+                    }
+                ]
+            }
         }
     },
     methods: {

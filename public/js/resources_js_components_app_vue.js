@@ -418,7 +418,19 @@ __webpack_require__.r(__webpack_exports__);
       sumOptions: ["daily", "weekly", "monthly", "yearly"],
       graphType: [],
       graphOptions: ["pie", "line", "bar", "area"],
-      dateChecked: false
+      dateChecked: false,
+      datacollection: {
+        labels: [18, 28],
+        datasets: [{
+          label: "Data One",
+          backgroundColor: "#f87979",
+          data: [3, 4]
+        }, {
+          label: "Data Two",
+          backgroundColor: "#f87979",
+          data: [3, 23]
+        }]
+      }
     };
   },
   methods: {
@@ -854,7 +866,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("a-layout-content", [_vm._v("Content")])
+                _c("a-layout-content")
               ],
               1
             )
