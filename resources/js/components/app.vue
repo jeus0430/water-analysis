@@ -198,14 +198,14 @@ export default {
             locale: heIL,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
-            zoneChecked: false,
+            zoneChecked: true,
             selectedZones: [],
             zones: [],
             groups: [],
-            groupChecked: false,
+            groupChecked: true,
             selectedGroups: [],
             selectedMoneavs: [],
-            moneavChecked: false,
+            moneavChecked: true,
             mone_avs: [],
             fetching: false,
             dateRange: [],
@@ -303,15 +303,22 @@ export default {
             let xaxis = this.selectedX
             let sum = this.sum
             let graphType = this.graphType
-            console.info(zones)
-            console.info(groups)
-            console.info(moneavs)
-            console.info(dateRange)
-            console.info(delta)
-            console.info(per_cent)
-            console.info(xaxis)
-            console.info(sum)
-            console.info(graphType)
+
+            axios
+                .post("/api/chart", {
+                    zones: zones,
+                    groups: groups,
+                    moneavs: moneavs,
+                    dateRange: dateRange,
+                    delta: delta,
+                    per_cent: per_cent,
+                    xaxis: xaxis,
+                    sum: sum,
+                    graphType: graphType
+                })
+                .then(res => {
+                    console.log(res)
+                })
 
             const max = 90
             const min = 20

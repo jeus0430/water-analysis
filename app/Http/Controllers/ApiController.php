@@ -41,4 +41,9 @@ class ApiController extends Controller
         $range = DB::select($sql);
         return response()->json($range[0], 200);
     }
+
+    public function chart(Request $request)
+    {
+        dd($request->all());
+    }
 }

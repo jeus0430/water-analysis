@@ -465,14 +465,14 @@ __webpack_require__.r(__webpack_exports__);
         name: "coordinated"
       }),
       data: [],
-      zoneChecked: false,
+      zoneChecked: true,
       selectedZones: [],
       zones: [],
       groups: [],
-      groupChecked: false,
+      groupChecked: true,
       selectedGroups: [],
       selectedMoneavs: [],
-      moneavChecked: false,
+      moneavChecked: true,
       mone_avs: [],
       fetching: false,
       dateRange: [],
@@ -565,15 +565,19 @@ __webpack_require__.r(__webpack_exports__);
       var xaxis = this.selectedX;
       var sum = this.sum;
       var graphType = this.graphType;
-      console.info(zones);
-      console.info(groups);
-      console.info(moneavs);
-      console.info(dateRange);
-      console.info(delta);
-      console.info(per_cent);
-      console.info(xaxis);
-      console.info(sum);
-      console.info(graphType);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/chart", {
+        zones: zones,
+        groups: groups,
+        moneavs: moneavs,
+        dateRange: dateRange,
+        delta: delta,
+        per_cent: per_cent,
+        xaxis: xaxis,
+        sum: sum,
+        graphType: graphType
+      }).then(function (res) {
+        console.log(res);
+      });
       var max = 90;
       var min = 20;
       var newData = this.series[0].data.map(function () {
