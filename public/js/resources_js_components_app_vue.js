@@ -507,17 +507,37 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          type: "category" // labels: {
-          //     datetimeUTC: false,
-          //     format: "yyyy-MM-dd",
-          //     datetimeFormatter: {
-          //         year: "yyyy",
-          //         month: "MMM 'yy",
-          //         day: "dd MMM",
-          //         hour: "HH:mm"
-          //     }
-          // }
+          type: "datetime",
+          labels: {
+            formatter: function formatter(value, timestamp, opts) {
+              if (value % 10 == 1) {
+                var d = new Date(value - 1); // Copy date so don't modify original
 
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                // Make Sunday's day number 7
+
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                return d.getUTCFullYear() + "-" + weekNo + "W";
+              } else if (value % 10 == 2) {
+                var _d = new Date(value - 2);
+
+                return _d.getFullYear() + "-" + _d.getMonth();
+              } else if (value % 10 == 3) {
+                var _d2 = new Date(value - 3);
+
+                return _d2.getFullYear();
+              } else {
+                var _d3 = new Date(value);
+
+                return _d3.toISOString().split("T")[0];
+              }
+            }
+          }
         }
       },
       series: [{
@@ -603,46 +623,8 @@ __webpack_require__.r(__webpack_exports__);
         sum: sum,
         graphType: graphType
       }).then(function (res) {
-        _this2.drawGraph(res.data);
+        _this2.series = res.data;
       });
-    },
-    drawGraph: function drawGraph(data) {
-      this.chartOptions.xaxis.categories = data.xaxis; // {
-      //     xaxis: {
-      //         categories: data.xaxis
-      //     }
-      // }
-      // .xaxis.categories = data.xaxis
-      // chartopts.xaxis.categories = ["asd", "wef", "wef"]
-      // console.log("-------------", chartopts)
-      // this.chartOptions = chartopts
-      // const a =
-
-      this.series = data.yaxis;
-      console.log(data.yaxis); // [
-      //     {
-      //         name: "qty",
-      //         data: [10, 2, 3, 4]
-      //     }
-      // ]
-      // data.yaxis.every((e, i) => {
-      //     console.log(i)
-      //     this.series[i] = {
-      //         name: e.name,
-      //         data: e.data
-      //     }
-      // })
-      // const max = 90
-      // const min = 20
-      // const newData = this.series[0].data.map(() => {
-      //     return Math.floor(Math.random() * (max - min + 1)) + min
-      // })
-      // // In the same way, update the series option
-      // this.series = [
-      //     {
-      //         data: newData
-      //     }
-      // ]
     }
   },
   mounted: function mounted() {

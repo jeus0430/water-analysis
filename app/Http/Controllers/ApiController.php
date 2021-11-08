@@ -51,61 +51,153 @@ class ApiController extends Controller
         $dates      = $request->input('dateRange');
         $per_cent   = $request->input('per_cent');
         $delta      = $request->input('delta');
-
-
+        $sum        = $request->input('sum');
+        $xaxis      = $request->input('xaxis');
 
         // Get All data according to criteria
         $query = ViewYomi::query();
-        $query = $query->selectRaw('waste_zone, DATE(day_date) AS date, SUM(qty) AS qty');
-        $query  = $query->orderBy('date');
+        $ind_field = '';
+        $des_field = '';
+        $sql_part  = '';
+
+        switch ($xaxis) {
+            case 'ezor':
+                $ind_field = 'waste_zone';
+                $des_field = 'waste_description';
+                $sql_part = $ind_field . ', ';
+                break;
+            case 'group':
+                $ind_field = 'waste_group';
+                $des_field = 'waste_description';
+                $sql_part = $ind_field . ', ';
+                break;
+            case 'mone_av':
+                $ind_field = 'mone_av';
+                $des_field = 'mone_av';
+                $sql_part = $ind_field . ', ';
+                break;
+            default:
+                $sql_part = '';
+        }
+
+        switch ($sum) {
+            case "daily":
+                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty");
+                break;
+            case "weekly":
+                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty");
+                break;
+            case "monthly";
+                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty");
+                break;
+            case "yearly":
+                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty");
+                break;
+        }
+
+        $query  = $query->orderBy('dt');
         $zones && $query = $query->whereIn('waste_zone', $zones);
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
         $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
         // $per_cent && $query = $query->whereBetween('per_cent', [$per_cent[0], $per_cent[1]]);
         // $delta && $query = $query->whereBetween('delta', [$delta[0], $delta[1]]);
-        $query = $query->groupByRaw('date, waste_zone');
+        switch ($xaxis) {
+            case "mone_av":
+                $query = $query->groupByRaw('dt, mone_av');
+                break;
+            case "ezor":
+                $query = $query->groupByRaw('dt, waste_zone');
+                break;
+            case 'group':
+                $query = $query->groupByRaw('dt, waste_group');
+                break;
+            default:
+                $query = $query->groupByRaw('dt');
+        }
         $result = $query->get()->toArray();
 
-        // Get All Zones
-        $zones  = DB::select("SELECT waste_zone, waste_description FROM index_waste_zone ORDER BY waste_zone ASC");
-        $zones_i = array_column($zones, 'waste_zone');
 
         // X-Axis data for return
-        $date_range = new \DatePeriod(
-            new \DateTime($dates[0]),
-            new \DateInterval('P1D'),
-            new \DateTime($dates[1])
-        );
-        foreach ($date_range as $index => $each) {
-            $xaxis[$index] = $each->format('Y-m-d');
+        $tmp = $this->_getDtsFromRang($dates[0], $dates[1], $sum);
+        $taxis = array_map(function ($e) use ($sum) {
+            switch ($sum) {
+                case 'daily':
+                    return strtotime($e) * 1000;
+                case 'weekly':
+                    $tmp = explode('-', $e);
+                    $n = new \DateTime();
+                    return $n->setISODate($tmp[0], $tmp[1])->getTimestamp() * 1000  + 1;
+                case 'monthly':
+                    return \DateTime::createFromFormat('Y-m-d', $e . '-01')->getTimestamp() * 1000  + 2;
+                case 'yearly':
+                    return \DateTime::createFromFormat('Y-m-d', $e . '-01-01')->getTimestamp() * 1000 + 3;
+            }
+        }, $tmp);
+
+
+        if ($xaxis != 'date') {
+            $column = [];
+            $column_i = [];
+            switch ($xaxis) {
+                case "mone_av":
+                    $column = DB::select("SELECT DISTINCT mone_av AS descr, mone_av AS ind FROM monim WHERE mone_av <> ''");
+                    $column_i = array_column($column, 'mone_av');
+                    break;
+                case 'ezor':
+                    $column = DB::select("SELECT *, waste_description AS descr, waste_zone AS ind FROM index_waste_zone");
+                    $column_i = array_column($column, 'waste_zone');
+                    break;
+                case 'group':
+                    $column = DB::select("SELECT *, waste_description AS descr, waste_group AS ind FROM index_waste_group");
+                    $column_i = array_column($column, 'waste_group');
+                    break;
+            }
+
+
+            // Calculate Y-Axis data for return
+            $yaxis  = [];
+            foreach ($column as $index => $each) {
+                $yaxis[$index]['name'] = $each->descr;
+            }
+
+            foreach ($column as $i => $each_i)
+                foreach ($taxis as $j => $each_j)
+                    $yaxis[$i]['data'][$j] = [$each_j, 0];
+
+            foreach ($result as $each) {
+                if (gettype($column_i) == 'string')
+                    dd($each);
+                $yaxis[array_search($each[$ind_field], $column_i)]['data'][array_search($each['dt'], $tmp)][1] = $each['qty'];
+            }
+        } else {
+            $yaxis['name'] = 'qty';
+            foreach ($taxis as $index => $each)
+                $yaxis['data'][$index] = [$each, 0];
+            foreach ($result as $index => $each)
+                $yaxis['data'][array_search($each['dt'], $tmp)][1] = $each['qty'];
+            $yaxis = [$yaxis];
         }
-        $xaxis = $this->getDatesFromRange($dates[0], $dates[1]);
-        // Calculate Y-Axis data for return
-        $yaxis  = [];
-        foreach ($zones as $index => $each) {
-            $yaxis[$index]['name'] = $each->waste_description;
-        }
 
-        foreach ($zones as $i => $each_i)
-            foreach ($xaxis as $j => $each_j)
-                $yaxis[$i]['data'][$j] = 0;
-
-        foreach ($result as $each) {
-            $yaxis[array_search($each['waste_zone'], $zones_i)]['data'][array_search($each['date'], $xaxis)] = $each['qty'];
-        }
-
-        $return = [
-            'xaxis'     => $xaxis,
-            'yaxis'     => $yaxis
-        ];
-
-        return response()->json($return);
+        return response()->json($yaxis);
     }
 
-    private function getDatesFromRange($start, $end, $format = 'Y-m-d')
+    private function _getDtsFromRang($st, $en, $mode)
     {
+        switch ($mode) {
+            case 'daily':
+                return $this->_getDatesFromRange($st, $en);
+            case 'weekly':
+                return $this->_getWeeksFromRange($st, $en);
+            case 'monthly':
+                return $this->_getMonthsFromRange($st, $en);
+            case 'yearly':
+                return $this->_getYearsFromRange($st, $en);
+        }
+    }
 
+    private function _getDatesFromRange($start, $end)
+    {
         // Declare an empty array
         $array = array();
 
@@ -120,10 +212,52 @@ class ApiController extends Controller
 
         // Use loop to store date into array
         foreach ($period as $date) {
-            $array[] = $date->format($format);
+            $array[] = $date->format('Y-m-d');
         }
 
         // Return the array elements
         return $array;
+    }
+
+    private function _getMonthsFromRange($start, $end)
+    {
+        $array = array();
+
+        $start    = (new \DateTime($start))->modify('first day of this month');
+        $end      = (new \DateTime($end))->modify('first day of next month');
+        $interval = \DateInterval::createFromDateString('1 month');
+        $period   = new \DatePeriod($start, $interval, $end);
+
+        foreach ($period as $dt) {
+            $array[] = $dt->format('Y-m');
+        }
+
+        return $array;
+    }
+
+    private function _getYearsFromRange($start, $end)
+    {
+        $array = array();
+        $getRangeYear   = range(gmdate('Y', strtotime($start)), gmdate('Y', strtotime($end)));
+        foreach ($getRangeYear as $each)
+            $array[] = $each;
+
+        return $array;
+    }
+
+    private function _getWeeksFromRange($start, $end)
+    {
+        $startDateUnix = strtotime($start);
+        $endDateUnix = strtotime($end);
+
+        $currentDateUnix = $startDateUnix;
+
+        $weekNumbers = array();
+        while ($currentDateUnix < $endDateUnix) {
+            $weekNumbers[] = date('Y-W', $currentDateUnix);
+            $currentDateUnix = strtotime('+1 week', $currentDateUnix);
+        }
+
+        return $weekNumbers;
     }
 }
