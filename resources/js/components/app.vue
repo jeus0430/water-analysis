@@ -167,6 +167,14 @@
                                     @change="handleGraphChange"
                                 />
                             </a-form-item>
+                            <a-form-item
+                                v-if="graphType == 'bar'"
+                                label="Stacked:"
+                            >
+                                <a-checkbox @change="handleStackedChange">
+                                    Checkbox
+                                </a-checkbox>
+                            </a-form-item>
                             <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
                                 <a-button type="primary" html-type="submit">
                                     Draw
@@ -178,6 +186,7 @@
                         <apexchart
                             :options="chartOptions"
                             :series="series"
+                            :type="graphType"
                         ></apexchart>
                     </a-layout-content>
                 </a-layout>
@@ -225,7 +234,6 @@ export default {
             chartOptions: {
                 chart: {
                     id: "vuechart-example",
-                    type: "area",
                     zoom: {
                         type: "x",
                         enabled: true
@@ -290,13 +298,20 @@ export default {
             console.log(this.delta)
         },
         handlePerCentChange(value) {},
+        handleStackedChange(value) {
+            this.$apexcharts.exec("vuechart-example", "updateOptions", {
+                chart: {
+                    stacked: value.target.checked
+                }
+            })
+        },
         handleXAxisChange(e) {
             this.selectedX = e.target.value
             if (e.target.value == "date") this.dateChecked = true
             else this.dateChecked = false
         },
         handleSumChange(value) {},
-        handleGraphChange(value) {},
+        handleGraphChange(e) {},
         updateChart() {
             let zones = this.selectedZones
             if (this.zoneChecked) zones = []
@@ -331,11 +346,12 @@ export default {
                 })
         },
         drawGraph(data) {
-            this.chartOptions = {
-                xaxis: {
-                    categories: data.xaxis
-                }
-            }
+            this.chartOptions.xaxis.categories = data.xaxis
+            // {
+            //     xaxis: {
+            //         categories: data.xaxis
+            //     }
+            // }
             // .xaxis.categories = data.xaxis
             // chartopts.xaxis.categories = ["asd", "wef", "wef"]
             // console.log("-------------", chartopts)

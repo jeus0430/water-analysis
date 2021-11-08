@@ -453,6 +453,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -492,7 +501,6 @@ __webpack_require__.r(__webpack_exports__);
       chartOptions: {
         chart: {
           id: "vuechart-example",
-          type: "area",
           zoom: {
             type: "x",
             enabled: true
@@ -556,12 +564,19 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.delta);
     },
     handlePerCentChange: function handlePerCentChange(value) {},
+    handleStackedChange: function handleStackedChange(value) {
+      this.$apexcharts.exec("vuechart-example", "updateOptions", {
+        chart: {
+          stacked: value.target.checked
+        }
+      });
+    },
     handleXAxisChange: function handleXAxisChange(e) {
       this.selectedX = e.target.value;
       if (e.target.value == "date") this.dateChecked = true;else this.dateChecked = false;
     },
     handleSumChange: function handleSumChange(value) {},
-    handleGraphChange: function handleGraphChange(value) {},
+    handleGraphChange: function handleGraphChange(e) {},
     updateChart: function updateChart() {
       var _this2 = this;
 
@@ -592,11 +607,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     drawGraph: function drawGraph(data) {
-      this.chartOptions = {
-        xaxis: {
-          categories: data.xaxis
-        }
-      }; // .xaxis.categories = data.xaxis
+      this.chartOptions.xaxis.categories = data.xaxis; // {
+      //     xaxis: {
+      //         categories: data.xaxis
+      //     }
+      // }
+      // .xaxis.categories = data.xaxis
       // chartopts.xaxis.categories = ["asd", "wef", "wef"]
       // console.log("-------------", chartopts)
       // this.chartOptions = chartopts
@@ -1119,6 +1135,25 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
+                        _vm.graphType == "bar"
+                          ? _c(
+                              "a-form-item",
+                              { attrs: { label: "Stacked:" } },
+                              [
+                                _c(
+                                  "a-checkbox",
+                                  { on: { change: _vm.handleStackedChange } },
+                                  [
+                                    _vm._v(
+                                      "\n                                Checkbox\n                            "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
                         _c(
                           "a-form-item",
                           { attrs: { "wrapper-col": { span: 12, offset: 5 } } },
@@ -1151,7 +1186,11 @@ var render = function() {
                   "a-layout-content",
                   [
                     _c("apexchart", {
-                      attrs: { options: _vm.chartOptions, series: _vm.series }
+                      attrs: {
+                        options: _vm.chartOptions,
+                        series: _vm.series,
+                        type: _vm.graphType
+                      }
                     })
                   ],
                   1
