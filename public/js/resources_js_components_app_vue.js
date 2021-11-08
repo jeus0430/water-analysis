@@ -499,12 +499,22 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          type: "category" // labels: {
+          //     datetimeUTC: false,
+          //     format: "yyyy-MM-dd",
+          //     datetimeFormatter: {
+          //         year: "yyyy",
+          //         month: "MMM 'yy",
+          //         day: "dd MMM",
+          //         hour: "HH:mm"
+          //     }
+          // }
+
         }
       },
       series: [{
         name: "Vue Chart",
-        data: [30, 40, 45, 50, 49, 60, 70, 81]
+        data: []
       }]
     };
   },
@@ -553,6 +563,8 @@ __webpack_require__.r(__webpack_exports__);
     handleSumChange: function handleSumChange(value) {},
     handleGraphChange: function handleGraphChange(value) {},
     updateChart: function updateChart() {
+      var _this2 = this;
+
       var zones = this.selectedZones;
       if (this.zoneChecked) zones = [];
       var groups = this.selectedGroups;
@@ -576,40 +588,68 @@ __webpack_require__.r(__webpack_exports__);
         sum: sum,
         graphType: graphType
       }).then(function (res) {
-        console.log(res);
+        _this2.drawGraph(res.data);
       });
-      var max = 90;
-      var min = 20;
-      var newData = this.series[0].data.map(function () {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }); // In the same way, update the series option
+    },
+    drawGraph: function drawGraph(data) {
+      this.chartOptions = {
+        xaxis: {
+          categories: data.xaxis
+        }
+      }; // .xaxis.categories = data.xaxis
+      // chartopts.xaxis.categories = ["asd", "wef", "wef"]
+      // console.log("-------------", chartopts)
+      // this.chartOptions = chartopts
+      // const a =
 
-      this.series = [{
-        data: newData
-      }];
+      this.series = data.yaxis;
+      console.log(data.yaxis); // [
+      //     {
+      //         name: "qty",
+      //         data: [10, 2, 3, 4]
+      //     }
+      // ]
+      // data.yaxis.every((e, i) => {
+      //     console.log(i)
+      //     this.series[i] = {
+      //         name: e.name,
+      //         data: e.data
+      //     }
+      // })
+      // const max = 90
+      // const min = 20
+      // const newData = this.series[0].data.map(() => {
+      //     return Math.floor(Math.random() * (max - min + 1)) + min
+      // })
+      // // In the same way, update the series option
+      // this.series = [
+      //     {
+      //         data: newData
+      //     }
+      // ]
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.$refs.xs.value = "date";
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/zones").then(function (res) {
       var data = res.data;
-      _this2.zones = data;
+      _this3.zones = data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/groups").then(function (res) {
-      _this2.groups = res.data;
+      _this3.groups = res.data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
-      _this2.mone_avs = res.data;
+      _this3.mone_avs = res.data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
-      _this2.delta_min = parseFloat(res.data.min);
-      _this2.delta_max = parseFloat(res.data.max);
+      _this3.delta_min = parseFloat(res.data.min);
+      _this3.delta_max = parseFloat(res.data.max);
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/per_cent_range").then(function (res) {
-      _this2.per_cent_min = parseFloat(res.data.min);
-      _this2.per_cent_max = parseFloat(res.data.max);
+      _this3.per_cent_min = parseFloat(res.data.min);
+      _this3.per_cent_max = parseFloat(res.data.max);
     });
   }
 });

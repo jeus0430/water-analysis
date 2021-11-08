@@ -232,13 +232,23 @@ export default {
                     }
                 },
                 xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                    type: "category"
+                    // labels: {
+                    //     datetimeUTC: false,
+                    //     format: "yyyy-MM-dd",
+                    //     datetimeFormatter: {
+                    //         year: "yyyy",
+                    //         month: "MMM 'yy",
+                    //         day: "dd MMM",
+                    //         hour: "HH:mm"
+                    //     }
+                    // }
                 }
             },
             series: [
                 {
                     name: "Vue Chart",
-                    data: [30, 40, 45, 50, 49, 60, 70, 81]
+                    data: []
                 }
             ]
         }
@@ -317,20 +327,46 @@ export default {
                     graphType: graphType
                 })
                 .then(res => {
-                    console.log(res)
+                    this.drawGraph(res.data)
                 })
-
-            const max = 90
-            const min = 20
-            const newData = this.series[0].data.map(() => {
-                return Math.floor(Math.random() * (max - min + 1)) + min
-            })
-            // In the same way, update the series option
-            this.series = [
-                {
-                    data: newData
+        },
+        drawGraph(data) {
+            this.chartOptions = {
+                xaxis: {
+                    categories: data.xaxis
                 }
-            ]
+            }
+            // .xaxis.categories = data.xaxis
+            // chartopts.xaxis.categories = ["asd", "wef", "wef"]
+            // console.log("-------------", chartopts)
+            // this.chartOptions = chartopts
+            // const a =
+            this.series = data.yaxis
+            console.log(data.yaxis)
+            // [
+            //     {
+            //         name: "qty",
+            //         data: [10, 2, 3, 4]
+            //     }
+            // ]
+            // data.yaxis.every((e, i) => {
+            //     console.log(i)
+            //     this.series[i] = {
+            //         name: e.name,
+            //         data: e.data
+            //     }
+            // })
+            // const max = 90
+            // const min = 20
+            // const newData = this.series[0].data.map(() => {
+            //     return Math.floor(Math.random() * (max - min + 1)) + min
+            // })
+            // // In the same way, update the series option
+            // this.series = [
+            //     {
+            //         data: newData
+            //     }
+            // ]
         }
     },
     mounted: function() {
