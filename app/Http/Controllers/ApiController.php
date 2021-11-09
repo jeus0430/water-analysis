@@ -47,14 +47,16 @@ class ApiController extends Controller
     {
         config()->set('database.connections.mysql.strict', false);
 
-        $zones      = $request->input('zones');
-        $groups     = $request->input('groups');
-        $mone_avs   = $request->input('moneavs');
-        $dates      = $request->input('dateRange');
-        $percent   = $request->input('percent');
-        $delta      = $request->input('delta');
-        $sum        = $request->input('sum');
-        $xaxis      = $request->input('xaxis');
+        $zones          = $request->input('zones');
+        $groups         = $request->input('groups');
+        $mone_avs       = $request->input('moneavs');
+        $dates          = $request->input('dateRange');
+        $percent_min    = $request->input('percent_min');
+        $percent_max    = $request->input('percent_max');
+        $delta_min      = $request->input('delta_min');
+        $delta_max      = $request->input('delta_max');
+        $sum            = $request->input('sum');
+        $xaxis          = $request->input('xaxis');
 
         // Get All data according to criteria
         $query = ViewYomi::query();
@@ -103,8 +105,8 @@ class ApiController extends Controller
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
         $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
-        $percent && $query = $query->whereBetween('percent', [$percent[0], $percent[1]]);
-        $delta && $query = $query->whereBetween('delta', [$delta[0], $delta[1]]);
+        (is_null($percent_max) || is_null(($percent_min))) || $query = $query->whereBetween('percent', [$percent_max, $percent_min]);
+        (is_null($delta_max) || is_null(($delta_min))) || $query = $query->whereBetween('delta', [$delta_max, $delta_min]);
         switch ($xaxis) {
             case "mone_av":
                 $query = $query->groupByRaw('dt, mone_av');

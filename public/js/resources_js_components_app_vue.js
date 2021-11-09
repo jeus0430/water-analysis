@@ -489,6 +489,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -496,6 +507,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      collapsible: true,
       locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
       form: this.$form.createForm(this, {
         name: "coordinated"
@@ -511,6 +523,7 @@ __webpack_require__.r(__webpack_exports__);
       moneavChecked: true,
       mone_avs: [],
       fetching: false,
+      sidebar: true,
       dateRange: [],
       delta_min: 0,
       delta_max: 0,
@@ -729,9 +742,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       e.preventDefault();
     },
-    handleZoneCheck: function handleZoneCheck(e) {
-      if (e.target.checked) {} else {}
-    },
     handleZoneChange: function handleZoneChange(value) {
       this.selectedZones = value;
     },
@@ -744,10 +754,6 @@ __webpack_require__.r(__webpack_exports__);
     handleDateRangeChange: function handleDateRangeChange(date, dateString) {
       this.dateRange = dateString;
     },
-    handleDeltaChange: function handleDeltaChange(value) {
-      console.log(this.delta);
-    },
-    handlePerCentChange: function handlePerCentChange(value) {},
     handleStackedChange: function handleStackedChange(value) {
       this.$apexcharts.exec("vuechart-example", "updateOptions", {
         chart: {
@@ -758,8 +764,6 @@ __webpack_require__.r(__webpack_exports__);
     handleXAxisChange: function handleXAxisChange(e) {
       this.selectedX = e.target.value;
     },
-    handleSumChange: function handleSumChange(value) {},
-    handleGraphChange: function handleGraphChange(e) {},
     updateChart: function updateChart() {
       var _this2 = this;
 
@@ -771,7 +775,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.moneavChecked) moneavs = this.selectedMoneavs;
       var dateRange = this.dateRange;
       var delta = this.delta;
-      var per_cent = this.per_cent;
+      var per_cent_min = this.per_cent_min;
+      var per_cent_max = this.per_cent_max;
+      var delta_min = this.delta_min;
+      var delta_max = this.delta_max;
       var xaxis = this.selectedX;
       var sum = this.sum;
       var graphType = this.graphType;
@@ -780,8 +787,10 @@ __webpack_require__.r(__webpack_exports__);
         groups: groups,
         moneavs: moneavs,
         dateRange: dateRange,
-        delta: delta,
-        per_cent: per_cent,
+        delta_min: delta_min,
+        delta_max: delta_max,
+        per_cent_max: per_cent_max,
+        per_cent_min: per_cent_min,
         xaxis: xaxis,
         sum: sum,
         graphType: graphType
@@ -912,411 +921,487 @@ var render = function() {
         _c(
           "a-layout",
           [
-            _c("a-layout-header", [
-              _c("h1", [_vm._v("Water Differences Analytics")])
-            ]),
+            _c(
+              "a-layout-header",
+              [
+                _c("h1", [_vm._v("Water Differences Analytics")]),
+                _vm._v(" "),
+                _c(
+                  "a-checkbox",
+                  {
+                    model: {
+                      value: _vm.sidebar,
+                      callback: function($$v) {
+                        _vm.sidebar = $$v
+                      },
+                      expression: "sidebar"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Sidebar " +
+                        _vm._s(_vm.sidebar ? "Visible" : "Hidden") +
+                        "\n                "
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
             _vm._v(" "),
             _c(
               "a-layout",
               [
-                _c(
-                  "a-layout-sider",
-                  { attrs: { width: "400" } },
-                  [
-                    _c(
-                      "a-form",
-                      {
-                        attrs: { label: "Search Form", form: _vm.form },
-                        on: { submit: _vm.handleSubmit }
-                      },
+                _vm.sidebar
+                  ? _c(
+                      "a-layout-sider",
+                      { attrs: { width: "400" } },
                       [
                         _c(
-                          "a-form-item",
-                          { attrs: { label: "Waste Zone:" } },
+                          "a-form",
+                          {
+                            attrs: { label: "Search Form", form: _vm.form },
+                            on: { submit: _vm.handleSubmit }
+                          },
                           [
                             _c(
-                              "a-checkbox",
-                              {
-                                model: {
-                                  value: _vm.zoneChecked,
-                                  callback: function($$v) {
-                                    _vm.zoneChecked = $$v
-                                  },
-                                  expression: "zoneChecked"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Select All\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a-select",
-                              {
-                                directives: [
-                                  {
-                                    name: "decorator",
-                                    rawName: "v-decorator",
-                                    value: [
-                                      "selectedZones",
-                                      {
-                                        rules: [
-                                          {
-                                            required: true,
-                                            message:
-                                              "Please select waste zones!"
-                                          }
-                                        ]
-                                      }
-                                    ],
-                                    expression:
-                                      "[\n                                    'selectedZones',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select waste zones!'\n                                            }\n                                        ]\n                                    }\n                                ]"
-                                  }
-                                ],
-                                attrs: {
-                                  mode: "multiple",
-                                  placeholder: "Select zones",
-                                  disabled: _vm.zoneChecked
-                                },
-                                on: { change: _vm.handleZoneChange }
-                              },
-                              _vm._l(_vm.zones, function(zone) {
-                                return _c(
-                                  "a-select-option",
-                                  { key: zone.waste_zone },
-                                  [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(zone.waste_description) +
-                                        "\n                                "
-                                    )
-                                  ]
-                                )
-                              }),
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "Belongs To:" } },
-                          [
-                            _c(
-                              "a-checkbox",
-                              {
-                                model: {
-                                  value: _vm.groupChecked,
-                                  callback: function($$v) {
-                                    _vm.groupChecked = $$v
-                                  },
-                                  expression: "groupChecked"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Select All\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a-select",
-                              {
-                                directives: [
-                                  {
-                                    name: "decorator",
-                                    rawName: "v-decorator",
-                                    value: [
-                                      "selectedGroups",
-                                      {
-                                        rules: [
-                                          {
-                                            required: true,
-                                            message: "Please select groups!"
-                                          }
-                                        ]
-                                      }
-                                    ],
-                                    expression:
-                                      "[\n                                    'selectedGroups',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select groups!'\n                                            }\n                                        ]\n                                    }\n                                ]"
-                                  }
-                                ],
-                                attrs: {
-                                  mode: "multiple",
-                                  placeholder: "Select group",
-                                  disabled: _vm.groupChecked
-                                },
-                                on: { change: _vm.handleGroupChange }
-                              },
-                              _vm._l(_vm.groups, function(group) {
-                                return _c(
-                                  "a-select-option",
-                                  { key: group.waste_group },
-                                  [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(group.waste_description) +
-                                        "\n                                "
-                                    )
-                                  ]
-                                )
-                              }),
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "Mone_av:" } },
-                          [
-                            _c(
-                              "a-checkbox",
-                              {
-                                model: {
-                                  value: _vm.moneavChecked,
-                                  callback: function($$v) {
-                                    _vm.moneavChecked = $$v
-                                  },
-                                  expression: "moneavChecked"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Select All\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a-select",
-                              {
-                                directives: [
-                                  {
-                                    name: "decorator",
-                                    rawName: "v-decorator",
-                                    value: [
-                                      "selectedMoneavs",
-                                      {
-                                        rules: [
-                                          {
-                                            required: true,
-                                            message: "Please select move_avs!"
-                                          }
-                                        ]
-                                      }
-                                    ],
-                                    expression:
-                                      "[\n                                    'selectedMoneavs',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select move_avs!'\n                                            }\n                                        ]\n                                    }\n                                ]"
-                                  }
-                                ],
-                                attrs: {
-                                  mode: "multiple",
-                                  placeholder: "Select Mone_av",
-                                  disabled: _vm.moneavChecked
-                                },
-                                on: { change: _vm.handleMoneavChange }
-                              },
-                              _vm._l(_vm.mone_avs, function(mone_av) {
-                                return _c(
-                                  "a-select-option",
-                                  { key: mone_av.mone_av },
-                                  [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(mone_av.mone_av) +
-                                        "\n                                "
-                                    )
-                                  ]
-                                )
-                              }),
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "Date Range:" } },
-                          [
-                            _c("a-range-picker", {
-                              directives: [
-                                {
-                                  name: "decorator",
-                                  rawName: "v-decorator",
-                                  value: [
-                                    "dateRange",
-                                    {
-                                      rules: [
-                                        {
-                                          required: true,
-                                          message: "Please select date range!"
-                                        }
-                                      ]
-                                    }
-                                  ],
-                                  expression:
-                                    "[\n                                    'dateRange',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select date range!'\n                                            }\n                                        ]\n                                    }\n                                ]"
-                                }
-                              ],
-                              on: { change: _vm.handleDateRangeChange }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "delta:" } },
-                          [
-                            _c("a-slider", {
-                              attrs: {
-                                range: "",
-                                "default-value": [_vm.delta_min, _vm.delta_max],
-                                min: _vm.delta_min,
-                                max: _vm.delta_max,
-                                step: 0.0001
-                              },
-                              on: { afterChange: _vm.handleDeltaChange },
-                              model: {
-                                value: _vm.delta,
-                                callback: function($$v) {
-                                  _vm.delta = $$v
-                                },
-                                expression: "delta"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "per_cent:" } },
-                          [
-                            _c("a-slider", {
-                              attrs: {
-                                range: "",
-                                "default-value": [
-                                  _vm.per_cent_min,
-                                  _vm.per_cent_max
-                                ],
-                                min: _vm.per_cent_min,
-                                max: _vm.per_cent_max
-                              },
-                              on: { afterChange: _vm.handlePerCentChange },
-                              model: {
-                                value: _vm.per_cent,
-                                callback: function($$v) {
-                                  _vm.per_cent = $$v
-                                },
-                                expression: "per_cent"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "X-axis:" } },
-                          [
-                            _c("a-radio-group", {
-                              ref: "xs",
-                              attrs: {
-                                name: "xaxis",
-                                value: _vm.selectedX,
-                                options: _vm.xOptions
-                              },
-                              on: { change: _vm.handleXAxisChange }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "Sum:" } },
-                          [
-                            _c("a-radio-group", {
-                              attrs: { options: _vm.sumOptions },
-                              on: { change: _vm.handleSumChange },
-                              model: {
-                                value: _vm.sum,
-                                callback: function($$v) {
-                                  _vm.sum = $$v
-                                },
-                                expression: "sum"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { label: "Graph:" } },
-                          [
-                            _c("a-radio-group", {
-                              attrs: {
-                                name: "graph",
-                                options: _vm.graphOptions
-                              },
-                              on: { change: _vm.handleGraphChange },
-                              model: {
-                                value: _vm.graphType,
-                                callback: function($$v) {
-                                  _vm.graphType = $$v
-                                },
-                                expression: "graphType"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm.graphType == "bar"
-                          ? _c(
                               "a-form-item",
-                              { attrs: { label: "Stacked:" } },
+                              { attrs: { label: "Waste Zone:" } },
                               [
                                 _c(
                                   "a-checkbox",
-                                  { on: { change: _vm.handleStackedChange } },
+                                  {
+                                    model: {
+                                      value: _vm.zoneChecked,
+                                      callback: function($$v) {
+                                        _vm.zoneChecked = $$v
+                                      },
+                                      expression: "zoneChecked"
+                                    }
+                                  },
                                   [
                                     _vm._v(
-                                      "\n                                Checkbox\n                            "
+                                      "\n                                Select All\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "decorator",
+                                        rawName: "v-decorator",
+                                        value: [
+                                          "selectedZones",
+                                          {
+                                            rules: [
+                                              {
+                                                required: true,
+                                                message:
+                                                  "Please select waste zones!"
+                                              }
+                                            ]
+                                          }
+                                        ],
+                                        expression:
+                                          "[\n                                    'selectedZones',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select waste zones!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                      }
+                                    ],
+                                    attrs: {
+                                      mode: "multiple",
+                                      placeholder: "Select zones",
+                                      disabled: _vm.zoneChecked
+                                    },
+                                    on: { change: _vm.handleZoneChange }
+                                  },
+                                  _vm._l(_vm.zones, function(zone) {
+                                    return _c(
+                                      "a-select-option",
+                                      { key: zone.waste_zone },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(zone.waste_description) +
+                                            "\n                                "
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Belongs To:" } },
+                              [
+                                _c(
+                                  "a-checkbox",
+                                  {
+                                    model: {
+                                      value: _vm.groupChecked,
+                                      callback: function($$v) {
+                                        _vm.groupChecked = $$v
+                                      },
+                                      expression: "groupChecked"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Select All\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "decorator",
+                                        rawName: "v-decorator",
+                                        value: [
+                                          "selectedGroups",
+                                          {
+                                            rules: [
+                                              {
+                                                required: true,
+                                                message: "Please select groups!"
+                                              }
+                                            ]
+                                          }
+                                        ],
+                                        expression:
+                                          "[\n                                    'selectedGroups',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select groups!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                      }
+                                    ],
+                                    attrs: {
+                                      mode: "multiple",
+                                      placeholder: "Select group",
+                                      disabled: _vm.groupChecked
+                                    },
+                                    on: { change: _vm.handleGroupChange }
+                                  },
+                                  _vm._l(_vm.groups, function(group) {
+                                    return _c(
+                                      "a-select-option",
+                                      { key: group.waste_group },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(group.waste_description) +
+                                            "\n                                "
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Mone_av:" } },
+                              [
+                                _c(
+                                  "a-checkbox",
+                                  {
+                                    model: {
+                                      value: _vm.moneavChecked,
+                                      callback: function($$v) {
+                                        _vm.moneavChecked = $$v
+                                      },
+                                      expression: "moneavChecked"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Select All\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "decorator",
+                                        rawName: "v-decorator",
+                                        value: [
+                                          "selectedMoneavs",
+                                          {
+                                            rules: [
+                                              {
+                                                required: true,
+                                                message:
+                                                  "Please select move_avs!"
+                                              }
+                                            ]
+                                          }
+                                        ],
+                                        expression:
+                                          "[\n                                    'selectedMoneavs',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select move_avs!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                      }
+                                    ],
+                                    attrs: {
+                                      mode: "multiple",
+                                      placeholder: "Select Mone_av",
+                                      disabled: _vm.moneavChecked
+                                    },
+                                    on: { change: _vm.handleMoneavChange }
+                                  },
+                                  _vm._l(_vm.mone_avs, function(mone_av) {
+                                    return _c(
+                                      "a-select-option",
+                                      { key: mone_av.mone_av },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(mone_av.mone_av) +
+                                            "\n                                "
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Date Range:" } },
+                              [
+                                _c("a-range-picker", {
+                                  directives: [
+                                    {
+                                      name: "decorator",
+                                      rawName: "v-decorator",
+                                      value: [
+                                        "dateRange",
+                                        {
+                                          rules: [
+                                            {
+                                              required: true,
+                                              message:
+                                                "Please select date range!"
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      expression:
+                                        "[\n                                    'dateRange',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select date range!'\n                                            }\n                                        ]\n                                    }\n                                ]"
+                                    }
+                                  ],
+                                  on: { change: _vm.handleDateRangeChange }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "delta:" } },
+                              [
+                                _c("a-input-number", {
+                                  staticStyle: {
+                                    width: "150px",
+                                    "text-align": "center"
+                                  },
+                                  attrs: { placeholder: "Minium Delta" },
+                                  model: {
+                                    value: _vm.delta_min,
+                                    callback: function($$v) {
+                                      _vm.delta_min = $$v
+                                    },
+                                    expression: "delta_min"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("a-input", {
+                                  staticStyle: {
+                                    width: "30px",
+                                    "border-left": "0",
+                                    "pointer-events": "none",
+                                    backgroundColor: "#fff"
+                                  },
+                                  attrs: { placeholder: "~", disabled: "" }
+                                }),
+                                _vm._v(" "),
+                                _c("a-input-number", {
+                                  staticStyle: {
+                                    width: "150px",
+                                    "text-align": "center"
+                                  },
+                                  attrs: { placeholder: "Maximum Delta" },
+                                  model: {
+                                    value: _vm.delta_max,
+                                    callback: function($$v) {
+                                      _vm.delta_max = $$v
+                                    },
+                                    expression: "delta_max"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "per_cent:" } },
+                              [
+                                _c("a-input-number", {
+                                  staticStyle: {
+                                    width: "150px",
+                                    "text-align": "center"
+                                  },
+                                  attrs: { placeholder: "Minium Percent" },
+                                  model: {
+                                    value: _vm.per_cent_min,
+                                    callback: function($$v) {
+                                      _vm.per_cent_min = $$v
+                                    },
+                                    expression: "per_cent_min"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("a-input", {
+                                  staticStyle: {
+                                    width: "30px",
+                                    "border-left": "0",
+                                    "pointer-events": "none",
+                                    backgroundColor: "#fff"
+                                  },
+                                  attrs: { placeholder: "~", disabled: "" }
+                                }),
+                                _vm._v(" "),
+                                _c("a-input-number", {
+                                  staticStyle: {
+                                    width: "150px",
+                                    "text-align": "center"
+                                  },
+                                  attrs: { placeholder: "Maximum Percent" },
+                                  model: {
+                                    value: _vm.per_cent_max,
+                                    callback: function($$v) {
+                                      _vm.per_cent_max = $$v
+                                    },
+                                    expression: "per_cent_max"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "X-axis:" } },
+                              [
+                                _c("a-radio-group", {
+                                  ref: "xs",
+                                  attrs: {
+                                    name: "xaxis",
+                                    value: _vm.selectedX,
+                                    options: _vm.xOptions
+                                  },
+                                  on: { change: _vm.handleXAxisChange }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Sum:" } },
+                              [
+                                _c("a-radio-group", {
+                                  attrs: { options: _vm.sumOptions },
+                                  model: {
+                                    value: _vm.sum,
+                                    callback: function($$v) {
+                                      _vm.sum = $$v
+                                    },
+                                    expression: "sum"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Graph:" } },
+                              [
+                                _c("a-radio-group", {
+                                  attrs: {
+                                    name: "graph",
+                                    options: _vm.graphOptions
+                                  },
+                                  model: {
+                                    value: _vm.graphType,
+                                    callback: function($$v) {
+                                      _vm.graphType = $$v
+                                    },
+                                    expression: "graphType"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm.graphType == "bar"
+                              ? _c(
+                                  "a-form-item",
+                                  { attrs: { label: "Stacked:" } },
+                                  [
+                                    _c(
+                                      "a-checkbox",
+                                      {
+                                        on: { change: _vm.handleStackedChange }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Checkbox\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              {
+                                attrs: {
+                                  "wrapper-col": { span: 12, offset: 5 }
+                                }
+                              },
+                              [
+                                _c(
+                                  "a-button",
+                                  {
+                                    attrs: {
+                                      type: "primary",
+                                      "html-type": "submit"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Draw\n                            "
                                     )
                                   ]
                                 )
                               ],
                               1
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c(
-                          "a-form-item",
-                          { attrs: { "wrapper-col": { span: 12, offset: 5 } } },
-                          [
-                            _c(
-                              "a-button",
-                              {
-                                attrs: {
-                                  type: "primary",
-                                  "html-type": "submit"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Draw\n                            "
-                                )
-                              ]
                             )
                           ],
                           1
@@ -1324,9 +1409,7 @@ var render = function() {
                       ],
                       1
                     )
-                  ],
-                  1
-                ),
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "a-layout-content",

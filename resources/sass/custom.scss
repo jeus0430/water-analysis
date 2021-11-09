@@ -8,9 +8,14 @@
 }
 #components-layout-demo-basic .ant-layout-header {
     background: white;
+    display: flex;
+    h1 {
+        margin-left: 10px;
+        font-size: 30px;
+    }
 }
 #components-layout-demo-basic .ant-layout-sider {
-    background: #3ba0e9;
+    background: #3be9a961;
     color: #fff;
     line-height: 120px;
     padding: 1rem;
@@ -25,4 +30,8 @@
 }
 #components-layout-demo-basic > .ant-layout:last-child {
     margin: 0;
+}
+.ant-form-item-label label {
+    font-weight: bold;
+    font-size: 16px;
 }

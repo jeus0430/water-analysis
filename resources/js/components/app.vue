@@ -4,9 +4,12 @@
             <a-layout>
                 <a-layout-header>
                     <h1>Water Differences Analytics</h1>
+                    <a-checkbox v-model="sidebar">
+                        Sidebar {{ sidebar ? "Visible" : "Hidden" }}
+                    </a-checkbox>
                 </a-layout-header>
                 <a-layout>
-                    <a-layout-sider width="400">
+                    <a-layout-sider width="400" v-if="sidebar">
                         <a-form
                             label="Search Form"
                             :form="form"
@@ -120,27 +123,37 @@
                                 />
                             </a-form-item>
                             <a-form-item label="delta:">
-                                <a-slider
-                                    range
-                                    :default-value="[delta_min, delta_max]"
-                                    :min="delta_min"
-                                    :max="delta_max"
-                                    :step="0.0001"
-                                    v-model="delta"
-                                    @afterChange="handleDeltaChange"
+                                <a-input-number
+                                    v-model="delta_min"
+                                    style=" width: 150px; text-align: center"
+                                    placeholder="Minium Delta"
+                                />
+                                <a-input
+                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
+                                    placeholder="~"
+                                    disabled
+                                />
+                                <a-input-number
+                                    style=" width: 150px; text-align: center"
+                                    v-model="delta_max"
+                                    placeholder="Maximum Delta"
                                 />
                             </a-form-item>
                             <a-form-item label="per_cent:">
-                                <a-slider
-                                    range
-                                    :default-value="[
-                                        per_cent_min,
-                                        per_cent_max
-                                    ]"
-                                    :min="per_cent_min"
-                                    :max="per_cent_max"
-                                    v-model="per_cent"
-                                    @afterChange="handlePerCentChange"
+                                <a-input-number
+                                    v-model="per_cent_min"
+                                    style=" width: 150px; text-align: center"
+                                    placeholder="Minium Percent"
+                                />
+                                <a-input
+                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
+                                    placeholder="~"
+                                    disabled
+                                />
+                                <a-input-number
+                                    style=" width: 150px; text-align: center"
+                                    v-model="per_cent_max"
+                                    placeholder="Maximum Percent"
                                 />
                             </a-form-item>
                             <a-form-item label="X-axis:">
@@ -156,7 +169,6 @@
                                 <a-radio-group
                                     v-model="sum"
                                     :options="sumOptions"
-                                    @change="handleSumChange"
                                 />
                             </a-form-item>
                             <a-form-item label="Graph:">
@@ -164,7 +176,6 @@
                                     name="graph"
                                     v-model="graphType"
                                     :options="graphOptions"
-                                    @change="handleGraphChange"
                                 />
                             </a-form-item>
                             <a-form-item
@@ -231,6 +242,7 @@ import VueApexCharts from "vue-apexcharts"
 export default {
     data() {
         return {
+            collapsible: true,
             locale: heIL,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
@@ -244,6 +256,7 @@ export default {
             moneavChecked: true,
             mone_avs: [],
             fetching: false,
+            sidebar: true,
             dateRange: [],
             delta_min: 0,
             delta_max: 0,
@@ -503,11 +516,6 @@ export default {
             })
             e.preventDefault()
         },
-        handleZoneCheck(e) {
-            if (e.target.checked) {
-            } else {
-            }
-        },
         handleZoneChange(value) {
             this.selectedZones = value
         },
@@ -520,10 +528,6 @@ export default {
         handleDateRangeChange(date, dateString) {
             this.dateRange = dateString
         },
-        handleDeltaChange(value) {
-            console.log(this.delta)
-        },
-        handlePerCentChange(value) {},
         handleStackedChange(value) {
             this.$apexcharts.exec("vuechart-example", "updateOptions", {
                 chart: {
@@ -534,8 +538,6 @@ export default {
         handleXAxisChange(e) {
             this.selectedX = e.target.value
         },
-        handleSumChange(value) {},
-        handleGraphChange(e) {},
         updateChart() {
             let zones = this.selectedZones
             if (this.zoneChecked) zones = []
@@ -548,7 +550,10 @@ export default {
 
             let dateRange = this.dateRange
             let delta = this.delta
-            let per_cent = this.per_cent
+            let per_cent_min = this.per_cent_min
+            let per_cent_max = this.per_cent_max
+            let delta_min = this.delta_min
+            let delta_max = this.delta_max
             let xaxis = this.selectedX
             let sum = this.sum
             let graphType = this.graphType
@@ -559,8 +564,10 @@ export default {
                     groups: groups,
                     moneavs: moneavs,
                     dateRange: dateRange,
-                    delta: delta,
-                    per_cent: per_cent,
+                    delta_min: delta_min,
+                    delta_max: delta_max,
+                    per_cent_max: per_cent_max,
+                    per_cent_min: per_cent_min,
                     xaxis: xaxis,
                     sum: sum,
                     graphType: graphType
