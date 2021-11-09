@@ -49,7 +49,7 @@ class ApiController extends Controller
         $groups     = $request->input('groups');
         $mone_avs   = $request->input('moneavs');
         $dates      = $request->input('dateRange');
-        $per_cent   = $request->input('per_cent');
+        $percent   = $request->input('percent');
         $delta      = $request->input('delta');
         $sum        = $request->input('sum');
         $xaxis      = $request->input('xaxis');
@@ -82,25 +82,27 @@ class ApiController extends Controller
 
         switch ($sum) {
             case "daily":
-                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty");
+
+                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
                 break;
             case "weekly":
-                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty");
+                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
                 break;
             case "monthly";
-                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty");
+                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
                 break;
             case "yearly":
-                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty");
+                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
                 break;
         }
 
         $query  = $query->orderBy('dt');
+
         $zones && $query = $query->whereIn('waste_zone', $zones);
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
         $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
-        // $per_cent && $query = $query->whereBetween('per_cent', [$per_cent[0], $per_cent[1]]);
+        // $percent && $query = $query->whereBetween('percent', [$percent[0], $percent[1]]);
         // $delta && $query = $query->whereBetween('delta', [$delta[0], $delta[1]]);
         switch ($xaxis) {
             case "mone_av":
@@ -116,7 +118,6 @@ class ApiController extends Controller
                 $query = $query->groupByRaw('dt');
         }
         $result = $query->get()->toArray();
-
 
         // X-Axis data for return
         $tmp = $this->_getDtsFromRang($dates[0], $dates[1], $sum);
@@ -156,27 +157,41 @@ class ApiController extends Controller
 
 
             // Calculate Y-Axis data for return
-            $yaxis  = [];
-            foreach ($column as $index => $each) {
-                $yaxis[$index]['name'] = $each->descr;
-            }
+            $yaxis  = [
+                'delta'     => [],
+                'qty'       => [],
+                'real_qty'  => [],
+                'percent'  => []
+            ];
+            foreach (['delta', 'qty', 'real_qty', 'percent'] as $each_key)
+                foreach ($column as $index => $each) {
+                    $yaxis[$each_key][$index]['name'] = $each->descr;
+                }
+            foreach (['delta', 'qty', 'real_qty', 'percent'] as $each_key)
+                foreach ($column as $i => $each_i)
+                    foreach ($taxis as $j => $each_j)
+                        $yaxis[$each_key][$i]['data'][$j] = [$each_j, 0];
 
-            foreach ($column as $i => $each_i)
-                foreach ($taxis as $j => $each_j)
-                    $yaxis[$i]['data'][$j] = [$each_j, 0];
-
-            foreach ($result as $each) {
-                if (gettype($column_i) == 'string')
-                    dd($each);
-                $yaxis[array_search($each[$ind_field], $column_i)]['data'][array_search($each['dt'], $tmp)][1] = $each['qty'];
-            }
+            foreach (['delta', 'qty', 'real_qty', 'percent'] as $each_key)
+                foreach ($result as $each) {
+                    $yaxis[$each_key][array_search($each[$ind_field], $column_i)]['data'][array_search($each['dt'], $tmp)][1] = $each[$each_key];
+                }
         } else {
-            $yaxis['name'] = 'qty';
-            foreach ($taxis as $index => $each)
-                $yaxis['data'][$index] = [$each, 0];
-            foreach ($result as $index => $each)
-                $yaxis['data'][array_search($each['dt'], $tmp)][1] = $each['qty'];
-            $yaxis = [$yaxis];
+            $yaxis  = [
+                'delta'     => [],
+                'qty'       => [],
+                'real_qty'  => [],
+                'percent'  => []
+            ];
+            foreach (['delta', 'qty', 'real_qty', 'percent'] as $each_key) {
+                $yaxis[$each_key][0]['name'] = $each_key;
+                foreach ($taxis as $index => $each)
+                    $yaxis[$each_key][0]['data'][$index] = [$each, 0];
+            }
+            foreach (['delta', 'qty', 'real_qty', 'percent'] as $each_key)
+                foreach ($result as $index => $each)
+                    $yaxis[$each_key][0]['data'][array_search($each['dt'], $tmp)][1] = $each[$each_key];
+            $yaxis = $yaxis;
         }
 
         return response()->json($yaxis);

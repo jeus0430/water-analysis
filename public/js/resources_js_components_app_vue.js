@@ -462,6 +462,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -497,8 +524,7 @@ __webpack_require__.r(__webpack_exports__);
       sumOptions: ["daily", "weekly", "monthly", "yearly"],
       graphType: "area",
       graphOptions: ["pie", "line", "bar", "area"],
-      dateChecked: true,
-      chartOptions: {
+      chartOptionsQty: {
         chart: {
           id: "vuechart-example",
           zoom: {
@@ -540,7 +566,145 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       },
-      series: [{
+      seriesQty: [{
+        name: "Vue Chart",
+        data: []
+      }],
+      chartOptionsRqty: {
+        chart: {
+          id: "vuechart-example",
+          zoom: {
+            type: "x",
+            enabled: true
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          labels: {
+            formatter: function formatter(value, timestamp, opts) {
+              if (value % 10 == 1) {
+                var d = new Date(value - 1); // Copy date so don't modify original
+
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                // Make Sunday's day number 7
+
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                return d.getUTCFullYear() + "-" + weekNo + "W";
+              } else if (value % 10 == 2) {
+                var _d4 = new Date(value - 2);
+
+                return _d4.getFullYear() + "-" + _d4.getMonth();
+              } else if (value % 10 == 3) {
+                var _d5 = new Date(value - 3);
+
+                return _d5.getFullYear();
+              } else {
+                var _d6 = new Date(value);
+
+                return _d6.toISOString().split("T")[0];
+              }
+            }
+          }
+        }
+      },
+      seriesRqty: [{
+        name: "Vue Chart",
+        data: []
+      }],
+      chartOptionsDelta: {
+        chart: {
+          id: "vuechart-example",
+          zoom: {
+            type: "x",
+            enabled: true
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          labels: {
+            formatter: function formatter(value, timestamp, opts) {
+              if (value % 10 == 1) {
+                var d = new Date(value - 1); // Copy date so don't modify original
+
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                // Make Sunday's day number 7
+
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                return d.getUTCFullYear() + "-" + weekNo + "W";
+              } else if (value % 10 == 2) {
+                var _d7 = new Date(value - 2);
+
+                return _d7.getFullYear() + "-" + _d7.getMonth();
+              } else if (value % 10 == 3) {
+                var _d8 = new Date(value - 3);
+
+                return _d8.getFullYear();
+              } else {
+                var _d9 = new Date(value);
+
+                return _d9.toISOString().split("T")[0];
+              }
+            }
+          }
+        }
+      },
+      seriesDelta: [{
+        name: "Vue Chart",
+        data: []
+      }],
+      chartOptionsPercent: {
+        chart: {
+          id: "vuechart-example",
+          zoom: {
+            type: "x",
+            enabled: true
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          labels: {
+            formatter: function formatter(value, timestamp, opts) {
+              if (value % 10 == 1) {
+                var d = new Date(value - 1); // Copy date so don't modify original
+
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                // Make Sunday's day number 7
+
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                return d.getUTCFullYear() + "-" + weekNo + "W";
+              } else if (value % 10 == 2) {
+                var _d10 = new Date(value - 2);
+
+                return _d10.getFullYear() + "-" + _d10.getMonth();
+              } else if (value % 10 == 3) {
+                var _d11 = new Date(value - 3);
+
+                return _d11.getFullYear();
+              } else {
+                var _d12 = new Date(value);
+
+                return _d12.toISOString().split("T")[0];
+              }
+            }
+          }
+        }
+      },
+      seriesPercent: [{
         name: "Vue Chart",
         data: []
       }]
@@ -593,7 +757,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleXAxisChange: function handleXAxisChange(e) {
       this.selectedX = e.target.value;
-      if (e.target.value == "date") this.dateChecked = true;else this.dateChecked = false;
     },
     handleSumChange: function handleSumChange(value) {},
     handleGraphChange: function handleGraphChange(e) {},
@@ -623,7 +786,10 @@ __webpack_require__.r(__webpack_exports__);
         sum: sum,
         graphType: graphType
       }).then(function (res) {
-        _this2.series = res.data;
+        _this2.seriesQty = res.data["qty"];
+        _this2.seriesRqty = res.data["real_qty"];
+        _this2.seriesPercent = res.data["percent"];
+        _this2.seriesDelta = res.data["delta"];
       });
     }
   },
@@ -1074,26 +1240,24 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
-                        _vm.dateChecked
-                          ? _c(
-                              "a-form-item",
-                              { attrs: { label: "Sum:" } },
-                              [
-                                _c("a-radio-group", {
-                                  attrs: { options: _vm.sumOptions },
-                                  on: { change: _vm.handleSumChange },
-                                  model: {
-                                    value: _vm.sum,
-                                    callback: function($$v) {
-                                      _vm.sum = $$v
-                                    },
-                                    expression: "sum"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          : _vm._e(),
+                        _c(
+                          "a-form-item",
+                          { attrs: { label: "Sum:" } },
+                          [
+                            _c("a-radio-group", {
+                              attrs: { options: _vm.sumOptions },
+                              on: { change: _vm.handleSumChange },
+                              model: {
+                                value: _vm.sum,
+                                callback: function($$v) {
+                                  _vm.sum = $$v
+                                },
+                                expression: "sum"
+                              }
+                            })
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "a-form-item",
@@ -1167,13 +1331,79 @@ var render = function() {
                 _c(
                   "a-layout-content",
                   [
-                    _c("apexchart", {
-                      attrs: {
-                        options: _vm.chartOptions,
-                        series: _vm.series,
-                        type: _vm.graphType
-                      }
-                    })
+                    _c(
+                      "a-row",
+                      { attrs: { type: "flex" } },
+                      [
+                        _c(
+                          "a-col",
+                          { attrs: { flex: 1 } },
+                          [
+                            _c("apexchart", {
+                              attrs: {
+                                options: _vm.chartOptionsQty,
+                                series: _vm.seriesQty,
+                                type: _vm.graphType
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-col",
+                          { attrs: { flex: 1 } },
+                          [
+                            _c("apexchart", {
+                              attrs: {
+                                options: _vm.chartOptionsRqty,
+                                series: _vm.seriesRqty,
+                                type: _vm.graphType
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a-row",
+                      { attrs: { type: "flex" } },
+                      [
+                        _c(
+                          "a-col",
+                          { attrs: { flex: 1 } },
+                          [
+                            _c("apexchart", {
+                              attrs: {
+                                options: _vm.chartOptionsDelta,
+                                series: _vm.seriesDelta,
+                                type: _vm.graphType
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a-col",
+                          { attrs: { flex: 1 } },
+                          [
+                            _c("apexchart", {
+                              attrs: {
+                                options: _vm.chartOptionsPercent,
+                                series: _vm.seriesPercent,
+                                type: _vm.graphType
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 )

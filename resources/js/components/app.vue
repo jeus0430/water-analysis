@@ -152,7 +152,7 @@
                                     @change="handleXAxisChange"
                                 />
                             </a-form-item>
-                            <a-form-item label="Sum:" v-if="dateChecked">
+                            <a-form-item label="Sum:">
                                 <a-radio-group
                                     v-model="sum"
                                     :options="sumOptions"
@@ -183,11 +183,38 @@
                         </a-form>
                     </a-layout-sider>
                     <a-layout-content>
-                        <apexchart
-                            :options="chartOptions"
-                            :series="series"
-                            :type="graphType"
-                        ></apexchart>
+                        <a-row type="flex">
+                            <a-col :flex="1">
+                                <apexchart
+                                    :options="chartOptionsQty"
+                                    :series="seriesQty"
+                                    :type="graphType"
+                                ></apexchart>
+                            </a-col>
+                            <a-col :flex="1">
+                                <apexchart
+                                    :options="chartOptionsRqty"
+                                    :series="seriesRqty"
+                                    :type="graphType"
+                                ></apexchart>
+                            </a-col>
+                        </a-row>
+                        <a-row type="flex">
+                            <a-col :flex="1">
+                                <apexchart
+                                    :options="chartOptionsDelta"
+                                    :series="seriesDelta"
+                                    :type="graphType"
+                                ></apexchart>
+                            </a-col>
+                            <a-col :flex="1">
+                                <apexchart
+                                    :options="chartOptionsPercent"
+                                    :series="seriesPercent"
+                                    :type="graphType"
+                                ></apexchart>
+                            </a-col>
+                        </a-row>
                     </a-layout-content>
                 </a-layout>
             </a-layout>
@@ -230,8 +257,7 @@ export default {
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
             graphType: "area",
             graphOptions: ["pie", "line", "bar", "area"],
-            dateChecked: true,
-            chartOptions: {
+            chartOptionsQty: {
                 chart: {
                     id: "vuechart-example",
                     zoom: {
@@ -282,7 +308,178 @@ export default {
                     }
                 }
             },
-            series: [
+            seriesQty: [
+                {
+                    name: "Vue Chart",
+                    data: []
+                }
+            ],
+            chartOptionsRqty: {
+                chart: {
+                    id: "vuechart-example",
+                    zoom: {
+                        type: "x",
+                        enabled: true
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            if (value % 10 == 1) {
+                                let d = new Date(value - 1)
+                                // Copy date so don't modify original
+                                d = new Date(
+                                    Date.UTC(
+                                        d.getFullYear(),
+                                        d.getMonth(),
+                                        d.getDate()
+                                    )
+                                )
+                                // Set to nearest Thursday: current date + 4 - current day number
+                                // Make Sunday's day number 7
+                                d.setUTCDate(
+                                    d.getUTCDate() + 4 - (d.getUTCDay() || 7)
+                                )
+                                // Get first day of year
+                                var yearStart = new Date(
+                                    Date.UTC(d.getUTCFullYear(), 0, 1)
+                                )
+                                // Calculate full weeks to nearest Thursday
+                                var weekNo = Math.ceil(
+                                    ((d - yearStart) / 86400000 + 1) / 7
+                                )
+                                // Return array of year and week number
+                                return d.getUTCFullYear() + "-" + weekNo + "W"
+                            } else if (value % 10 == 2) {
+                                let d = new Date(value - 2)
+                                return d.getFullYear() + "-" + d.getMonth()
+                            } else if (value % 10 == 3) {
+                                let d = new Date(value - 3)
+                                return d.getFullYear()
+                            } else {
+                                const d = new Date(value)
+                                return d.toISOString().split("T")[0]
+                            }
+                        }
+                    }
+                }
+            },
+            seriesRqty: [
+                {
+                    name: "Vue Chart",
+                    data: []
+                }
+            ],
+            chartOptionsDelta: {
+                chart: {
+                    id: "vuechart-example",
+                    zoom: {
+                        type: "x",
+                        enabled: true
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            if (value % 10 == 1) {
+                                let d = new Date(value - 1)
+                                // Copy date so don't modify original
+                                d = new Date(
+                                    Date.UTC(
+                                        d.getFullYear(),
+                                        d.getMonth(),
+                                        d.getDate()
+                                    )
+                                )
+                                // Set to nearest Thursday: current date + 4 - current day number
+                                // Make Sunday's day number 7
+                                d.setUTCDate(
+                                    d.getUTCDate() + 4 - (d.getUTCDay() || 7)
+                                )
+                                // Get first day of year
+                                var yearStart = new Date(
+                                    Date.UTC(d.getUTCFullYear(), 0, 1)
+                                )
+                                // Calculate full weeks to nearest Thursday
+                                var weekNo = Math.ceil(
+                                    ((d - yearStart) / 86400000 + 1) / 7
+                                )
+                                // Return array of year and week number
+                                return d.getUTCFullYear() + "-" + weekNo + "W"
+                            } else if (value % 10 == 2) {
+                                let d = new Date(value - 2)
+                                return d.getFullYear() + "-" + d.getMonth()
+                            } else if (value % 10 == 3) {
+                                let d = new Date(value - 3)
+                                return d.getFullYear()
+                            } else {
+                                const d = new Date(value)
+                                return d.toISOString().split("T")[0]
+                            }
+                        }
+                    }
+                }
+            },
+            seriesDelta: [
+                {
+                    name: "Vue Chart",
+                    data: []
+                }
+            ],
+            chartOptionsPercent: {
+                chart: {
+                    id: "vuechart-example",
+                    zoom: {
+                        type: "x",
+                        enabled: true
+                    }
+                },
+                xaxis: {
+                    type: "datetime",
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            if (value % 10 == 1) {
+                                let d = new Date(value - 1)
+                                // Copy date so don't modify original
+                                d = new Date(
+                                    Date.UTC(
+                                        d.getFullYear(),
+                                        d.getMonth(),
+                                        d.getDate()
+                                    )
+                                )
+                                // Set to nearest Thursday: current date + 4 - current day number
+                                // Make Sunday's day number 7
+                                d.setUTCDate(
+                                    d.getUTCDate() + 4 - (d.getUTCDay() || 7)
+                                )
+                                // Get first day of year
+                                var yearStart = new Date(
+                                    Date.UTC(d.getUTCFullYear(), 0, 1)
+                                )
+                                // Calculate full weeks to nearest Thursday
+                                var weekNo = Math.ceil(
+                                    ((d - yearStart) / 86400000 + 1) / 7
+                                )
+                                // Return array of year and week number
+                                return d.getUTCFullYear() + "-" + weekNo + "W"
+                            } else if (value % 10 == 2) {
+                                let d = new Date(value - 2)
+                                return d.getFullYear() + "-" + d.getMonth()
+                            } else if (value % 10 == 3) {
+                                let d = new Date(value - 3)
+                                return d.getFullYear()
+                            } else {
+                                const d = new Date(value)
+                                return d.toISOString().split("T")[0]
+                            }
+                        }
+                    }
+                }
+            },
+            seriesPercent: [
                 {
                     name: "Vue Chart",
                     data: []
@@ -336,8 +533,6 @@ export default {
         },
         handleXAxisChange(e) {
             this.selectedX = e.target.value
-            if (e.target.value == "date") this.dateChecked = true
-            else this.dateChecked = false
         },
         handleSumChange(value) {},
         handleGraphChange(e) {},
@@ -371,7 +566,10 @@ export default {
                     graphType: graphType
                 })
                 .then(res => {
-                    this.series = res.data
+                    this.seriesQty = res.data["qty"]
+                    this.seriesRqty = res.data["real_qty"]
+                    this.seriesPercent = res.data["percent"]
+                    this.seriesDelta = res.data["delta"]
                 })
         }
     },
@@ -398,3 +596,4 @@ export default {
     }
 }
 </script>
+wwww
