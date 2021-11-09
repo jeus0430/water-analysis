@@ -45,6 +45,8 @@ class ApiController extends Controller
 
     public function chart(Request $request)
     {
+        config()->set('database.connections.mysql.strict', false);
+
         $zones      = $request->input('zones');
         $groups     = $request->input('groups');
         $mone_avs   = $request->input('moneavs');
@@ -82,7 +84,6 @@ class ApiController extends Controller
 
         switch ($sum) {
             case "daily":
-
                 $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
                 break;
             case "weekly":
@@ -102,8 +103,8 @@ class ApiController extends Controller
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
         $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
-        // $percent && $query = $query->whereBetween('percent', [$percent[0], $percent[1]]);
-        // $delta && $query = $query->whereBetween('delta', [$delta[0], $delta[1]]);
+        $percent && $query = $query->whereBetween('percent', [$percent[0], $percent[1]]);
+        $delta && $query = $query->whereBetween('delta', [$delta[0], $delta[1]]);
         switch ($xaxis) {
             case "mone_av":
                 $query = $query->groupByRaw('dt, mone_av');
