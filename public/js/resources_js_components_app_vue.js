@@ -500,6 +500,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -815,15 +823,14 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
       _this3.mone_avs = res.data;
-    });
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
-      _this3.delta_min = parseFloat(res.data.min);
-      _this3.delta_max = parseFloat(res.data.max);
-    });
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/per_cent_range").then(function (res) {
-      _this3.per_cent_min = parseFloat(res.data.min);
-      _this3.per_cent_max = parseFloat(res.data.max);
-    });
+    }); // axios.get("/api/delta_range").then(res => {
+    //     this.delta_min = parseFloat(res.data.min)
+    //     this.delta_max = parseFloat(res.data.max)
+    // })
+    // axios.get("/api/per_cent_range").then(res => {
+    //     this.per_cent_min = parseFloat(res.data.min)
+    //     this.per_cent_max = parseFloat(res.data.max)
+    // })
   }
 });
 
@@ -1390,6 +1397,7 @@ var render = function() {
                                   "a-button",
                                   {
                                     attrs: {
+                                      size: "large",
                                       type: "primary",
                                       "html-type": "submit"
                                     }
@@ -1431,8 +1439,15 @@ var render = function() {
                             })
                           ],
                           1
-                        ),
-                        _vm._v(" "),
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a-row",
+                      { attrs: { type: "flex" } },
+                      [
                         _c(
                           "a-col",
                           { attrs: { flex: 1 } },
@@ -1468,8 +1483,15 @@ var render = function() {
                             })
                           ],
                           1
-                        ),
-                        _vm._v(" "),
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a-row",
+                      { attrs: { type: "flex" } },
+                      [
                         _c(
                           "a-col",
                           { attrs: { flex: 1 } },

@@ -11,7 +11,7 @@
     display: flex;
     h1 {
         margin-left: 10px;
-        font-size: 30px;
+        font-size: 40px;
     }
 }
 #components-layout-demo-basic .ant-layout-sider {
@@ -33,5 +33,17 @@
 }
 .ant-form-item-label label {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 30px;
+}
+
+.ant-form label {
+    font-size: 20px;
+}
+
+.ant-checkbox-wrapper {
+    font-size: 20px;
+}
+
+.ant-btn-primary.ant-btn-lg {
+    font-size: 26px;
 }

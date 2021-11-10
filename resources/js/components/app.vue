@@ -187,7 +187,11 @@
                                 </a-checkbox>
                             </a-form-item>
                             <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                                <a-button type="primary" html-type="submit">
+                                <a-button
+                                    size="large"
+                                    type="primary"
+                                    html-type="submit"
+                                >
                                     Draw
                                 </a-button>
                             </a-form-item>
@@ -202,6 +206,8 @@
                                     :type="graphType"
                                 ></apexchart>
                             </a-col>
+                        </a-row>
+                        <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
                                     :options="chartOptionsRqty"
@@ -218,6 +224,8 @@
                                     :type="graphType"
                                 ></apexchart>
                             </a-col>
+                        </a-row>
+                        <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
                                     :options="chartOptionsPercent"
@@ -592,14 +600,14 @@ export default {
         axios.get("/api/mone_avs").then(res => {
             this.mone_avs = res.data
         })
-        axios.get("/api/delta_range").then(res => {
-            this.delta_min = parseFloat(res.data.min)
-            this.delta_max = parseFloat(res.data.max)
-        })
-        axios.get("/api/per_cent_range").then(res => {
-            this.per_cent_min = parseFloat(res.data.min)
-            this.per_cent_max = parseFloat(res.data.max)
-        })
+        // axios.get("/api/delta_range").then(res => {
+        //     this.delta_min = parseFloat(res.data.min)
+        //     this.delta_max = parseFloat(res.data.max)
+        // })
+        // axios.get("/api/per_cent_range").then(res => {
+        //     this.per_cent_min = parseFloat(res.data.min)
+        //     this.per_cent_max = parseFloat(res.data.max)
+        // })
     }
 }
 </script>

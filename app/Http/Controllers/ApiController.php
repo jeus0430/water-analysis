@@ -51,8 +51,8 @@ class ApiController extends Controller
         $groups         = $request->input('groups');
         $mone_avs       = $request->input('moneavs');
         $dates          = $request->input('dateRange');
-        $percent_min    = $request->input('percent_min');
-        $percent_max    = $request->input('percent_max');
+        $percent_min    = $request->input('per_cent_min');
+        $percent_max    = $request->input('per_cent_max');
         $delta_min      = $request->input('delta_min');
         $delta_max      = $request->input('delta_max');
         $sum            = $request->input('sum');
@@ -105,7 +105,7 @@ class ApiController extends Controller
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
         $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
-        (is_null($percent_max) || is_null(($percent_min))) || $query = $query->whereBetween('percent', [$percent_max, $percent_min]);
+        (is_null($percent_max) || is_null(($percent_min))) || $query = $query->whereBetween('per_cent', [$percent_max, $percent_min]);
         (is_null($delta_max) || is_null(($delta_min))) || $query = $query->whereBetween('delta', [$delta_max, $delta_min]);
         switch ($xaxis) {
             case "mone_av":
