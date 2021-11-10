@@ -176,6 +176,12 @@
                             </a-form-item>
                             <a-form-item label="Graph:">
                                 <a-radio-group
+                                    v-model="selectedOneGraph"
+                                    :options="oneGraphOptions"
+                                />
+                            </a-form-item>
+                            <a-form-item label="Graph Type:">
+                                <a-radio-group
                                     name="graph"
                                     v-model="graphType"
                                     :options="graphOptions"
@@ -204,6 +210,7 @@
                         <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
+                                    v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
                                     :series="seriesQty"
                                     :type="graphType"
@@ -213,6 +220,7 @@
                         <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
+                                    v-if="selectedOneGraph == 'r_qty'"
                                     :options="chartOptionsRqty"
                                     :series="seriesRqty"
                                     :type="graphType"
@@ -222,6 +230,7 @@
                         <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
+                                    v-if="selectedOneGraph == 'delta'"
                                     :options="chartOptionsDelta"
                                     :series="seriesDelta"
                                     :type="graphType"
@@ -231,6 +240,7 @@
                         <a-row type="flex">
                             <a-col :flex="1">
                                 <apexchart
+                                    v-if="selectedOneGraph == 'per_cent'"
                                     :options="chartOptionsPercent"
                                     :series="seriesPercent"
                                     :type="graphType"
@@ -281,6 +291,8 @@ export default {
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
             graphType: "area",
             graphOptions: ["pie", "line", "bar", "area"],
+            selectedOneGraph: "qty",
+            oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
                 title: {
                     text: "qty",

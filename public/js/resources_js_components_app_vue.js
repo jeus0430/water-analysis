@@ -511,6 +511,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -548,6 +558,8 @@ __webpack_require__.r(__webpack_exports__);
       sumOptions: ["daily", "weekly", "monthly", "yearly"],
       graphType: "area",
       graphOptions: ["pie", "line", "bar", "area"],
+      selectedOneGraph: "qty",
+      oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
       chartOptionsQty: {
         title: {
           text: "qty",
@@ -1373,6 +1385,24 @@ var render = function() {
                               { attrs: { label: "Graph:" } },
                               [
                                 _c("a-radio-group", {
+                                  attrs: { options: _vm.oneGraphOptions },
+                                  model: {
+                                    value: _vm.selectedOneGraph,
+                                    callback: function($$v) {
+                                      _vm.selectedOneGraph = $$v
+                                    },
+                                    expression: "selectedOneGraph"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a-form-item",
+                              { attrs: { label: "Graph Type:" } },
+                              [
+                                _c("a-radio-group", {
                                   attrs: {
                                     name: "graph",
                                     options: _vm.graphOptions
@@ -1455,13 +1485,15 @@ var render = function() {
                           "a-col",
                           { attrs: { flex: 1 } },
                           [
-                            _c("apexchart", {
-                              attrs: {
-                                options: _vm.chartOptionsQty,
-                                series: _vm.seriesQty,
-                                type: _vm.graphType
-                              }
-                            })
+                            _vm.selectedOneGraph == "qty"
+                              ? _c("apexchart", {
+                                  attrs: {
+                                    options: _vm.chartOptionsQty,
+                                    series: _vm.seriesQty,
+                                    type: _vm.graphType
+                                  }
+                                })
+                              : _vm._e()
                           ],
                           1
                         )
@@ -1477,13 +1509,15 @@ var render = function() {
                           "a-col",
                           { attrs: { flex: 1 } },
                           [
-                            _c("apexchart", {
-                              attrs: {
-                                options: _vm.chartOptionsRqty,
-                                series: _vm.seriesRqty,
-                                type: _vm.graphType
-                              }
-                            })
+                            _vm.selectedOneGraph == "r_qty"
+                              ? _c("apexchart", {
+                                  attrs: {
+                                    options: _vm.chartOptionsRqty,
+                                    series: _vm.seriesRqty,
+                                    type: _vm.graphType
+                                  }
+                                })
+                              : _vm._e()
                           ],
                           1
                         )
@@ -1499,13 +1533,15 @@ var render = function() {
                           "a-col",
                           { attrs: { flex: 1 } },
                           [
-                            _c("apexchart", {
-                              attrs: {
-                                options: _vm.chartOptionsDelta,
-                                series: _vm.seriesDelta,
-                                type: _vm.graphType
-                              }
-                            })
+                            _vm.selectedOneGraph == "delta"
+                              ? _c("apexchart", {
+                                  attrs: {
+                                    options: _vm.chartOptionsDelta,
+                                    series: _vm.seriesDelta,
+                                    type: _vm.graphType
+                                  }
+                                })
+                              : _vm._e()
                           ],
                           1
                         )
@@ -1521,13 +1557,15 @@ var render = function() {
                           "a-col",
                           { attrs: { flex: 1 } },
                           [
-                            _c("apexchart", {
-                              attrs: {
-                                options: _vm.chartOptionsPercent,
-                                series: _vm.seriesPercent,
-                                type: _vm.graphType
-                              }
-                            })
+                            _vm.selectedOneGraph == "per_cent"
+                              ? _c("apexchart", {
+                                  attrs: {
+                                    options: _vm.chartOptionsPercent,
+                                    series: _vm.seriesPercent,
+                                    type: _vm.graphType
+                                  }
+                                })
+                              : _vm._e()
                           ],
                           1
                         )
