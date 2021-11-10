@@ -58,7 +58,8 @@ class ApiController extends Controller
         $zones          = $request->input('zones');
         $groups         = $request->input('groups');
         $mone_avs       = $request->input('moneavs');
-        $dates          = $request->input('dateRange');
+        $date_min       = $request->input('date_min');
+        $date_max       = $request->input('date_max');
         $percent_min    = $request->input('per_cent_min');
         $percent_max    = $request->input('per_cent_max');
         $delta_min      = $request->input('delta_min');
@@ -112,7 +113,10 @@ class ApiController extends Controller
         $zones && $query = $query->whereIn('waste_zone', $zones);
         $groups && $query = $query->whereIn('waste_group', $groups);
         $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
-        $dates && $query = $query->whereBetween(DB::raw('DATE(day_date)'), [$dates[0], $dates[1]]);
+        if ($date_min)
+            $query = $query->where(DB::raw('DATE(day_date)'), '>=', $date_min);
+        if ($date_max)
+            $query = $query->where(DB::raw('DATE(day_date)'), '<=', $date_max);
         (is_null($percent_max) || is_null(($percent_min))) || $query = $query->whereBetween('per_cent', [$percent_max, $percent_min]);
         (is_null($delta_max) || is_null(($delta_min))) || $query = $query->whereBetween('delta', [$delta_max, $delta_min]);
         switch ($xaxis) {
@@ -131,7 +135,7 @@ class ApiController extends Controller
         $result = $query->get()->toArray();
 
         // X-Axis data for return
-        $tmp = $this->_getDtsFromRang($dates[0], $dates[1], $sum);
+        $tmp = $this->_getDtsFromRang($date_min, $date_max, $sum);
         $taxis = array_map(function ($e) use ($sum) {
             switch ($sum) {
                 case 'daily':
@@ -210,6 +214,8 @@ class ApiController extends Controller
 
     private function _getDtsFromRang($st, $en, $mode)
     {
+        if (!$en)
+            $en = date('Y-m-d');
         switch ($mode) {
             case 'daily':
                 return $this->_getDatesFromRange($st, $en);

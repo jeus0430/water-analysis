@@ -24029,3 +24029,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-calendar-time .ant-calendar-footer .ant-calendar-time-picker-btn {
   display: none;
 }
+
+.ant-calendar-picker-input.ant-input {
+  padding-right: 50px;
+}

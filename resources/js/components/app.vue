@@ -4,12 +4,18 @@
             <a-layout>
                 <a-layout-header>
                     <h1>Water Differences Analytics</h1>
-                    <a-checkbox v-model="sidebar">
-                        Sidebar {{ sidebar ? "Visible" : "Hidden" }}
-                    </a-checkbox>
+                    <a-button type="primary" @click="showDrawer">
+                        Show Sidebar
+                    </a-button>
                 </a-layout-header>
                 <a-layout>
-                    <a-layout-sider width="400" v-if="sidebar">
+                    <a-drawer
+                        title="Search Panel"
+                        placement="right"
+                        :visible="sidebar"
+                        @close="onClose"
+                        width="1000"
+                    >
                         <a-form
                             label="Search Form"
                             :form="form"
@@ -106,23 +112,35 @@
                                 </a-select>
                             </a-form-item>
                             <a-form-item :label="trans.day_date">
-                                <a-range-picker
+                                <a-date-picker
                                     size="large"
-                                    show-time
                                     format="YYYY-MM-DD"
-                                    @change="handleDateRangeChange"
+                                    @change="handleDateMinChange"
+                                    placeholder="min date"
                                     v-decorator="[
-                                        'dateRange',
+                                        'date_min',
                                         {
                                             rules: [
                                                 {
                                                     required: true,
                                                     message:
-                                                        'Please select date range!'
+                                                        'Please select Min Date!'
                                                 }
                                             ]
                                         }
                                     ]"
+                                />
+                                <a-input
+                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
+                                    placeholder="~"
+                                    size="large"
+                                    disabled
+                                />
+                                <a-date-picker
+                                    size="large"
+                                    format="YYYY-MM-DD"
+                                    v-model="date_max"
+                                    placeholder="max date"
                                 />
                             </a-form-item>
                             <a-form-item :label="trans.delta">
@@ -163,7 +181,7 @@
                                 <a-radio-group
                                     name="xaxis"
                                     :value="selectedX"
-                                    ref="xs"
+                                    defaultValue="date"
                                     :options="xOptions"
                                     @change="handleXAxisChange"
                                 />
@@ -201,11 +219,11 @@
                                     type="primary"
                                     html-type="submit"
                                 >
-                                    Draw
+                                    Show
                                 </a-button>
                             </a-form-item>
                         </a-form>
-                    </a-layout-sider>
+                    </a-drawer>
                     <a-layout-content>
                         <a-row type="flex">
                             <a-col :flex="1">
@@ -294,7 +312,8 @@ export default {
             mone_avs: [],
             fetching: false,
             sidebar: true,
-            dateRange: [],
+            date_min: "",
+            date_max: "",
             delta_min: 0,
             delta_max: 0,
             delta: [0, 0],
@@ -697,6 +716,9 @@ export default {
     },
     methods: {
         moment,
+        onClose() {
+            this.sidebar = false
+        },
         forceUpdate() {
             this.$forceUpdate()
         },
@@ -706,7 +728,7 @@ export default {
             if (!this.groupChecked) toCheck.push("selectedGroups")
             if (!this.moneavChecked) toCheck.push("selectedMoneavs")
 
-            toCheck.push("dateRange")
+            toCheck.push("date_min")
             this.form.validateFields(toCheck, (err, values) => {
                 if (!err) {
                     console.log("Received values of form: ", values)
@@ -724,8 +746,8 @@ export default {
         handleMoneavChange(value) {
             this.selectedMoneavs = value
         },
-        handleDateRangeChange(date, dateString) {
-            this.dateRange = dateString
+        handleDateMinChange(date, dateString) {
+            this.date_min = dateString
         },
         handleStackedChange(value) {
             this.$apexcharts.exec("vuechart-example", "updateOptions", {
@@ -747,7 +769,8 @@ export default {
             let moneavs = this.selectedMoneavs
             if (this.moneavChecked) moneavs = this.selectedMoneavs
 
-            let dateRange = this.dateRange
+            let date_min = this.date_min
+            let date_max = this.date_max
             let delta = this.delta
             let per_cent_min = this.per_cent_min
             let per_cent_max = this.per_cent_max
@@ -762,7 +785,8 @@ export default {
                     zones: zones,
                     groups: groups,
                     moneavs: moneavs,
-                    dateRange: dateRange,
+                    date_max: date_max,
+                    date_min: date_min,
                     delta_min: delta_min,
                     delta_max: delta_max,
                     per_cent_max: per_cent_max,
@@ -778,10 +802,12 @@ export default {
                     this.seriesDelta = res.data["delta"]
                     this.sidebar = false
                 })
+        },
+        showDrawer() {
+            this.sidebar = true
         }
     },
     mounted: function() {
-        this.$refs.xs.value = "date"
         axios.get("/api/zones").then(res => {
             let data = res.data
             this.zones = data
