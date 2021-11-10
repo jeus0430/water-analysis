@@ -584,6 +584,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -643,7 +650,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         grid: {
-          borderColor: "#fff",
+          borderColor: "#f00",
           xaxis: {
             lines: {
               show: true
@@ -1235,7 +1242,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    Show Sidebar\n                "
+                      "\n                        Show Sidebar\n                    "
                     )
                   ]
                 )
@@ -1250,7 +1257,6 @@ var render = function() {
                   "a-drawer",
                   {
                     attrs: {
-                      title: "Search Panel",
                       placement: "right",
                       visible: _vm.sidebar,
                       width: "1200"
@@ -1266,12 +1272,27 @@ var render = function() {
                       },
                       [
                         _c(
-                          "a-row",
-                          { attrs: { type: "flex", gutter: 16 } },
+                          "div",
+                          {
+                            staticStyle: {
+                              display: "grid",
+                              "grid-template": "auto / 1fr 1fr 1fr 1fr 1fr 1fr",
+                              "grid-column-gap": "24px",
+                              "grid-row-gap": "24px",
+                              "align-items": "flex-end",
+                              "text-align": "center",
+                              "justify-items": "center"
+                            }
+                          },
                           [
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "1",
+                                  "grid-column-end": "4"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1290,7 +1311,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Select All\n                                    "
+                                          "\n                                            Select All\n                                        "
                                         )
                                       ]
                                     ),
@@ -1315,7 +1336,7 @@ var render = function() {
                                               }
                                             ],
                                             expression:
-                                              "[\n                                            'selectedZones',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select waste zones!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
+                                              "[\n                                                'selectedZones',\n                                                {\n                                                    rules: [\n                                                        {\n                                                            required: true,\n                                                            message:\n                                                                'Please select waste zones!'\n                                                        }\n                                                    ]\n                                                }\n                                            ]"
                                           }
                                         ],
                                         attrs: {
@@ -1332,9 +1353,9 @@ var render = function() {
                                           { key: zone.waste_zone },
                                           [
                                             _vm._v(
-                                              "\n                                            " +
+                                              "\n                                                " +
                                                 _vm._s(zone.waste_description) +
-                                                "\n                                        "
+                                                "\n                                            "
                                             )
                                           ]
                                         )
@@ -1349,8 +1370,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "4",
+                                  "grid-column-end": "7"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1371,7 +1397,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Select All\n                                    "
+                                          "\n                                            Select All\n                                        "
                                         )
                                       ]
                                     ),
@@ -1396,7 +1422,7 @@ var render = function() {
                                               }
                                             ],
                                             expression:
-                                              "[\n                                            'selectedGroups',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select groups!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
+                                              "[\n                                                'selectedGroups',\n                                                {\n                                                    rules: [\n                                                        {\n                                                            required: true,\n                                                            message:\n                                                                'Please select groups!'\n                                                        }\n                                                    ]\n                                                }\n                                            ]"
                                           }
                                         ],
                                         attrs: {
@@ -1413,11 +1439,11 @@ var render = function() {
                                           { key: group.waste_group },
                                           [
                                             _vm._v(
-                                              "\n                                            " +
+                                              "\n                                                " +
                                                 _vm._s(
                                                   group.waste_description
                                                 ) +
-                                                "\n                                        "
+                                                "\n                                            "
                                             )
                                           ]
                                         )
@@ -1432,155 +1458,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
-                              [
-                                _c(
-                                  "a-form-item",
-                                  { attrs: { label: _vm.trans.mone_av } },
-                                  [
-                                    _c(
-                                      "a-checkbox",
-                                      {
-                                        model: {
-                                          value: _vm.moneavChecked,
-                                          callback: function($$v) {
-                                            _vm.moneavChecked = $$v
-                                          },
-                                          expression: "moneavChecked"
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Select All\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a-select",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "decorator",
-                                            rawName: "v-decorator",
-                                            value: [
-                                              "selectedMoneavs",
-                                              {
-                                                rules: [
-                                                  {
-                                                    required: true,
-                                                    message:
-                                                      "Please select move_avs!"
-                                                  }
-                                                ]
-                                              }
-                                            ],
-                                            expression:
-                                              "[\n                                            'selectedMoneavs',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select move_avs!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
-                                          }
-                                        ],
-                                        attrs: {
-                                          mode: "multiple",
-                                          size: "large",
-                                          placeholder: "Select Mone_av",
-                                          disabled: _vm.moneavChecked
-                                        },
-                                        on: { change: _vm.handleMoneavChange }
-                                      },
-                                      _vm._l(_vm.mone_avs, function(mone_av) {
-                                        return _c(
-                                          "a-select-option",
-                                          { key: mone_av.mone_av },
-                                          [
-                                            _vm._v(
-                                              "\n                                            " +
-                                                _vm._s(mone_av.mone_av) +
-                                                "\n                                        "
-                                            )
-                                          ]
-                                        )
-                                      }),
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-row",
-                          {
-                            staticStyle: { "flex-wrap": "nowrap" },
-                            attrs: { type: "flex", gutter: 16 }
-                          },
-                          [
-                            _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
-                              [
-                                _c(
-                                  "a-form-item",
-                                  { attrs: { label: _vm.trans.day_date } },
-                                  [
-                                    _c("a-date-picker", {
-                                      directives: [
-                                        {
-                                          name: "decorator",
-                                          rawName: "v-decorator",
-                                          value: [
-                                            "date_min",
-                                            {
-                                              rules: [
-                                                {
-                                                  required: true,
-                                                  message:
-                                                    "Please select Min Date!"
-                                                }
-                                              ]
-                                            }
-                                          ],
-                                          expression:
-                                            "[\n                                            'date_min',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Min Date!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
-                                        }
-                                      ],
-                                      attrs: {
-                                        size: "large",
-                                        format: "YYYY-MM-DD",
-                                        placeholder: "min date"
-                                      },
-                                      on: { change: _vm.handleDateMinChange }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("a-date-picker", {
-                                      attrs: {
-                                        size: "large",
-                                        format: "YYYY-MM-DD",
-                                        placeholder: "max date"
-                                      },
-                                      model: {
-                                        value: _vm.date_max,
-                                        callback: function($$v) {
-                                          _vm.date_max = $$v
-                                        },
-                                        expression: "date_max"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "1",
+                                  "grid-column-end": "3"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1629,8 +1513,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "3",
+                                  "grid-column-end": "5"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1676,21 +1565,171 @@ var render = function() {
                                 )
                               ],
                               1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-row",
-                          {
-                            staticStyle: { "flex-wrap": "nowrap" },
-                            attrs: { type: "flex", gutter: 16 }
-                          },
-                          [
+                            ),
+                            _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "5",
+                                  "grid-column-end": "7"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a-form-item",
+                                  { attrs: { label: _vm.trans.mone_av } },
+                                  [
+                                    _c(
+                                      "a-checkbox",
+                                      {
+                                        model: {
+                                          value: _vm.moneavChecked,
+                                          callback: function($$v) {
+                                            _vm.moneavChecked = $$v
+                                          },
+                                          expression: "moneavChecked"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            Select All\n                                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a-select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "decorator",
+                                            rawName: "v-decorator",
+                                            value: [
+                                              "selectedMoneavs",
+                                              {
+                                                rules: [
+                                                  {
+                                                    required: true,
+                                                    message:
+                                                      "Please select move_avs!"
+                                                  }
+                                                ]
+                                              }
+                                            ],
+                                            expression:
+                                              "[\n                                                'selectedMoneavs',\n                                                {\n                                                    rules: [\n                                                        {\n                                                            required: true,\n                                                            message:\n                                                                'Please select move_avs!'\n                                                        }\n                                                    ]\n                                                }\n                                            ]"
+                                          }
+                                        ],
+                                        attrs: {
+                                          mode: "multiple",
+                                          size: "large",
+                                          placeholder: "Select Mone_av",
+                                          disabled: _vm.moneavChecked
+                                        },
+                                        on: { change: _vm.handleMoneavChange }
+                                      },
+                                      _vm._l(_vm.mone_avs, function(mone_av) {
+                                        return _c(
+                                          "a-select-option",
+                                          { key: mone_av.mone_av },
+                                          [
+                                            _vm._v(
+                                              "\n                                                " +
+                                                _vm._s(mone_av.mone_av) +
+                                                "\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "3",
+                                  "grid-column-end": "5"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a-form-item",
+                                  { attrs: { label: _vm.trans.day_date } },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticStyle: { display: "flex" } },
+                                      [
+                                        _c("a-date-picker", {
+                                          directives: [
+                                            {
+                                              name: "decorator",
+                                              rawName: "v-decorator",
+                                              value: [
+                                                "date_min",
+                                                {
+                                                  rules: [
+                                                    {
+                                                      required: true,
+                                                      message:
+                                                        "Please select Min Date!"
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              expression:
+                                                "[\n                                                    'date_min',\n                                                    {\n                                                        rules: [\n                                                            {\n                                                                required: true,\n                                                                message:\n                                                                    'Please select Min Date!'\n                                                            }\n                                                        ]\n                                                    }\n                                                ]"
+                                            }
+                                          ],
+                                          attrs: {
+                                            size: "large",
+                                            format: "YYYY-MM-DD",
+                                            placeholder: "min date"
+                                          },
+                                          on: {
+                                            change: _vm.handleDateMinChange
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("a-date-picker", {
+                                          attrs: {
+                                            size: "large",
+                                            format: "YYYY-MM-DD",
+                                            placeholder: "max date"
+                                          },
+                                          model: {
+                                            value: _vm.date_max,
+                                            callback: function($$v) {
+                                              _vm.date_max = $$v
+                                            },
+                                            expression: "date_max"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "1",
+                                  "grid-column-end": "4"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1713,8 +1752,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "4",
+                                  "grid-column-end": "7"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1738,43 +1782,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
-                              [
-                                _c(
-                                  "a-form-item",
-                                  { attrs: { label: "Graph:" } },
-                                  [
-                                    _c("a-radio-group", {
-                                      attrs: { options: _vm.oneGraphOptions },
-                                      model: {
-                                        value: _vm.selectedOneGraph,
-                                        callback: function($$v) {
-                                          _vm.selectedOneGraph = $$v
-                                        },
-                                        expression: "selectedOneGraph"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-row",
-                          {
-                            staticStyle: { "flex-wrap": "nowrap" },
-                            attrs: { type: "flex", gutter: 16 }
-                          },
-                          [
-                            _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "1",
+                                  "grid-column-end": "4"
+                                }
+                              },
                               [
                                 _c(
                                   "a-form-item",
@@ -1801,13 +1815,47 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
-                              { attrs: { flex: 1 } },
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "4",
+                                  "grid-column-end": "7"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a-form-item",
+                                  { attrs: { label: "Graph:" } },
+                                  [
+                                    _c("a-radio-group", {
+                                      attrs: { options: _vm.oneGraphOptions },
+                                      model: {
+                                        value: _vm.selectedOneGraph,
+                                        callback: function($$v) {
+                                          _vm.selectedOneGraph = $$v
+                                        },
+                                        expression: "selectedOneGraph"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: {
+                                  "grid-column-start": "1",
+                                  "grid-column-end": "4"
+                                }
+                              },
                               [
                                 _vm.graphType == "bar"
                                   ? _c(
                                       "a-form-item",
-                                      { attrs: { label: "Stacked:" } },
                                       [
                                         _c(
                                           "a-checkbox",
@@ -1818,7 +1866,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                        Checkbox\n                                    "
+                                              "\n                                            Stacked\n                                        "
                                             )
                                           ]
                                         )
@@ -1831,10 +1879,12 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a-col",
+                              "div",
                               {
-                                staticStyle: { "align-self": "end" },
-                                attrs: { flex: 1 }
+                                staticStyle: {
+                                  "grid-column-start": "4",
+                                  "grid-column-end": "7"
+                                }
                               },
                               [
                                 _c(
@@ -1856,7 +1906,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Show\n                                    "
+                                          "\n                                            Show\n                                        "
                                         )
                                       ]
                                     )
@@ -1866,121 +1916,91 @@ var render = function() {
                               ],
                               1
                             )
-                          ],
-                          1
+                          ]
                         )
-                      ],
-                      1
+                      ]
                     )
                   ],
                   1
                 ),
                 _vm._v(" "),
-                _c(
-                  "a-layout-content",
-                  [
+                _c("a-layout-content", [
+                  _c("div", [
                     _c(
-                      "a-row",
-                      { attrs: { type: "flex" } },
+                      "div",
                       [
-                        _c(
-                          "a-col",
-                          { attrs: { flex: 1 } },
-                          [
-                            _vm.selectedOneGraph == "qty"
-                              ? _c("apexchart", {
-                                  key: _vm.trans_updated,
-                                  attrs: {
-                                    options: _vm.chartOptionsQty,
-                                    series: _vm.seriesQty,
-                                    type: _vm.graphType
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a-row",
-                      { attrs: { type: "flex" } },
-                      [
-                        _c(
-                          "a-col",
-                          { attrs: { flex: 1 } },
-                          [
-                            _vm.selectedOneGraph == "r_qty"
-                              ? _c("apexchart", {
-                                  key: _vm.trans_updated,
-                                  attrs: {
-                                    options: _vm.chartOptionsRqty,
-                                    series: _vm.seriesRqty,
-                                    type: _vm.graphType
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a-row",
-                      { attrs: { type: "flex" } },
-                      [
-                        _c(
-                          "a-col",
-                          { attrs: { flex: 1 } },
-                          [
-                            _vm.selectedOneGraph == "delta"
-                              ? _c("apexchart", {
-                                  key: _vm.trans_updated,
-                                  attrs: {
-                                    options: _vm.chartOptionsDelta,
-                                    series: _vm.seriesDelta,
-                                    type: _vm.graphType
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a-row",
-                      { attrs: { type: "flex" } },
-                      [
-                        _c(
-                          "a-col",
-                          { attrs: { flex: 1 } },
-                          [
-                            _vm.selectedOneGraph == "per_cent"
-                              ? _c("apexchart", {
-                                  key: _vm.trans_updated,
-                                  attrs: {
-                                    options: _vm.chartOptionsPercent,
-                                    series: _vm.seriesPercent,
-                                    type: _vm.graphType
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
-                        )
+                        _vm.selectedOneGraph == "qty"
+                          ? _c("apexchart", {
+                              key: _vm.trans_updated,
+                              attrs: {
+                                options: _vm.chartOptionsQty,
+                                series: _vm.seriesQty,
+                                type: _vm.graphType
+                              }
+                            })
+                          : _vm._e()
                       ],
                       1
                     )
-                  ],
-                  1
-                )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "div",
+                      [
+                        _vm.selectedOneGraph == "r_qty"
+                          ? _c("apexchart", {
+                              key: _vm.trans_updated,
+                              attrs: {
+                                options: _vm.chartOptionsRqty,
+                                series: _vm.seriesRqty,
+                                type: _vm.graphType
+                              }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "div",
+                      [
+                        _vm.selectedOneGraph == "delta"
+                          ? _c("apexchart", {
+                              key: _vm.trans_updated,
+                              attrs: {
+                                options: _vm.chartOptionsDelta,
+                                series: _vm.seriesDelta,
+                                type: _vm.graphType
+                              }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "div",
+                      [
+                        _vm.selectedOneGraph == "per_cent"
+                          ? _c("apexchart", {
+                              key: _vm.trans_updated,
+                              attrs: {
+                                options: _vm.chartOptionsPercent,
+                                series: _vm.seriesPercent,
+                                type: _vm.graphType
+                              }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ])
+                ])
               ],
               1
             )

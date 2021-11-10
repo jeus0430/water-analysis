@@ -10,7 +10,6 @@
                 </a-layout-header>
                 <a-layout>
                     <a-drawer
-                        title="Search Panel"
                         placement="right"
                         :visible="sidebar"
                         @close="onClose"
@@ -21,8 +20,13 @@
                             :form="form"
                             @submit="handleSubmit"
                         >
-                            <a-row type="flex" :gutter="16">
-                                <a-col :flex="1">
+                            <div
+                                style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 24px;  align-items: flex-end;text-align:center;justify-items: center;
+"
+                            >
+                                <div
+                                    style="grid-column-start: 1;grid-column-end: 4;"
+                                >
                                     <a-form-item :label="trans.waste_zone">
                                         <a-checkbox v-model="zoneChecked">
                                             Select All
@@ -54,8 +58,10 @@
                                             </a-select-option>
                                         </a-select>
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 4;grid-column-end: 7;"
+                                >
                                     <a-form-item
                                         :label="trans.belongs_to_group"
                                     >
@@ -89,8 +95,46 @@
                                             </a-select-option>
                                         </a-select>
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 1;grid-column-end: 3;"
+                                >
+                                    <a-form-item :label="trans.delta">
+                                        <a-input-number
+                                            v-model="delta_min"
+                                            style=" width: 100px; text-align: center"
+                                            placeholder="Minium Delta"
+                                            size="large"
+                                        />
+                                        <a-input-number
+                                            style=" width: 100px; text-align: center"
+                                            size="large"
+                                            v-model="delta_max"
+                                            placeholder="Maximum Delta"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div
+                                    style="grid-column-start: 3;grid-column-end: 5;"
+                                >
+                                    <a-form-item :label="trans.per_cent">
+                                        <a-input-number
+                                            size="large"
+                                            v-model="per_cent_min"
+                                            style=" width: 100px; text-align: center"
+                                            placeholder="Minium Percent"
+                                        />
+                                        <a-input-number
+                                            style="width: 100px; text-align: center"
+                                            size="large"
+                                            v-model="per_cent_max"
+                                            placeholder="Maximum Percent"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div
+                                    style="grid-column-start: 5;grid-column-end: 7;"
+                                >
                                     <a-form-item :label="trans.mone_av">
                                         <a-checkbox v-model="moneavChecked">
                                             Select All
@@ -122,80 +166,42 @@
                                             </a-select-option>
                                         </a-select>
                                     </a-form-item>
-                                </a-col>
-                            </a-row>
-                            <a-row
-                                type="flex"
-                                :gutter="16"
-                                style="flex-wrap: nowrap"
-                            >
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 3; grid-column-end: 5;"
+                                >
                                     <a-form-item :label="trans.day_date">
-                                        <a-date-picker
-                                            size="large"
-                                            format="YYYY-MM-DD"
-                                            @change="handleDateMinChange"
-                                            placeholder="min date"
-                                            v-decorator="[
-                                                'date_min',
-                                                {
-                                                    rules: [
-                                                        {
-                                                            required: true,
-                                                            message:
-                                                                'Please select Min Date!'
-                                                        }
-                                                    ]
-                                                }
-                                            ]"
-                                        />
-                                        <a-date-picker
-                                            size="large"
-                                            format="YYYY-MM-DD"
-                                            v-model="date_max"
-                                            placeholder="max date"
-                                        />
+                                        <div style="display: flex">
+                                            <a-date-picker
+                                                size="large"
+                                                format="YYYY-MM-DD"
+                                                @change="handleDateMinChange"
+                                                placeholder="min date"
+                                                v-decorator="[
+                                                    'date_min',
+                                                    {
+                                                        rules: [
+                                                            {
+                                                                required: true,
+                                                                message:
+                                                                    'Please select Min Date!'
+                                                            }
+                                                        ]
+                                                    }
+                                                ]"
+                                            />
+                                            <a-date-picker
+                                                size="large"
+                                                format="YYYY-MM-DD"
+                                                v-model="date_max"
+                                                placeholder="max date"
+                                            />
+                                        </div>
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
-                                    <a-form-item :label="trans.delta">
-                                        <a-input-number
-                                            v-model="delta_min"
-                                            style=" width: 100px; text-align: center"
-                                            placeholder="Minium Delta"
-                                            size="large"
-                                        />
-                                        <a-input-number
-                                            style=" width: 100px; text-align: center"
-                                            size="large"
-                                            v-model="delta_max"
-                                            placeholder="Maximum Delta"
-                                        />
-                                    </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
-                                    <a-form-item :label="trans.per_cent">
-                                        <a-input-number
-                                            size="large"
-                                            v-model="per_cent_min"
-                                            style=" width: 100px; text-align: center"
-                                            placeholder="Minium Percent"
-                                        />
-                                        <a-input-number
-                                            style="width: 100px; text-align: center"
-                                            size="large"
-                                            v-model="per_cent_max"
-                                            placeholder="Maximum Percent"
-                                        />
-                                    </a-form-item>
-                                </a-col>
-                            </a-row>
-                            <a-row
-                                type="flex"
-                                :gutter="16"
-                                style="flex-wrap: nowrap"
-                            >
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 1; grid-column-end: 4;"
+                                >
                                     <a-form-item label="X-axis:">
                                         <a-radio-group
                                             name="xaxis"
@@ -205,30 +211,20 @@
                                             @change="handleXAxisChange"
                                         />
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 4;grid-column-end: 7;"
+                                >
                                     <a-form-item :label="trans.sum">
                                         <a-radio-group
                                             v-model="sum"
                                             :options="sumOptions"
                                         />
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
-                                    <a-form-item label="Graph:">
-                                        <a-radio-group
-                                            v-model="selectedOneGraph"
-                                            :options="oneGraphOptions"
-                                        />
-                                    </a-form-item>
-                                </a-col>
-                            </a-row>
-                            <a-row
-                                type="flex"
-                                :gutter="16"
-                                style="flex-wrap: nowrap"
-                            >
-                                <a-col :flex="1">
+                                </div>
+                                <div
+                                    style="grid-column-start: 1; grid-column-end: 4"
+                                >
                                     <a-form-item label="Graph Type:">
                                         <a-radio-group
                                             name="graph"
@@ -236,20 +232,31 @@
                                             :options="graphOptions"
                                         />
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1">
-                                    <a-form-item
-                                        v-if="graphType == 'bar'"
-                                        label="Stacked:"
-                                    >
+                                </div>
+                                <div
+                                    style="grid-column-start: 4;grid-column-end:7;"
+                                >
+                                    <a-form-item label="Graph:">
+                                        <a-radio-group
+                                            v-model="selectedOneGraph"
+                                            :options="oneGraphOptions"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div
+                                    style="grid-column-start: 1;grid-column-end:4;"
+                                >
+                                    <a-form-item v-if="graphType == 'bar'">
                                         <a-checkbox
                                             @change="handleStackedChange"
                                         >
-                                            Checkbox
+                                            Stacked
                                         </a-checkbox>
                                     </a-form-item>
-                                </a-col>
-                                <a-col :flex="1" style="align-self: end">
+                                </div>
+                                <div
+                                    style="grid-column-start: 4;grid-column-end:7;"
+                                >
                                     <a-form-item
                                         :wrapper-col="{ span: 12, offset: 5 }"
                                     >
@@ -261,13 +268,13 @@
                                             Show
                                         </a-button>
                                     </a-form-item>
-                                </a-col>
-                            </a-row>
+                                </div>
+                            </div>
                         </a-form>
                     </a-drawer>
                     <a-layout-content>
-                        <a-row type="flex">
-                            <a-col :flex="1">
+                        <div>
+                            <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
@@ -275,10 +282,10 @@
                                     :series="seriesQty"
                                     :type="graphType"
                                 ></apexchart>
-                            </a-col>
-                        </a-row>
-                        <a-row type="flex">
-                            <a-col :flex="1">
+                            </div>
+                        </div>
+                        <div>
+                            <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'r_qty'"
                                     :options="chartOptionsRqty"
@@ -286,10 +293,10 @@
                                     :type="graphType"
                                     :key="trans_updated"
                                 ></apexchart>
-                            </a-col>
-                        </a-row>
-                        <a-row type="flex">
-                            <a-col :flex="1">
+                            </div>
+                        </div>
+                        <div>
+                            <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'delta'"
                                     :options="chartOptionsDelta"
@@ -297,10 +304,10 @@
                                     :key="trans_updated"
                                     :type="graphType"
                                 ></apexchart>
-                            </a-col>
-                        </a-row>
-                        <a-row type="flex">
-                            <a-col :flex="1">
+                            </div>
+                        </div>
+                        <div>
+                            <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'per_cent'"
                                     :options="chartOptionsPercent"
@@ -308,8 +315,8 @@
                                     :series="seriesPercent"
                                     :type="graphType"
                                 ></apexchart>
-                            </a-col>
-                        </a-row>
+                            </div>
+                        </div>
                     </a-layout-content>
                 </a-layout>
             </a-layout>
@@ -376,7 +383,7 @@ export default {
                     }
                 },
                 grid: {
-                    borderColor: "#fff",
+                    borderColor: "#f00",
                     xaxis: {
                         lines: {
                             show: true
