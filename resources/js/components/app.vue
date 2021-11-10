@@ -306,7 +306,7 @@ export default {
             sum: "daily",
             sumOptions: ["daily", "weekly", "monthly", "yearly"],
             graphType: "area",
-            graphOptions: ["pie", "line", "bar", "area"],
+            graphOptions: ["line", "bar", "area"],
             selectedOneGraph: "qty",
             oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
