@@ -508,6 +508,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -546,6 +549,10 @@ __webpack_require__.r(__webpack_exports__);
       graphType: "area",
       graphOptions: ["pie", "line", "bar", "area"],
       chartOptionsQty: {
+        title: {
+          text: "qty",
+          offsetX: 30
+        },
         chart: {
           id: "vuechart-example",
           zoom: {
@@ -592,6 +599,10 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsRqty: {
+        title: {
+          text: "r_qty",
+          offsetX: 30
+        },
         chart: {
           id: "vuechart-example",
           zoom: {
@@ -638,6 +649,10 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsDelta: {
+        title: {
+          text: "delta",
+          offsetX: 30
+        },
         chart: {
           id: "vuechart-example",
           zoom: {
@@ -684,6 +699,10 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsPercent: {
+        title: {
+          text: "per_cent",
+          offsetX: 30
+        },
         chart: {
           id: "vuechart-example",
           zoom: {
@@ -807,6 +826,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.seriesRqty = res.data["real_qty"];
         _this2.seriesPercent = res.data["percent"];
         _this2.seriesDelta = res.data["delta"];
+        _this2.sidebar = false;
       });
     }
   },
@@ -1208,6 +1228,11 @@ var render = function() {
                                         "[\n                                    'dateRange',\n                                    {\n                                        rules: [\n                                            {\n                                                required: true,\n                                                message:\n                                                    'Please select date range!'\n                                            }\n                                        ]\n                                    }\n                                ]"
                                     }
                                   ],
+                                  attrs: {
+                                    size: "large",
+                                    "show-time": "",
+                                    format: "YYYY-MM-DD"
+                                  },
                                   on: { change: _vm.handleDateRangeChange }
                                 })
                               ],

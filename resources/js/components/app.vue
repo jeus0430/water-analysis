@@ -107,6 +107,9 @@
                             </a-form-item>
                             <a-form-item label="Date Range:">
                                 <a-range-picker
+                                    size="large"
+                                    show-time
+                                    format="YYYY-MM-DD"
                                     @change="handleDateRangeChange"
                                     v-decorator="[
                                         'dateRange',
@@ -279,6 +282,10 @@ export default {
             graphType: "area",
             graphOptions: ["pie", "line", "bar", "area"],
             chartOptionsQty: {
+                title: {
+                    text: "qty",
+                    offsetX: 30
+                },
                 chart: {
                     id: "vuechart-example",
                     zoom: {
@@ -336,6 +343,10 @@ export default {
                 }
             ],
             chartOptionsRqty: {
+                title: {
+                    text: "r_qty",
+                    offsetX: 30
+                },
                 chart: {
                     id: "vuechart-example",
                     zoom: {
@@ -393,6 +404,10 @@ export default {
                 }
             ],
             chartOptionsDelta: {
+                title: {
+                    text: "delta",
+                    offsetX: 30
+                },
                 chart: {
                     id: "vuechart-example",
                     zoom: {
@@ -450,6 +465,10 @@ export default {
                 }
             ],
             chartOptionsPercent: {
+                title: {
+                    text: "per_cent",
+                    offsetX: 30
+                },
                 chart: {
                     id: "vuechart-example",
                     zoom: {
@@ -585,6 +604,7 @@ export default {
                     this.seriesRqty = res.data["real_qty"]
                     this.seriesPercent = res.data["percent"]
                     this.seriesDelta = res.data["delta"]
+                    this.sidebar = false
                 })
         }
     },

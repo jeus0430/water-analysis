@@ -24025,3 +24025,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-btn-primary.ant-btn-lg {
   font-size: 26px;
 }
+
+.ant-calendar-time .ant-calendar-footer .ant-calendar-time-picker-btn {
+  display: none;
+}
