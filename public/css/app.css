@@ -23983,9 +23983,10 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 #components-layout-demo-basic .ant-layout-header {
   background: white;
   display: flex;
+  align-items: center;
 }
 #components-layout-demo-basic .ant-layout-header h1 {
-  margin-left: 10px;
+  margin: 0 0 0 10px;
   font-size: 40px;
 }
 
@@ -24020,10 +24021,6 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 
 .ant-checkbox-wrapper {
   font-size: 20px;
-}
-
-.ant-btn-primary.ant-btn-lg {
-  font-size: 26px;
 }
 
 .ant-calendar-time .ant-calendar-footer .ant-calendar-time-picker-btn {

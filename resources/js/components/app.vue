@@ -4,7 +4,7 @@
             <a-layout>
                 <a-layout-header>
                     <h1>Water Differences Analytics</h1>
-                    <a-button type="primary" @click="showDrawer">
+                    <a-button type="primary" @click="showDrawer" size="large">
                         Show Sidebar
                     </a-button>
                 </a-layout-header>
@@ -14,214 +14,255 @@
                         placement="right"
                         :visible="sidebar"
                         @close="onClose"
-                        width="1000"
+                        width="1200"
                     >
                         <a-form
                             label="Search Form"
                             :form="form"
                             @submit="handleSubmit"
                         >
-                            <a-form-item :label="trans.waste_zone">
-                                <a-checkbox v-model="zoneChecked">
-                                    Select All
-                                </a-checkbox>
-                                <a-select
-                                    mode="multiple"
-                                    placeholder="Select zones"
-                                    @change="handleZoneChange"
-                                    :disabled="zoneChecked"
-                                    v-decorator="[
-                                        'selectedZones',
-                                        {
-                                            rules: [
+                            <a-row type="flex" :gutter="16">
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.waste_zone">
+                                        <a-checkbox v-model="zoneChecked">
+                                            Select All
+                                        </a-checkbox>
+                                        <a-select
+                                            mode="multiple"
+                                            placeholder="Select zones"
+                                            size="large"
+                                            @change="handleZoneChange"
+                                            :disabled="zoneChecked"
+                                            v-decorator="[
+                                                'selectedZones',
                                                 {
-                                                    required: true,
-                                                    message:
-                                                        'Please select waste zones!'
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select waste zones!'
+                                                        }
+                                                    ]
                                                 }
-                                            ]
-                                        }
-                                    ]"
-                                >
-                                    <a-select-option
-                                        v-for="zone in zones"
-                                        :key="zone.waste_zone"
+                                            ]"
+                                        >
+                                            <a-select-option
+                                                v-for="zone in zones"
+                                                :key="zone.waste_zone"
+                                            >
+                                                {{ zone.waste_description }}
+                                            </a-select-option>
+                                        </a-select>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item
+                                        :label="trans.belongs_to_group"
                                     >
-                                        {{ zone.waste_description }}
-                                    </a-select-option>
-                                </a-select>
-                            </a-form-item>
-                            <a-form-item :label="trans.belongs_to_group">
-                                <a-checkbox v-model="groupChecked">
-                                    Select All
-                                </a-checkbox>
-                                <a-select
-                                    mode="multiple"
-                                    placeholder="Select group"
-                                    @change="handleGroupChange"
-                                    :disabled="groupChecked"
-                                    v-decorator="[
-                                        'selectedGroups',
-                                        {
-                                            rules: [
+                                        <a-checkbox v-model="groupChecked">
+                                            Select All
+                                        </a-checkbox>
+                                        <a-select
+                                            mode="multiple"
+                                            size="large"
+                                            placeholder="Select group"
+                                            @change="handleGroupChange"
+                                            :disabled="groupChecked"
+                                            v-decorator="[
+                                                'selectedGroups',
                                                 {
-                                                    required: true,
-                                                    message:
-                                                        'Please select groups!'
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select groups!'
+                                                        }
+                                                    ]
                                                 }
-                                            ]
-                                        }
-                                    ]"
-                                >
-                                    <a-select-option
-                                        v-for="group in groups"
-                                        :key="group.waste_group"
-                                    >
-                                        {{ group.waste_description }}
-                                    </a-select-option>
-                                </a-select>
-                            </a-form-item>
-                            <a-form-item :label="trans.mone_av">
-                                <a-checkbox v-model="moneavChecked">
-                                    Select All
-                                </a-checkbox>
-                                <a-select
-                                    mode="multiple"
-                                    placeholder="Select Mone_av"
-                                    @change="handleMoneavChange"
-                                    :disabled="moneavChecked"
-                                    v-decorator="[
-                                        'selectedMoneavs',
-                                        {
-                                            rules: [
+                                            ]"
+                                        >
+                                            <a-select-option
+                                                v-for="group in groups"
+                                                :key="group.waste_group"
+                                            >
+                                                {{ group.waste_description }}
+                                            </a-select-option>
+                                        </a-select>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.mone_av">
+                                        <a-checkbox v-model="moneavChecked">
+                                            Select All
+                                        </a-checkbox>
+                                        <a-select
+                                            mode="multiple"
+                                            size="large"
+                                            placeholder="Select Mone_av"
+                                            @change="handleMoneavChange"
+                                            :disabled="moneavChecked"
+                                            v-decorator="[
+                                                'selectedMoneavs',
                                                 {
-                                                    required: true,
-                                                    message:
-                                                        'Please select move_avs!'
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select move_avs!'
+                                                        }
+                                                    ]
                                                 }
-                                            ]
-                                        }
-                                    ]"
-                                >
-                                    <a-select-option
-                                        v-for="mone_av in mone_avs"
-                                        :key="mone_av.mone_av"
-                                    >
-                                        {{ mone_av.mone_av }}
-                                    </a-select-option>
-                                </a-select>
-                            </a-form-item>
-                            <a-form-item :label="trans.day_date">
-                                <a-date-picker
-                                    size="large"
-                                    format="YYYY-MM-DD"
-                                    @change="handleDateMinChange"
-                                    placeholder="min date"
-                                    v-decorator="[
-                                        'date_min',
-                                        {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message:
-                                                        'Please select Min Date!'
-                                                }
-                                            ]
-                                        }
-                                    ]"
-                                />
-                                <a-input
-                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
-                                    placeholder="~"
-                                    size="large"
-                                    disabled
-                                />
-                                <a-date-picker
-                                    size="large"
-                                    format="YYYY-MM-DD"
-                                    v-model="date_max"
-                                    placeholder="max date"
-                                />
-                            </a-form-item>
-                            <a-form-item :label="trans.delta">
-                                <a-input-number
-                                    v-model="delta_min"
-                                    style=" width: 150px; text-align: center"
-                                    placeholder="Minium Delta"
-                                />
-                                <a-input
-                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
-                                    placeholder="~"
-                                    disabled
-                                />
-                                <a-input-number
-                                    style=" width: 150px; text-align: center"
-                                    v-model="delta_max"
-                                    placeholder="Maximum Delta"
-                                />
-                            </a-form-item>
-                            <a-form-item :label="trans.per_cent">
-                                <a-input-number
-                                    v-model="per_cent_min"
-                                    style=" width: 150px; text-align: center"
-                                    placeholder="Minium Percent"
-                                />
-                                <a-input
-                                    style=" width: 30px; border-left: 0; pointer-events: none; backgroundColor: #fff"
-                                    placeholder="~"
-                                    disabled
-                                />
-                                <a-input-number
-                                    style=" width: 150px; text-align: center"
-                                    v-model="per_cent_max"
-                                    placeholder="Maximum Percent"
-                                />
-                            </a-form-item>
-                            <a-form-item label="X-axis:">
-                                <a-radio-group
-                                    name="xaxis"
-                                    :value="selectedX"
-                                    defaultValue="date"
-                                    :options="xOptions"
-                                    @change="handleXAxisChange"
-                                />
-                            </a-form-item>
-                            <a-form-item :label="trans.sum">
-                                <a-radio-group
-                                    v-model="sum"
-                                    :options="sumOptions"
-                                />
-                            </a-form-item>
-                            <a-form-item label="Graph:">
-                                <a-radio-group
-                                    v-model="selectedOneGraph"
-                                    :options="oneGraphOptions"
-                                />
-                            </a-form-item>
-                            <a-form-item label="Graph Type:">
-                                <a-radio-group
-                                    name="graph"
-                                    v-model="graphType"
-                                    :options="graphOptions"
-                                />
-                            </a-form-item>
-                            <a-form-item
-                                v-if="graphType == 'bar'"
-                                label="Stacked:"
+                                            ]"
+                                        >
+                                            <a-select-option
+                                                v-for="mone_av in mone_avs"
+                                                :key="mone_av.mone_av"
+                                            >
+                                                {{ mone_av.mone_av }}
+                                            </a-select-option>
+                                        </a-select>
+                                    </a-form-item>
+                                </a-col>
+                            </a-row>
+                            <a-row
+                                type="flex"
+                                :gutter="16"
+                                style="flex-wrap: nowrap"
                             >
-                                <a-checkbox @change="handleStackedChange">
-                                    Checkbox
-                                </a-checkbox>
-                            </a-form-item>
-                            <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                                <a-button
-                                    size="large"
-                                    type="primary"
-                                    html-type="submit"
-                                >
-                                    Show
-                                </a-button>
-                            </a-form-item>
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.day_date">
+                                        <a-date-picker
+                                            size="large"
+                                            format="YYYY-MM-DD"
+                                            @change="handleDateMinChange"
+                                            placeholder="min date"
+                                            v-decorator="[
+                                                'date_min',
+                                                {
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select Min Date!'
+                                                        }
+                                                    ]
+                                                }
+                                            ]"
+                                        />
+                                        <a-date-picker
+                                            size="large"
+                                            format="YYYY-MM-DD"
+                                            v-model="date_max"
+                                            placeholder="max date"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.delta">
+                                        <a-input-number
+                                            v-model="delta_min"
+                                            style=" width: 100px; text-align: center"
+                                            placeholder="Minium Delta"
+                                            size="large"
+                                        />
+                                        <a-input-number
+                                            style=" width: 100px; text-align: center"
+                                            size="large"
+                                            v-model="delta_max"
+                                            placeholder="Maximum Delta"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.per_cent">
+                                        <a-input-number
+                                            size="large"
+                                            v-model="per_cent_min"
+                                            style=" width: 100px; text-align: center"
+                                            placeholder="Minium Percent"
+                                        />
+                                        <a-input-number
+                                            style="width: 100px; text-align: center"
+                                            size="large"
+                                            v-model="per_cent_max"
+                                            placeholder="Maximum Percent"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                            </a-row>
+                            <a-row
+                                type="flex"
+                                :gutter="16"
+                                style="flex-wrap: nowrap"
+                            >
+                                <a-col :flex="1">
+                                    <a-form-item label="X-axis:">
+                                        <a-radio-group
+                                            name="xaxis"
+                                            :value="selectedX"
+                                            defaultValue="date"
+                                            :options="xOptions"
+                                            @change="handleXAxisChange"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item :label="trans.sum">
+                                        <a-radio-group
+                                            v-model="sum"
+                                            :options="sumOptions"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item label="Graph:">
+                                        <a-radio-group
+                                            v-model="selectedOneGraph"
+                                            :options="oneGraphOptions"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                            </a-row>
+                            <a-row
+                                type="flex"
+                                :gutter="16"
+                                style="flex-wrap: nowrap"
+                            >
+                                <a-col :flex="1">
+                                    <a-form-item label="Graph Type:">
+                                        <a-radio-group
+                                            name="graph"
+                                            v-model="graphType"
+                                            :options="graphOptions"
+                                        />
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1">
+                                    <a-form-item
+                                        v-if="graphType == 'bar'"
+                                        label="Stacked:"
+                                    >
+                                        <a-checkbox
+                                            @change="handleStackedChange"
+                                        >
+                                            Checkbox
+                                        </a-checkbox>
+                                    </a-form-item>
+                                </a-col>
+                                <a-col :flex="1" style="align-self: end">
+                                    <a-form-item
+                                        :wrapper-col="{ span: 12, offset: 5 }"
+                                    >
+                                        <a-button
+                                            size="large"
+                                            type="primary"
+                                            html-type="submit"
+                                        >
+                                            Show
+                                        </a-button>
+                                    </a-form-item>
+                                </a-col>
+                            </a-row>
                         </a-form>
                     </a-drawer>
                     <a-layout-content>
@@ -329,6 +370,11 @@ export default {
             selectedOneGraph: "qty",
             oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
+                dataLabels: {
+                    style: {
+                        fontSize: "14px"
+                    }
+                },
                 grid: {
                     borderColor: "#fff",
                     xaxis: {
@@ -361,7 +407,8 @@ export default {
                     },
                     labels: {
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     }
                 },
@@ -409,7 +456,8 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     },
                     axisBorder: {
@@ -425,6 +473,11 @@ export default {
                 }
             ],
             chartOptionsRqty: {
+                dataLabels: {
+                    style: {
+                        fontSize: "14px"
+                    }
+                },
                 grid: {
                     borderColor: "#fff",
                     xaxis: {
@@ -457,7 +510,8 @@ export default {
                     },
                     labels: {
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     }
                 },
@@ -505,7 +559,8 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     },
                     axisBorder: {
@@ -521,6 +576,11 @@ export default {
                 }
             ],
             chartOptionsDelta: {
+                dataLabels: {
+                    style: {
+                        fontSize: "14px"
+                    }
+                },
                 grid: {
                     borderColor: "#fff",
                     xaxis: {
@@ -553,7 +613,8 @@ export default {
                     },
                     labels: {
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     }
                 },
@@ -601,7 +662,8 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     },
                     axisBorder: {
@@ -617,6 +679,11 @@ export default {
                 }
             ],
             chartOptionsPercent: {
+                dataLabels: {
+                    style: {
+                        fontSize: "14px"
+                    }
+                },
                 grid: {
                     borderColor: "#fff",
                     xaxis: {
@@ -649,7 +716,8 @@ export default {
                     },
                     labels: {
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     }
                 },
@@ -697,7 +765,8 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff"
+                            colors: "#fff",
+                            fontSize: "16px"
                         }
                     },
                     axisBorder: {
