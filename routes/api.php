@@ -25,4 +25,5 @@ Route::get('/groups', [ApiController::class, 'groups']);
 Route::get('/mone_avs', [ApiController::class, 'moneAvs']);
 Route::get('/delta_range', [ApiController::class, 'deltaRange']);
 Route::get('/per_cent_range', [ApiController::class, 'percentRange']);
+Route::get('trans', [ApiController::class, 'trans']);
 Route::post('/chart', [ApiController::class, 'chart']);

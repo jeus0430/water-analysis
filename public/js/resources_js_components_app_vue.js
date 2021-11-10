@@ -521,6 +521,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -528,8 +532,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      trans: {
+        qty: "qty",
+        real_qty: "real qty",
+        delta: "delta",
+        per_cent: "percent",
+        waste_zone: "waste_zone",
+        mone_av: "mone_av",
+        belongs_to_group: "belongs_to_group",
+        day_date: "day_date",
+        sum: "sum"
+      },
       collapsible: true,
       locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
+      trans_updated: 0,
       form: this.$form.createForm(this, {
         name: "coordinated"
       }),
@@ -572,6 +588,7 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "qty",
           style: {
+            fontSize: "20px",
             color: "#fff"
           },
           offsetX: 30
@@ -656,9 +673,10 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "real qty",
           style: {
+            fontSize: "20px",
             color: "#fff"
           },
-          offsetX: 50
+          offsetX: 100
         },
         chart: {
           background: "#000",
@@ -740,9 +758,10 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "delta",
           style: {
+            fontSize: "20px",
             color: "#fff"
           },
-          offsetX: 50
+          offsetX: 100
         },
         chart: {
           background: "#000",
@@ -824,9 +843,10 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "percent",
           style: {
+            fontSize: "20px",
             color: "#fff"
           },
-          offsetX: 50
+          offsetX: 100
         },
         chart: {
           background: "#000",
@@ -900,6 +920,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     moment: (moment__WEBPACK_IMPORTED_MODULE_1___default()),
+    forceUpdate: function forceUpdate() {
+      this.$forceUpdate();
+    },
     handleSubmit: function handleSubmit(e) {
       var _this = this;
 
@@ -991,6 +1014,14 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
       _this3.mone_avs = res.data;
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/trans").then(function (res) {
+      _this3.trans = Object.assign(_this3.trans, res.data);
+      _this3.chartOptionsQty.title.text = _this3.trans.qty;
+      _this3.chartOptionsRqty.title.text = _this3.trans.real_qty;
+      _this3.chartOptionsDelta.title.text = _this3.trans.delta;
+      _this3.chartOptionsPercent.title.text = _this3.trans.per_cent;
+      _this3.trans_updated = 1;
     }); // axios.get("/api/delta_range").then(res => {
     //     this.delta_min = parseFloat(res.data.min)
     //     this.delta_max = parseFloat(res.data.max)
@@ -1141,7 +1172,7 @@ var render = function() {
                           [
                             _c(
                               "a-form-item",
-                              { attrs: { label: "Waste Zone:" } },
+                              { attrs: { label: _vm.trans.waste_zone } },
                               [
                                 _c(
                                   "a-checkbox",
@@ -1212,7 +1243,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "Belongs To:" } },
+                              { attrs: { label: _vm.trans.belongs_to_group } },
                               [
                                 _c(
                                   "a-checkbox",
@@ -1282,7 +1313,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "Mone_av:" } },
+                              { attrs: { label: _vm.trans.mone_av } },
                               [
                                 _c(
                                   "a-checkbox",
@@ -1353,7 +1384,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "Date Range:" } },
+                              { attrs: { label: _vm.trans.day_date } },
                               [
                                 _c("a-range-picker", {
                                   directives: [
@@ -1389,7 +1420,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "delta:" } },
+                              { attrs: { label: _vm.trans.delta } },
                               [
                                 _c("a-input-number", {
                                   staticStyle: {
@@ -1436,7 +1467,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "per_cent:" } },
+                              { attrs: { label: _vm.trans.per_cent } },
                               [
                                 _c("a-input-number", {
                                   staticStyle: {
@@ -1500,7 +1531,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "a-form-item",
-                              { attrs: { label: "Sum:" } },
+                              { attrs: { label: _vm.trans.sum } },
                               [
                                 _c("a-radio-group", {
                                   attrs: { options: _vm.sumOptions },
@@ -1623,6 +1654,7 @@ var render = function() {
                           [
                             _vm.selectedOneGraph == "qty"
                               ? _c("apexchart", {
+                                  key: _vm.trans_updated,
                                   attrs: {
                                     options: _vm.chartOptionsQty,
                                     series: _vm.seriesQty,
@@ -1647,6 +1679,7 @@ var render = function() {
                           [
                             _vm.selectedOneGraph == "r_qty"
                               ? _c("apexchart", {
+                                  key: _vm.trans_updated,
                                   attrs: {
                                     options: _vm.chartOptionsRqty,
                                     series: _vm.seriesRqty,
@@ -1671,6 +1704,7 @@ var render = function() {
                           [
                             _vm.selectedOneGraph == "delta"
                               ? _c("apexchart", {
+                                  key: _vm.trans_updated,
                                   attrs: {
                                     options: _vm.chartOptionsDelta,
                                     series: _vm.seriesDelta,
@@ -1695,6 +1729,7 @@ var render = function() {
                           [
                             _vm.selectedOneGraph == "per_cent"
                               ? _c("apexchart", {
+                                  key: _vm.trans_updated,
                                   attrs: {
                                     options: _vm.chartOptionsPercent,
                                     series: _vm.seriesPercent,

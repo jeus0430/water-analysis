@@ -15,7 +15,7 @@
                             :form="form"
                             @submit="handleSubmit"
                         >
-                            <a-form-item label="Waste Zone:">
+                            <a-form-item :label="trans.waste_zone">
                                 <a-checkbox v-model="zoneChecked">
                                     Select All
                                 </a-checkbox>
@@ -45,7 +45,7 @@
                                     </a-select-option>
                                 </a-select>
                             </a-form-item>
-                            <a-form-item label="Belongs To:">
+                            <a-form-item :label="trans.belongs_to_group">
                                 <a-checkbox v-model="groupChecked">
                                     Select All
                                 </a-checkbox>
@@ -75,7 +75,7 @@
                                     </a-select-option>
                                 </a-select>
                             </a-form-item>
-                            <a-form-item label="Mone_av:">
+                            <a-form-item :label="trans.mone_av">
                                 <a-checkbox v-model="moneavChecked">
                                     Select All
                                 </a-checkbox>
@@ -105,7 +105,7 @@
                                     </a-select-option>
                                 </a-select>
                             </a-form-item>
-                            <a-form-item label="Date Range:">
+                            <a-form-item :label="trans.day_date">
                                 <a-range-picker
                                     size="large"
                                     show-time
@@ -125,7 +125,7 @@
                                     ]"
                                 />
                             </a-form-item>
-                            <a-form-item label="delta:">
+                            <a-form-item :label="trans.delta">
                                 <a-input-number
                                     v-model="delta_min"
                                     style=" width: 150px; text-align: center"
@@ -142,7 +142,7 @@
                                     placeholder="Maximum Delta"
                                 />
                             </a-form-item>
-                            <a-form-item label="per_cent:">
+                            <a-form-item :label="trans.per_cent">
                                 <a-input-number
                                     v-model="per_cent_min"
                                     style=" width: 150px; text-align: center"
@@ -168,7 +168,7 @@
                                     @change="handleXAxisChange"
                                 />
                             </a-form-item>
-                            <a-form-item label="Sum:">
+                            <a-form-item :label="trans.sum">
                                 <a-radio-group
                                     v-model="sum"
                                     :options="sumOptions"
@@ -212,6 +212,7 @@
                                 <apexchart
                                     v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
+                                    :key="trans_updated"
                                     :series="seriesQty"
                                     :type="graphType"
                                 ></apexchart>
@@ -224,6 +225,7 @@
                                     :options="chartOptionsRqty"
                                     :series="seriesRqty"
                                     :type="graphType"
+                                    :key="trans_updated"
                                 ></apexchart>
                             </a-col>
                         </a-row>
@@ -233,6 +235,7 @@
                                     v-if="selectedOneGraph == 'delta'"
                                     :options="chartOptionsDelta"
                                     :series="seriesDelta"
+                                    :key="trans_updated"
                                     :type="graphType"
                                 ></apexchart>
                             </a-col>
@@ -242,6 +245,7 @@
                                 <apexchart
                                     v-if="selectedOneGraph == 'per_cent'"
                                     :options="chartOptionsPercent"
+                                    :key="trans_updated"
                                     :series="seriesPercent"
                                     :type="graphType"
                                 ></apexchart>
@@ -263,8 +267,20 @@ import VueApexCharts from "vue-apexcharts"
 export default {
     data() {
         return {
+            trans: {
+                qty: "qty",
+                real_qty: "real qty",
+                delta: "delta",
+                per_cent: "percent",
+                waste_zone: "waste_zone",
+                mone_av: "mone_av",
+                belongs_to_group: "belongs_to_group",
+                day_date: "day_date",
+                sum: "sum"
+            },
             collapsible: true,
             locale: heIL,
+            trans_updated: 0,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
             zoneChecked: true,
@@ -305,6 +321,7 @@ export default {
                 title: {
                     text: "qty",
                     style: {
+                        fontSize: "20px",
                         color: "#fff"
                     },
                     offsetX: 30
@@ -400,9 +417,10 @@ export default {
                 title: {
                     text: "real qty",
                     style: {
+                        fontSize: "20px",
                         color: "#fff"
                     },
-                    offsetX: 50
+                    offsetX: 100
                 },
                 chart: {
                     background: "#000",
@@ -495,9 +513,10 @@ export default {
                 title: {
                     text: "delta",
                     style: {
+                        fontSize: "20px",
                         color: "#fff"
                     },
-                    offsetX: 50
+                    offsetX: 100
                 },
                 chart: {
                     background: "#000",
@@ -590,9 +609,10 @@ export default {
                 title: {
                     text: "percent",
                     style: {
+                        fontSize: "20px",
                         color: "#fff"
                     },
-                    offsetX: 50
+                    offsetX: 100
                 },
                 chart: {
                     background: "#000",
@@ -677,11 +697,15 @@ export default {
     },
     methods: {
         moment,
+        forceUpdate() {
+            this.$forceUpdate()
+        },
         handleSubmit(e) {
             let toCheck = []
             if (!this.zoneChecked) toCheck.push("selectedZones")
             if (!this.groupChecked) toCheck.push("selectedGroups")
             if (!this.moneavChecked) toCheck.push("selectedMoneavs")
+
             toCheck.push("dateRange")
             this.form.validateFields(toCheck, (err, values) => {
                 if (!err) {
@@ -767,6 +791,14 @@ export default {
         })
         axios.get("/api/mone_avs").then(res => {
             this.mone_avs = res.data
+        })
+        axios.get("/api/trans").then(res => {
+            this.trans = Object.assign(this.trans, res.data)
+            this.chartOptionsQty.title.text = this.trans.qty
+            this.chartOptionsRqty.title.text = this.trans.real_qty
+            this.chartOptionsDelta.title.text = this.trans.delta
+            this.chartOptionsPercent.title.text = this.trans.per_cent
+            this.trans_updated = 1
         })
         // axios.get("/api/delta_range").then(res => {
         //     this.delta_min = parseFloat(res.data.min)
