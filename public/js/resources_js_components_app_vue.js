@@ -561,18 +561,45 @@ __webpack_require__.r(__webpack_exports__);
       selectedOneGraph: "qty",
       oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
       chartOptionsQty: {
+        grid: {
+          borderColor: "#fff",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
         title: {
           text: "qty",
+          style: {
+            color: "#fff"
+          },
           offsetX: 30
         },
         chart: {
+          background: "#000",
           id: "vuechart-example",
           zoom: {
             type: "x",
             enabled: true
           }
         },
+        colors: ["#00ff00"],
+        yaxis: {
+          axisBorder: {
+            show: true,
+            color: "#fff"
+          },
+          labels: {
+            style: {
+              colors: "#fff"
+            }
+          }
+        },
         xaxis: {
+          axisTicks: {
+            show: false
+          },
           type: "datetime",
           labels: {
             formatter: function formatter(value, timestamp, opts) {
@@ -602,7 +629,14 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d3.toISOString().split("T")[0];
               }
+            },
+            style: {
+              colors: "#fff"
             }
+          },
+          axisBorder: {
+            show: true,
+            color: "#fff"
           }
         }
       },
@@ -611,18 +645,45 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsRqty: {
+        grid: {
+          borderColor: "#fff",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
         title: {
-          text: "r_qty",
-          offsetX: 30
+          text: "real qty",
+          style: {
+            color: "#fff"
+          },
+          offsetX: 50
         },
         chart: {
+          background: "#000",
           id: "vuechart-example",
           zoom: {
             type: "x",
             enabled: true
           }
         },
+        colors: ["#0000ff"],
+        yaxis: {
+          axisBorder: {
+            show: true,
+            color: "#fff"
+          },
+          labels: {
+            style: {
+              colors: "#fff"
+            }
+          }
+        },
         xaxis: {
+          axisTicks: {
+            show: false
+          },
           type: "datetime",
           labels: {
             formatter: function formatter(value, timestamp, opts) {
@@ -652,7 +713,14 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d6.toISOString().split("T")[0];
               }
+            },
+            style: {
+              colors: "#fff"
             }
+          },
+          axisBorder: {
+            show: true,
+            color: "#fff"
           }
         }
       },
@@ -661,18 +729,45 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsDelta: {
+        grid: {
+          borderColor: "#fff",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
         title: {
           text: "delta",
-          offsetX: 30
+          style: {
+            color: "#fff"
+          },
+          offsetX: 50
         },
         chart: {
+          background: "#000",
           id: "vuechart-example",
           zoom: {
             type: "x",
             enabled: true
           }
         },
+        colors: ["#ff0000"],
+        yaxis: {
+          axisBorder: {
+            show: true,
+            color: "#fff"
+          },
+          labels: {
+            style: {
+              colors: "#fff"
+            }
+          }
+        },
         xaxis: {
+          axisTicks: {
+            show: false
+          },
           type: "datetime",
           labels: {
             formatter: function formatter(value, timestamp, opts) {
@@ -702,7 +797,14 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d9.toISOString().split("T")[0];
               }
+            },
+            style: {
+              colors: "#fff"
             }
+          },
+          axisBorder: {
+            show: true,
+            color: "#fff"
           }
         }
       },
@@ -711,18 +813,45 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsPercent: {
+        grid: {
+          borderColor: "#fff",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
         title: {
-          text: "per_cent",
-          offsetX: 30
+          text: "percent",
+          style: {
+            color: "#fff"
+          },
+          offsetX: 50
         },
         chart: {
+          background: "#000",
           id: "vuechart-example",
           zoom: {
             type: "x",
             enabled: true
           }
         },
+        colors: ["#ffff00"],
+        yaxis: {
+          axisBorder: {
+            show: true,
+            color: "#fff"
+          },
+          labels: {
+            style: {
+              colors: "#fff"
+            }
+          }
+        },
         xaxis: {
+          axisTicks: {
+            show: false
+          },
           type: "datetime",
           labels: {
             formatter: function formatter(value, timestamp, opts) {
@@ -752,7 +881,14 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d12.toISOString().split("T")[0];
               }
+            },
+            style: {
+              colors: "#fff"
             }
+          },
+          axisBorder: {
+            show: true,
+            color: "#fff"
           }
         }
       },
