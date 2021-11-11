@@ -18,7 +18,7 @@
                         placement="right"
                         :visible="sidebar"
                         @close="onClose"
-                        width="1200"
+                        width="1250"
                     >
                         <a-form
                             label="Search Form"

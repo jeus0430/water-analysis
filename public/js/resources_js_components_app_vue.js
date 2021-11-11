@@ -1254,7 +1254,7 @@ var render = function() {
                     attrs: {
                       placement: "right",
                       visible: _vm.sidebar,
-                      width: "1200"
+                      width: "1250"
                     },
                     on: { close: _vm.onClose }
                   },
