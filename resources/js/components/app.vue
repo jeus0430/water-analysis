@@ -102,12 +102,12 @@
                                     <a-form-item :label="trans.delta">
                                         <a-input-number
                                             v-model="delta_min"
-                                            style=" width: 100px; text-align: center"
+                                            style=" width: 150px; text-align: center"
                                             placeholder="Minium Delta"
                                             size="large"
                                         />
                                         <a-input-number
-                                            style=" width: 100px; text-align: center"
+                                            style=" width: 150px; text-align: center"
                                             size="large"
                                             v-model="delta_max"
                                             placeholder="Maximum Delta"
@@ -121,11 +121,11 @@
                                         <a-input-number
                                             size="large"
                                             v-model="per_cent_min"
-                                            style=" width: 100px; text-align: center"
+                                            style=" width: 150px; text-align: center"
                                             placeholder="Minium Percent"
                                         />
                                         <a-input-number
-                                            style="width: 100px; text-align: center"
+                                            style="width: 150px; text-align: center"
                                             size="large"
                                             v-model="per_cent_max"
                                             placeholder="Maximum Percent"
@@ -135,7 +135,10 @@
                                 <div
                                     style="grid-column-start: 5;grid-column-end: 7;"
                                 >
-                                    <a-form-item :label="trans.mone_av">
+                                    <a-form-item
+                                        :label="trans.mone_av"
+                                        class="sm-ch"
+                                    >
                                         <a-checkbox v-model="moneavChecked">
                                             Select All
                                         </a-checkbox>

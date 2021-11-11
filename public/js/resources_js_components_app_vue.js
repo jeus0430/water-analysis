@@ -600,6 +600,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1479,7 +1482,7 @@ var render = function() {
                                   [
                                     _c("a-input-number", {
                                       staticStyle: {
-                                        width: "100px",
+                                        width: "150px",
                                         "text-align": "center"
                                       },
                                       attrs: {
@@ -1497,7 +1500,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("a-input-number", {
                                       staticStyle: {
-                                        width: "100px",
+                                        width: "150px",
                                         "text-align": "center"
                                       },
                                       attrs: {
@@ -1534,7 +1537,7 @@ var render = function() {
                                   [
                                     _c("a-input-number", {
                                       staticStyle: {
-                                        width: "100px",
+                                        width: "150px",
                                         "text-align": "center"
                                       },
                                       attrs: {
@@ -1552,7 +1555,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("a-input-number", {
                                       staticStyle: {
-                                        width: "100px",
+                                        width: "150px",
                                         "text-align": "center"
                                       },
                                       attrs: {
@@ -1585,7 +1588,10 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: _vm.trans.mone_av } },
+                                  {
+                                    staticClass: "sm-ch",
+                                    attrs: { label: _vm.trans.mone_av }
+                                  },
                                   [
                                     _c(
                                       "a-checkbox",

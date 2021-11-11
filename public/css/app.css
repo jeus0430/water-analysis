@@ -24024,6 +24024,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-input-number-input,
 .ant-radio-wrapper span {
   color: #f00;
+  font-size: 30px;
 }
 
 .ant-checkbox-wrapper {
@@ -24036,6 +24037,8 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 
 .ant-calendar-picker-input.ant-input {
   padding-right: 50px;
+  height: 50px;
+  width: 300px;
 }
 
 .ant-drawer-content {
@@ -24052,4 +24055,27 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 
 .ant-calendar-picker + .ant-calendar-picker {
   margin-left: 20px;
+}
+
+.ant-radio {
+  margin-bottom: 5px;
+}
+
+.ant-input-number-lg,
+.ant-input-number-lg input {
+  height: 50px;
+}
+
+.ant-select-selection__rendered,
+.ant-select-selection__placeholder,
+.ant-select-search__field__placeholder {
+  font-size: 30px;
+  height: 50px !important;
+}
+
+.sm-ch .ant-select-selection__rendered,
+.sm-ch .ant-select-selection__placeholder,
+.sm-ch .ant-select-search__field__placeholder {
+  font-size: 25px;
+  height: 40px !important;
 }
