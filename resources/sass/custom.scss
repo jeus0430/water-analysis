@@ -46,15 +46,16 @@
     line-height: 60px;
 }
 .ant-radio-inner {
-    top: -15px;
-    width: 20px;
-    height: 20px;
+    top: -5px;
+    width: 30px;
+    height: 30px;
 }
 .ant-radio-inner::after {
-    left: 1px;
-    width: 15px;
-    height: 15px;
-    top: 1px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 32px;
+    top: 4px;
 }
 .ant-input,
 .ant-input-number-input,
@@ -121,7 +122,11 @@
     top: 23%;
     line-height: 60px;
 }
+.ant-select-selection--multiple .ant-select-selection__choice {
+    color: black;
+}
 .ant-select-dropdown-menu-item {
+    color: black;
     font-size: 60px;
     line-height: 60px;
 }
@@ -136,14 +141,20 @@
 }
 
 .ant-checkbox-inner::after {
-    width: 10px;
-    height: 20px;
+    width: 15px;
+    height: 35px;
 }
 
 .ant-checkbox-inner {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
 }
 .ant-select-dropdown-menu {
     max-height: 750px !important;
+}
+
+.ant-select-dropdown.ant-select-dropdown--multiple
+    .ant-select-dropdown-menu-item
+    .ant-select-selected-icon {
+    font-size: 24px;
 }
