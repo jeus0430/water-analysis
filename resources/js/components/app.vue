@@ -18,7 +18,7 @@
                         placement="right"
                         :visible="sidebar"
                         @close="onClose"
-                        width="1250"
+                        style="width: 100%;"
                     >
                         <a-form
                             label="Search Form"
@@ -166,12 +166,14 @@
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item label="Minium Date">
-                                        <a-date-picker
+                                        <a-input
+                                            v-mask="{
+                                                mask: '9999-99-99',
+                                                greedy: false
+                                            }"
+                                            placeholder="Basic usage"
                                             size="large"
-                                            format="YYYY-MM-DD"
                                             @change="handleDateMinChange"
-                                            placeholder="min date"
-                                            ref="dmin"
                                             v-decorator="[
                                                 'date_min',
                                                 {
@@ -191,10 +193,13 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
-                                    <a-form-item label="Mazium Date">
-                                        <a-date-picker
+                                    <a-form-item label="Maxium Date">
+                                        <a-input
                                             size="large"
-                                            format="YYYY-MM-DD"
+                                            v-mask="{
+                                                mask: '9999-99-99',
+                                                greedy: false
+                                            }"
                                             v-model="date_max"
                                             placeholder="max date"
                                         />
@@ -353,7 +358,7 @@ export default {
             fetching: false,
             sidebar: true,
             date_min: moment(),
-            date_max: moment(),
+            date_max: moment().format("YYYY-MM-DD"),
             delta_min: -1,
             delta_max: 1,
             per_cent_min: -1,

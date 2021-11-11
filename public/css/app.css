@@ -24103,3 +24103,12 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   font-size: 60px;
   line-height: 60px;
 }
+
+.ant-drawer-content-wrapper {
+  width: 100% !important;
+}
+
+.ant-input {
+  height: 80px;
+  width: 500px;
+}

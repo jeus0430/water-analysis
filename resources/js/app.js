@@ -17,8 +17,22 @@ window.Fire = new Vue()
 
 import Antd from "ant-design-vue"
 import VueApexCharts from "vue-apexcharts"
+import InputMask from 'inputmask'
+
+var VueInputMask = {
+    install: function (Vue, options) {
+        Vue.directive('mask', {
+            bind: function (el, binding) {
+                InputMask(binding.value).mask(el);
+            }
+        });
+    }
+};
+
 Vue.use(Antd)
 Vue.use(VueApexCharts)
+Vue.use(VueInputMask)
+
 Vue.component("apexchart", VueApexCharts)
 
 const app = new Vue({

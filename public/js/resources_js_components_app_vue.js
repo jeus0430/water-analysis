@@ -583,6 +583,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -620,7 +625,7 @@ __webpack_require__.r(__webpack_exports__);
       fetching: false,
       sidebar: true,
       date_min: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
-      date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
+      date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD"),
       delta_min: -1,
       delta_max: 1,
       per_cent_min: -1,
@@ -1251,11 +1256,8 @@ var render = function() {
                 _c(
                   "a-drawer",
                   {
-                    attrs: {
-                      placement: "right",
-                      visible: _vm.sidebar,
-                      width: "1250"
-                    },
+                    staticStyle: { width: "100%" },
+                    attrs: { placement: "right", visible: _vm.sidebar },
                     on: { close: _vm.onClose }
                   },
                   [
@@ -1662,8 +1664,18 @@ var render = function() {
                                   "a-form-item",
                                   { attrs: { label: "Minium Date" } },
                                   [
-                                    _c("a-date-picker", {
+                                    _c("a-input", {
                                       directives: [
+                                        {
+                                          name: "mask",
+                                          rawName: "v-mask",
+                                          value: {
+                                            mask: "9999-99-99",
+                                            greedy: false
+                                          },
+                                          expression:
+                                            "{\n                                            mask: '9999-99-99',\n                                            greedy: false\n                                        }"
+                                        },
                                         {
                                           name: "decorator",
                                           rawName: "v-decorator",
@@ -1687,11 +1699,9 @@ var render = function() {
                                             "[\n                                            'date_min',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Min Date!'\n                                                    }\n                                                ],\n                                                initialValue: moment()\n                                                    .subtract(1, 'months')\n                                                    .format('YYYY-MM-DD')\n                                            }\n                                        ]"
                                         }
                                       ],
-                                      ref: "dmin",
                                       attrs: {
-                                        size: "large",
-                                        format: "YYYY-MM-DD",
-                                        placeholder: "min date"
+                                        placeholder: "Basic usage",
+                                        size: "large"
                                       },
                                       on: { change: _vm.handleDateMinChange }
                                     })
@@ -1713,12 +1723,23 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "Mazium Date" } },
+                                  { attrs: { label: "Maxium Date" } },
                                   [
-                                    _c("a-date-picker", {
+                                    _c("a-input", {
+                                      directives: [
+                                        {
+                                          name: "mask",
+                                          rawName: "v-mask",
+                                          value: {
+                                            mask: "9999-99-99",
+                                            greedy: false
+                                          },
+                                          expression:
+                                            "{\n                                            mask: '9999-99-99',\n                                            greedy: false\n                                        }"
+                                        }
+                                      ],
                                       attrs: {
                                         size: "large",
-                                        format: "YYYY-MM-DD",
                                         placeholder: "max date"
                                       },
                                       model: {
