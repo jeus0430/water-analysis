@@ -21,12 +21,9 @@
                             @submit="handleSubmit"
                         >
                             <div
-                                style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 24px;  align-items: flex-end;text-align:center;justify-items: center;
-"
+                                style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 24px; align-items: flex-end;text-align:center;justify-items: center;"
                             >
-                                <div
-                                    style="grid-column-start: 1;grid-column-end: 4;"
-                                >
+                                <div style="grid-column: 1/5;width: 100%;">
                                     <a-form-item :label="trans.waste_zone">
                                         <a-checkbox v-model="zoneChecked">
                                             Select All
@@ -59,9 +56,7 @@
                                         </a-select>
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 4;grid-column-end: 7;"
-                                >
+                                <div style="grid-column: 1/5;width: 100%;">
                                     <a-form-item
                                         :label="trans.belongs_to_group"
                                     >
@@ -96,45 +91,7 @@
                                         </a-select>
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 1;grid-column-end: 3;"
-                                >
-                                    <a-form-item :label="trans.delta">
-                                        <a-input-number
-                                            v-model="delta_min"
-                                            style=" width: 150px; text-align: center"
-                                            placeholder="Minium Delta"
-                                            size="large"
-                                        />
-                                        <a-input-number
-                                            style=" width: 150px; text-align: center"
-                                            size="large"
-                                            v-model="delta_max"
-                                            placeholder="Maximum Delta"
-                                        />
-                                    </a-form-item>
-                                </div>
-                                <div
-                                    style="grid-column-start: 3;grid-column-end: 5;"
-                                >
-                                    <a-form-item :label="trans.per_cent">
-                                        <a-input-number
-                                            size="large"
-                                            v-model="per_cent_min"
-                                            style=" width: 150px; text-align: center"
-                                            placeholder="Minium Percent"
-                                        />
-                                        <a-input-number
-                                            style="width: 150px; text-align: center"
-                                            size="large"
-                                            v-model="per_cent_max"
-                                            placeholder="Maximum Percent"
-                                        />
-                                    </a-form-item>
-                                </div>
-                                <div
-                                    style="grid-column-start: 5;grid-column-end: 7;"
-                                >
+                                <div style="grid-column: 1/5;width: 100%">
                                     <a-form-item
                                         :label="trans.mone_av"
                                         class="sm-ch"
@@ -170,50 +127,75 @@
                                         </a-select>
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 3; grid-column-end: 5;"
-                                >
-                                    <a-form-item :label="trans.day_date">
-                                        <div style="display: flex">
-                                            <a-date-picker
-                                                size="large"
-                                                format="YYYY-MM-DD"
-                                                @change="handleDateMinChange"
-                                                placeholder="min date"
-                                                ref="dmin"
-                                                v-decorator="[
-                                                    'date_min',
-                                                    {
-                                                        rules: [
-                                                            {
-                                                                required: true,
-                                                                message:
-                                                                    'Please select Min Date!'
-                                                            }
-                                                        ],
-                                                        initialValue: moment()
-                                                            .subtract(
-                                                                1,
-                                                                'months'
-                                                            )
-                                                            .format(
-                                                                'YYYY-MM-DD'
-                                                            )
-                                                    }
-                                                ]"
-                                            />
-                                            <a-date-picker
-                                                size="large"
-                                                format="YYYY-MM-DD"
-                                                v-model="date_max"
-                                                placeholder="max date"
-                                            />
-                                        </div>
+                                <div style="grid-column: 1/3;width: 100%;">
+                                    <a-form-item :label="trans.delta">
+                                        <a-input-number
+                                            v-model="delta_min"
+                                            style="width: 265px; text-align: center"
+                                            placeholder="Minium Delta"
+                                            size="large"
+                                        />
+                                        <a-input-number
+                                            style="width: 265px; text-align: center"
+                                            size="large"
+                                            v-model="delta_max"
+                                            placeholder="Maximum Delta"
+                                        />
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 1; grid-column-end: 4;"
-                                >
+                                <div style="grid-column: 3/5;width: 100%;">
+                                    <a-form-item :label="trans.per_cent">
+                                        <a-input-number
+                                            size="large"
+                                            v-model="per_cent_min"
+                                            style=" width: 265px; text-align: center"
+                                            placeholder="Minium Percent"
+                                        />
+                                        <a-input-number
+                                            style="width: 265px; text-align: center"
+                                            size="large"
+                                            v-model="per_cent_max"
+                                            placeholder="Maximum Percent"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div style="grid-column: 1/3;width: 100%;">
+                                    <a-form-item label="Minium Date">
+                                        <a-date-picker
+                                            size="large"
+                                            format="YYYY-MM-DD"
+                                            @change="handleDateMinChange"
+                                            placeholder="min date"
+                                            ref="dmin"
+                                            v-decorator="[
+                                                'date_min',
+                                                {
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select Min Date!'
+                                                        }
+                                                    ],
+                                                    initialValue: moment()
+                                                        .subtract(1, 'months')
+                                                        .format('YYYY-MM-DD')
+                                                }
+                                            ]"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div style="grid-column: 3/5;width: 100%;">
+                                    <a-form-item label="Mazium Date">
+                                        <a-date-picker
+                                            size="large"
+                                            format="YYYY-MM-DD"
+                                            v-model="date_max"
+                                            placeholder="max date"
+                                        />
+                                    </a-form-item>
+                                </div>
+                                <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item label="X-axis:">
                                         <a-radio-group
                                             name="xaxis"
@@ -224,9 +206,7 @@
                                         />
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 4;grid-column-end: 7;"
-                                >
+                                <div style="grid-column: 3/5;width: 100%;">
                                     <a-form-item :label="trans.sum">
                                         <a-radio-group
                                             v-model="sum"
@@ -235,7 +215,7 @@
                                     </a-form-item>
                                 </div>
                                 <div
-                                    style="grid-column-start: 1; grid-column-end: 4"
+                                    style="grid-column: 1/3;width: 100%;align-self: baseline;"
                                 >
                                     <a-form-item label="Graph Type:">
                                         <a-radio-group
@@ -245,9 +225,7 @@
                                         />
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 4;grid-column-end:7;"
-                                >
+                                <div style="grid-column: 3/5;width: 100%;">
                                     <a-form-item label="Graph:">
                                         <a-radio-group
                                             v-model="selectedOneGraph"
@@ -255,9 +233,7 @@
                                         />
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 1;grid-column-end:4;"
-                                >
+                                <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item v-if="graphType == 'bar'">
                                         <a-checkbox
                                             @change="handleStackedChange"
@@ -266,9 +242,7 @@
                                         </a-checkbox>
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column-start: 4;grid-column-end:7;"
-                                >
+                                <div style="grid-column: 3/5;width: 100%">
                                     <a-form-item
                                         :wrapper-col="{ span: 12, offset: 5 }"
                                     >
@@ -276,6 +250,7 @@
                                             size="large"
                                             type="primary"
                                             html-type="submit"
+                                            style="font-size: 50px;line-height: 60px;height: 70px;"
                                         >
                                             Show
                                         </a-button>
