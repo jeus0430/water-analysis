@@ -141,13 +141,13 @@
 }
 
 .ant-checkbox-inner::after {
-    width: 15px;
-    height: 35px;
+    width: 27px;
+    height: 57px;
 }
 
 .ant-checkbox-inner {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 .ant-select-dropdown-menu {
     max-height: 750px !important;
@@ -156,5 +156,21 @@
 .ant-select-dropdown.ant-select-dropdown--multiple
     .ant-select-dropdown-menu-item
     .ant-select-selected-icon {
-    font-size: 24px;
+    font-size: 50px;
+    left: 0px !important;
+    right: initial !important;
+}
+
+.ant-select-dropdown.ant-select-dropdown--multiple
+    .ant-select-dropdown-menu-item {
+    padding-left: 55px !important;
+}
+
+.ant-select-dropdown.ant-select-dropdown--multiple
+    .ant-select-dropdown-menu-item-selected
+    .ant-select-selected-icon,
+.ant-select-dropdown.ant-select-dropdown--multiple
+    .ant-select-dropdown-menu-item-selected:hover
+    .ant-select-selected-icon {
+    color: black;
 }
