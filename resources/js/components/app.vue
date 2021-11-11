@@ -4,7 +4,12 @@
             <a-layout>
                 <a-layout-header>
                     <h1>Water Differences Analytics</h1>
-                    <a-button type="primary" @click="showDrawer" size="large">
+                    <a-button
+                        type="primary"
+                        @click="showDrawer"
+                        size="large"
+                        style="font-size: 50px;line-height: 60px;height: 70px;"
+                    >
                         Show Sidebar
                     </a-button>
                 </a-layout-header>

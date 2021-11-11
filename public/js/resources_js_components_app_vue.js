@@ -578,6 +578,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1222,6 +1227,11 @@ var render = function() {
                 _c(
                   "a-button",
                   {
+                    staticStyle: {
+                      "font-size": "50px",
+                      "line-height": "60px",
+                      height: "70px"
+                    },
                     attrs: { type: "primary", size: "large" },
                     on: { click: _vm.showDrawer }
                   },

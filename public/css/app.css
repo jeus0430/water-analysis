@@ -23983,11 +23983,12 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 #components-layout-demo-basic .ant-layout-header {
   background: white;
   display: flex;
+  height: 100px;
   align-items: center;
 }
 #components-layout-demo-basic .ant-layout-header h1 {
   margin: 0 0 0 10px;
-  font-size: 40px;
+  font-size: 80px;
 }
 
 #components-layout-demo-basic .ant-layout-sider {
