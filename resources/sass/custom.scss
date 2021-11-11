@@ -66,3 +66,11 @@
 .ant-row-flex {
     flex-wrap: nowrap !important;
 }
+
+.ant-input-number + .ant-input-number {
+    margin-left: 20px;
+}
+
+.ant-calendar-picker + .ant-calendar-picker {
+    margin-left: 20px;
+}

@@ -636,14 +636,12 @@ __webpack_require__.r(__webpack_exports__);
       mone_avs: [],
       fetching: false,
       sidebar: true,
-      date_min: "",
+      date_min: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
       date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
-      delta_min: 0,
-      delta_max: 0,
-      delta: [0, 0],
-      per_cent_min: 0,
-      per_cent_max: 0,
-      per_cent: [0, 0],
+      delta_min: -1,
+      delta_max: 1,
+      per_cent_min: -1,
+      per_cent_max: 1,
       xOptions: ["date", "ezor", "group", "mone_av"],
       selectedX: "date",
       sum: "daily",
@@ -659,7 +657,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         grid: {
-          borderColor: "#f00",
+          borderColor: "#fff",
           xaxis: {
             lines: {
               show: true

@@ -369,14 +369,12 @@ export default {
             mone_avs: [],
             fetching: false,
             sidebar: true,
-            date_min: "",
+            date_min: moment(),
             date_max: moment(),
-            delta_min: 0,
-            delta_max: 0,
-            delta: [0, 0],
-            per_cent_min: 0,
-            per_cent_max: 0,
-            per_cent: [0, 0],
+            delta_min: -1,
+            delta_max: 1,
+            per_cent_min: -1,
+            per_cent_max: 1,
             xOptions: ["date", "ezor", "group", "mone_av"],
             selectedX: "date",
             sum: "daily",
@@ -392,7 +390,7 @@ export default {
                     }
                 },
                 grid: {
-                    borderColor: "#f00",
+                    borderColor: "#fff",
                     xaxis: {
                         lines: {
                             show: true
