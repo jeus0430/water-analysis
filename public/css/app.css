@@ -24127,3 +24127,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   width: 30px;
   height: 30px;
 }
+
+.ant-select-dropdown-menu {
+  max-height: 750px !important;
+}
