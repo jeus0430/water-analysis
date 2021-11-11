@@ -177,6 +177,7 @@
                                                 format="YYYY-MM-DD"
                                                 @change="handleDateMinChange"
                                                 placeholder="min date"
+                                                ref="dmin"
                                                 v-decorator="[
                                                     'date_min',
                                                     {
@@ -186,7 +187,15 @@
                                                                 message:
                                                                     'Please select Min Date!'
                                                             }
-                                                        ]
+                                                        ],
+                                                        initialValue: moment()
+                                                            .subtract(
+                                                                1,
+                                                                'months'
+                                                            )
+                                                            .format(
+                                                                'YYYY-MM-DD'
+                                                            )
                                                     }
                                                 ]"
                                             />
@@ -361,7 +370,7 @@ export default {
             fetching: false,
             sidebar: true,
             date_min: "",
-            date_max: "",
+            date_max: moment(),
             delta_min: 0,
             delta_max: 0,
             delta: [0, 0],

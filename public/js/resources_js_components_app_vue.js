@@ -591,6 +591,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -628,7 +637,7 @@ __webpack_require__.r(__webpack_exports__);
       fetching: false,
       sidebar: true,
       date_min: "",
-      date_max: "",
+      date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
       delta_min: 0,
       delta_max: 0,
       delta: [0, 0],
@@ -1682,13 +1691,18 @@ var render = function() {
                                                       message:
                                                         "Please select Min Date!"
                                                     }
-                                                  ]
+                                                  ],
+                                                  initialValue: _vm
+                                                    .moment()
+                                                    .subtract(1, "months")
+                                                    .format("YYYY-MM-DD")
                                                 }
                                               ],
                                               expression:
-                                                "[\n                                                    'date_min',\n                                                    {\n                                                        rules: [\n                                                            {\n                                                                required: true,\n                                                                message:\n                                                                    'Please select Min Date!'\n                                                            }\n                                                        ]\n                                                    }\n                                                ]"
+                                                "[\n                                                    'date_min',\n                                                    {\n                                                        rules: [\n                                                            {\n                                                                required: true,\n                                                                message:\n                                                                    'Please select Min Date!'\n                                                            }\n                                                        ],\n                                                        initialValue: moment()\n                                                            .subtract(\n                                                                1,\n                                                                'months'\n                                                            )\n                                                            .format(\n                                                                'YYYY-MM-DD'\n                                                            )\n                                                    }\n                                                ]"
                                             }
                                           ],
+                                          ref: "dmin",
                                           attrs: {
                                             size: "large",
                                             format: "YYYY-MM-DD",
