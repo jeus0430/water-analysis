@@ -30,7 +30,10 @@
                             >
                                 <div style="grid-column: 1/5;width: 100%;">
                                     <a-form-item :label="trans.waste_zone">
-                                        <a-checkbox v-model="zoneChecked">
+                                        <a-checkbox
+                                            v-model="zoneChecked"
+                                            @change="handleAllZones"
+                                        >
                                             Select All
                                         </a-checkbox>
                                         <a-select
@@ -65,7 +68,10 @@
                                     <a-form-item
                                         :label="trans.belongs_to_group"
                                     >
-                                        <a-checkbox v-model="groupChecked">
+                                        <a-checkbox
+                                            v-model="groupChecked"
+                                            @change="handleAllGroups"
+                                        >
                                             Select All
                                         </a-checkbox>
                                         <a-select
@@ -101,7 +107,10 @@
                                         :label="trans.mone_av"
                                         class="sm-ch"
                                     >
-                                        <a-checkbox v-model="moneavChecked">
+                                        <a-checkbox
+                                            v-model="moneavChecked"
+                                            @change="handleAllMones"
+                                        >
                                             Select All
                                         </a-checkbox>
                                         <a-select
@@ -876,18 +885,48 @@ export default {
         },
         showDrawer() {
             this.sidebar = true
+        },
+        handleAllZones(e) {
+            if (e.target.checked) {
+                this.form.setFieldsValue({
+                    selectedZones: this.zones.map(e => e.waste_zone)
+                })
+            }
+        },
+        handleAllGroups(e) {
+            if (e.target.checked) {
+                this.form.setFieldsValue({
+                    selectedGroups: this.groups.map(e => e.waste_group)
+                })
+            }
+        },
+        handleAllMones(e) {
+            if (e.target.checked) {
+                this.form.setFieldsValue({
+                    selectedMoneavs: this.mone_avs.map(e => e.mone_av)
+                })
+            }
         }
     },
     mounted: function() {
         axios.get("/api/zones").then(res => {
             let data = res.data
             this.zones = data
+            this.form.setFieldsValue({
+                selectedZones: this.zones.map(e => e.waste_zone)
+            })
         })
         axios.get("/api/groups").then(res => {
             this.groups = res.data
+            this.form.setFieldsValue({
+                selectedGroups: this.groups.map(e => e.waste_group)
+            })
         })
         axios.get("/api/mone_avs").then(res => {
             this.mone_avs = res.data
+            this.form.setFieldsValue({
+                selectedMoneavs: this.mone_avs.map(e => e.mone_av)
+            })
         })
         axios.get("/api/trans").then(res => {
             this.trans = Object.assign(this.trans, res.data)

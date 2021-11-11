@@ -588,6 +588,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1097,6 +1106,33 @@ __webpack_require__.r(__webpack_exports__);
     },
     showDrawer: function showDrawer() {
       this.sidebar = true;
+    },
+    handleAllZones: function handleAllZones(e) {
+      if (e.target.checked) {
+        this.form.setFieldsValue({
+          selectedZones: this.zones.map(function (e) {
+            return e.waste_zone;
+          })
+        });
+      }
+    },
+    handleAllGroups: function handleAllGroups(e) {
+      if (e.target.checked) {
+        this.form.setFieldsValue({
+          selectedGroups: this.groups.map(function (e) {
+            return e.waste_group;
+          })
+        });
+      }
+    },
+    handleAllMones: function handleAllMones(e) {
+      if (e.target.checked) {
+        this.form.setFieldsValue({
+          selectedMoneavs: this.mone_avs.map(function (e) {
+            return e.mone_av;
+          })
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -1105,12 +1141,30 @@ __webpack_require__.r(__webpack_exports__);
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/zones").then(function (res) {
       var data = res.data;
       _this3.zones = data;
+
+      _this3.form.setFieldsValue({
+        selectedZones: _this3.zones.map(function (e) {
+          return e.waste_zone;
+        })
+      });
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/groups").then(function (res) {
       _this3.groups = res.data;
+
+      _this3.form.setFieldsValue({
+        selectedGroups: _this3.groups.map(function (e) {
+          return e.waste_group;
+        })
+      });
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/mone_avs").then(function (res) {
       _this3.mone_avs = res.data;
+
+      _this3.form.setFieldsValue({
+        selectedMoneavs: _this3.mone_avs.map(function (e) {
+          return e.mone_av;
+        })
+      });
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/trans").then(function (res) {
       _this3.trans = Object.assign(_this3.trans, res.data);
@@ -1298,6 +1352,7 @@ var render = function() {
                                     _c(
                                       "a-checkbox",
                                       {
+                                        on: { change: _vm.handleAllZones },
                                         model: {
                                           value: _vm.zoneChecked,
                                           callback: function($$v) {
@@ -1384,6 +1439,7 @@ var render = function() {
                                     _c(
                                       "a-checkbox",
                                       {
+                                        on: { change: _vm.handleAllGroups },
                                         model: {
                                           value: _vm.groupChecked,
                                           callback: function($$v) {
@@ -1473,6 +1529,7 @@ var render = function() {
                                     _c(
                                       "a-checkbox",
                                       {
+                                        on: { change: _vm.handleAllMones },
                                         model: {
                                           value: _vm.moneavChecked,
                                           callback: function($$v) {
