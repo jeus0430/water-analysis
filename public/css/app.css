@@ -24069,6 +24069,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 
 .ant-select-dropdown-menu-item {
   color: #1317fa;
+  font-size: 20px;
 }
 
 .ant-checkbox-inner {
