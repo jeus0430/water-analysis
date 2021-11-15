@@ -597,7 +597,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -616,6 +615,7 @@ __webpack_require__.r(__webpack_exports__);
         day_date: "day_date",
         sum: "sum"
       },
+      widthofscreen: window.innerWidth,
       collapsible: true,
       locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
       trans_updated: 0,
@@ -634,8 +634,6 @@ __webpack_require__.r(__webpack_exports__);
       mone_avs: [],
       fetching: false,
       sidebar: true,
-      date_min: moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(1, "months").format("YYYY-MM-DD"),
-      date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD"),
       delta_min: -1,
       delta_max: 1,
       per_cent_min: -1,
@@ -649,9 +647,12 @@ __webpack_require__.r(__webpack_exports__);
       selectedOneGraph: "qty",
       oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
       chartOptionsQty: {
+        stroke: {
+          width: 1
+        },
         dataLabels: {
           style: {
-            fontSize: "14px"
+            fontSize: "24px"
           }
         },
         grid: {
@@ -665,14 +666,15 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "qty",
           style: {
-            fontSize: "20px",
+            fontSize: "40px",
             color: "#fff"
           },
-          offsetX: 30
+          offsetX: 200
         },
         chart: {
           background: "#000",
           id: "vuechart-example",
+          height: "100%",
           zoom: {
             type: "x",
             enabled: true
@@ -687,7 +689,7 @@ __webpack_require__.r(__webpack_exports__);
           labels: {
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           }
         },
@@ -720,14 +722,18 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d2.getFullYear();
               } else {
-                var _d3 = new Date(value);
+                if (typeof value != "undefined") {
+                  var _d3 = new Date(value);
 
-                return _d3.toISOString().split("T")[0];
+                  return _d3.toISOString().split("T")[0];
+                } else {
+                  return "0";
+                }
               }
             },
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           },
           axisBorder: {
@@ -743,7 +749,7 @@ __webpack_require__.r(__webpack_exports__);
       chartOptionsRqty: {
         dataLabels: {
           style: {
-            fontSize: "14px"
+            fontSize: "24px"
           }
         },
         grid: {
@@ -757,12 +763,13 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "real qty",
           style: {
-            fontSize: "20px",
+            fontSize: "40px",
             color: "#fff"
           },
-          offsetX: 100
+          offsetX: 300
         },
         chart: {
+          height: "1000px",
           background: "#000",
           id: "vuechart-example",
           zoom: {
@@ -779,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
           labels: {
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           }
         },
@@ -819,7 +826,7 @@ __webpack_require__.r(__webpack_exports__);
             },
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           },
           axisBorder: {
@@ -835,7 +842,7 @@ __webpack_require__.r(__webpack_exports__);
       chartOptionsDelta: {
         dataLabels: {
           style: {
-            fontSize: "14px"
+            fontSize: "24px"
           }
         },
         grid: {
@@ -849,12 +856,13 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "delta",
           style: {
-            fontSize: "20px",
+            fontSize: "40px",
             color: "#fff"
           },
-          offsetX: 100
+          offsetX: 300
         },
         chart: {
+          height: "1000px",
           background: "#000",
           id: "vuechart-example",
           zoom: {
@@ -871,7 +879,7 @@ __webpack_require__.r(__webpack_exports__);
           labels: {
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           }
         },
@@ -911,7 +919,7 @@ __webpack_require__.r(__webpack_exports__);
             },
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           },
           axisBorder: {
@@ -927,7 +935,7 @@ __webpack_require__.r(__webpack_exports__);
       chartOptionsPercent: {
         dataLabels: {
           style: {
-            fontSize: "14px"
+            fontSize: "24px"
           }
         },
         grid: {
@@ -941,12 +949,13 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           text: "percent",
           style: {
-            fontSize: "20px",
+            fontSize: "40px",
             color: "#fff"
           },
-          offsetX: 100
+          offsetX: 300
         },
         chart: {
+          height: "1000px",
           background: "#000",
           id: "vuechart-example",
           zoom: {
@@ -963,7 +972,7 @@ __webpack_require__.r(__webpack_exports__);
           labels: {
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           }
         },
@@ -1003,7 +1012,7 @@ __webpack_require__.r(__webpack_exports__);
             },
             style: {
               colors: "#fff",
-              fontSize: "16px"
+              fontSize: "24px"
             }
           },
           axisBorder: {
@@ -1034,6 +1043,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.groupChecked) toCheck.push("selectedGroups");
       if (!this.moneavChecked) toCheck.push("selectedMoneavs");
       toCheck.push("date_min");
+      toCheck.push("date_max");
       this.form.validateFields(toCheck, function (err, values) {
         if (!err) {
           _this.updateChart();
@@ -1050,8 +1060,15 @@ __webpack_require__.r(__webpack_exports__);
     handleMoneavChange: function handleMoneavChange(value) {
       this.selectedMoneavs = value;
     },
-    handleDateMinChange: function handleDateMinChange(e) {
-      this.date_min = e.target.value;
+    handleDateMinChange: function handleDateMinChange(d, s) {
+      this.form.setFieldsValue({
+        date_min: s
+      });
+    },
+    handleDateMaxChange: function handleDateMaxChange(d, s) {
+      this.form.setFieldsValue({
+        date_max: s
+      });
     },
     handleStackedChange: function handleStackedChange(value) {
       this.$apexcharts.exec("vuechart-example", "updateOptions", {
@@ -1072,8 +1089,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.groupChecked) groups = this.selectedGroups;
       var moneavs = this.selectedMoneavs;
       if (this.moneavChecked) moneavs = this.selectedMoneavs;
-      var date_min = this.date_min;
-      var date_max = this.date_max;
+      var date_min = this.form.getFieldValue("date_min");
+      var date_max = this.form.getFieldValue("date_max");
       var delta = this.delta;
       var per_cent_min = this.per_cent_min;
       var per_cent_max = this.per_cent_max;
@@ -1086,12 +1103,12 @@ __webpack_require__.r(__webpack_exports__);
         zones: zones,
         groups: groups,
         moneavs: moneavs,
-        date_max: date_max,
-        date_min: date_min,
         delta_min: delta_min,
         delta_max: delta_max,
         per_cent_max: per_cent_max,
         per_cent_min: per_cent_min,
+        date_max: date_max,
+        date_min: date_min,
         xaxis: xaxis,
         sum: sum,
         graphType: graphType
@@ -1184,14 +1201,15 @@ __webpack_require__.r(__webpack_exports__);
       _this3.chartOptionsDelta.title.text = _this3.trans.delta;
       _this3.chartOptionsPercent.title.text = _this3.trans.per_cent;
       _this3.trans_updated = 1;
-    }); // axios.get("/api/delta_range").then(res => {
-    //     this.delta_min = parseFloat(res.data.min)
-    //     this.delta_max = parseFloat(res.data.max)
-    // })
-    // axios.get("/api/per_cent_range").then(res => {
-    //     this.per_cent_min = parseFloat(res.data.min)
-    //     this.per_cent_max = parseFloat(res.data.max)
-    // })
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
+      _this3.delta_min = parseFloat(res.data.min);
+      _this3.delta_max = parseFloat(res.data.max);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/per_cent_range").then(function (res) {
+      _this3.per_cent_min = parseFloat(res.data.min);
+      _this3.per_cent_max = parseFloat(res.data.max);
+    });
   }
 });
 
@@ -1297,11 +1315,6 @@ var render = function() {
                 _c(
                   "a-button",
                   {
-                    staticStyle: {
-                      "font-size": "50px",
-                      "line-height": "60px",
-                      height: "70px"
-                    },
                     attrs: { type: "primary", size: "large" },
                     on: { click: _vm.showDrawer }
                   },
@@ -1321,8 +1334,11 @@ var render = function() {
                 _c(
                   "a-drawer",
                   {
-                    staticStyle: { width: "100%" },
-                    attrs: { placement: "right", visible: _vm.sidebar },
+                    attrs: {
+                      placement: "right",
+                      visible: _vm.sidebar,
+                      width: _vm.widthofscreen
+                    },
                     on: { close: _vm.onClose }
                   },
                   [
@@ -1732,18 +1748,8 @@ var render = function() {
                                   "a-form-item",
                                   { attrs: { label: "Minium Date" } },
                                   [
-                                    _c("a-input", {
+                                    _c("a-date-picker", {
                                       directives: [
-                                        {
-                                          name: "mask",
-                                          rawName: "v-mask",
-                                          value: {
-                                            mask: "9999-99-99",
-                                            greedy: false
-                                          },
-                                          expression:
-                                            "{\n                                            mask: '9999-99-99',\n                                            greedy: false\n                                        }"
-                                        },
                                         {
                                           name: "decorator",
                                           rawName: "v-decorator",
@@ -1756,21 +1762,18 @@ var render = function() {
                                                   message:
                                                     "Please select Min Date!"
                                                 }
-                                              ],
-                                              initialValue: _vm
-                                                .moment()
-                                                .subtract(1, "months")
-                                                .format("YYYY-MM-DD")
+                                              ]
                                             }
                                           ],
                                           expression:
-                                            "[\n                                            'date_min',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Min Date!'\n                                                    }\n                                                ],\n                                                initialValue: moment()\n                                                    .subtract(1, 'months')\n                                                    .format('YYYY-MM-DD')\n                                            }\n                                        ]"
+                                            "[\n                                            'date_min',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Min Date!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
                                         }
                                       ],
                                       attrs: {
-                                        placeholder: "Basic usage",
+                                        "show-time": "",
                                         size: "large",
-                                        format: "YYYY-MM-DD"
+                                        format: "YYYY-MM-DD",
+                                        placeholder: "min date"
                                       },
                                       on: { change: _vm.handleDateMinChange }
                                     })
@@ -1794,30 +1797,34 @@ var render = function() {
                                   "a-form-item",
                                   { attrs: { label: "Maxium Date" } },
                                   [
-                                    _c("a-input", {
+                                    _c("a-date-picker", {
                                       directives: [
                                         {
-                                          name: "mask",
-                                          rawName: "v-mask",
-                                          value: {
-                                            mask: "9999-99-99",
-                                            greedy: false
-                                          },
+                                          name: "decorator",
+                                          rawName: "v-decorator",
+                                          value: [
+                                            "date_max",
+                                            {
+                                              rules: [
+                                                {
+                                                  required: true,
+                                                  message:
+                                                    "Please select Max Date!"
+                                                }
+                                              ]
+                                            }
+                                          ],
                                           expression:
-                                            "{\n                                            mask: '9999-99-99',\n                                            greedy: false\n                                        }"
+                                            "[\n                                            'date_max',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Max Date!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
                                         }
                                       ],
                                       attrs: {
+                                        "show-time": "",
                                         size: "large",
+                                        format: "YYYY-MM-DD",
                                         placeholder: "max date"
                                       },
-                                      model: {
-                                        value: _vm.date_max,
-                                        callback: function($$v) {
-                                          _vm.date_max = $$v
-                                        },
-                                        expression: "date_max"
-                                      }
+                                      on: { change: _vm.handleDateMaxChange }
                                     })
                                   ],
                                   1
@@ -2038,6 +2045,7 @@ var render = function() {
                   _c("div", [
                     _c(
                       "div",
+                      { staticStyle: { width: "80vw", margin: "auto" } },
                       [
                         _vm.selectedOneGraph == "qty"
                           ? _c("apexchart", {
@@ -2054,62 +2062,74 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "div",
-                      [
-                        _vm.selectedOneGraph == "r_qty"
-                          ? _c("apexchart", {
-                              key: _vm.trans_updated,
-                              attrs: {
-                                options: _vm.chartOptionsRqty,
-                                series: _vm.seriesRqty,
-                                type: _vm.graphType
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  ]),
+                  _c(
+                    "div",
+                    { staticStyle: { width: "80vw", margin: "auto" } },
+                    [
+                      _c(
+                        "div",
+                        [
+                          _vm.selectedOneGraph == "r_qty"
+                            ? _c("apexchart", {
+                                key: _vm.trans_updated,
+                                attrs: {
+                                  options: _vm.chartOptionsRqty,
+                                  series: _vm.seriesRqty,
+                                  type: _vm.graphType
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "div",
-                      [
-                        _vm.selectedOneGraph == "delta"
-                          ? _c("apexchart", {
-                              key: _vm.trans_updated,
-                              attrs: {
-                                options: _vm.chartOptionsDelta,
-                                series: _vm.seriesDelta,
-                                type: _vm.graphType
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  ]),
+                  _c(
+                    "div",
+                    { staticStyle: { width: "80vw", margin: "auto" } },
+                    [
+                      _c(
+                        "div",
+                        [
+                          _vm.selectedOneGraph == "delta"
+                            ? _c("apexchart", {
+                                key: _vm.trans_updated,
+                                attrs: {
+                                  options: _vm.chartOptionsDelta,
+                                  series: _vm.seriesDelta,
+                                  type: _vm.graphType
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "div",
-                      [
-                        _vm.selectedOneGraph == "per_cent"
-                          ? _c("apexchart", {
-                              key: _vm.trans_updated,
-                              attrs: {
-                                options: _vm.chartOptionsPercent,
-                                series: _vm.seriesPercent,
-                                type: _vm.graphType
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticStyle: { width: "80vw", margin: "auto" } },
+                    [
+                      _c(
+                        "div",
+                        [
+                          _vm.selectedOneGraph == "per_cent"
+                            ? _c("apexchart", {
+                                key: _vm.trans_updated,
+                                attrs: {
+                                  options: _vm.chartOptionsPercent,
+                                  series: _vm.seriesPercent,
+                                  type: _vm.graphType
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  )
                 ])
               ],
               1

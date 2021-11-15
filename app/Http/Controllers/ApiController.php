@@ -60,6 +60,8 @@ class ApiController extends Controller
         $mone_avs       = $request->input('moneavs');
         $date_min       = $request->input('date_min');
         $date_max       = $request->input('date_max');
+        $date_max       = explode('T', $date_max)[0];
+        $date_min       = explode('T', $date_min)[0];
         $percent_min    = $request->input('per_cent_min');
         $percent_max    = $request->input('per_cent_max');
         $delta_min      = $request->input('delta_min');

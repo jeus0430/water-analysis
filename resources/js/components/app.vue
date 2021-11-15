@@ -4,12 +4,7 @@
             <a-layout>
                 <a-layout-header>
                     <h1>Water Differences Analytics</h1>
-                    <a-button
-                        type="primary"
-                        @click="showDrawer"
-                        size="large"
-                        style="font-size: 50px;line-height: 60px;height: 70px;"
-                    >
+                    <a-button type="primary" @click="showDrawer" size="large">
                         Show Sidebar
                     </a-button>
                 </a-layout-header>
@@ -18,7 +13,7 @@
                         placement="right"
                         :visible="sidebar"
                         @close="onClose"
-                        style="width: 100%;"
+                        :width="widthofscreen"
                     >
                         <a-form
                             label="Search Form"
@@ -175,15 +170,12 @@
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item label="Minium Date">
-                                        <a-input
-                                            v-mask="{
-                                                mask: '9999-99-99',
-                                                greedy: false
-                                            }"
-                                            placeholder="Basic usage"
+                                        <a-date-picker
+                                            show-time
                                             size="large"
-                                            @change="handleDateMinChange"
                                             format="YYYY-MM-DD"
+                                            @change="handleDateMinChange"
+                                            placeholder="min date"
                                             v-decorator="[
                                                 'date_min',
                                                 {
@@ -193,10 +185,7 @@
                                                             message:
                                                                 'Please select Min Date!'
                                                         }
-                                                    ],
-                                                    initialValue: moment()
-                                                        .subtract(1, 'months')
-                                                        .format('YYYY-MM-DD')
+                                                    ]
                                                 }
                                             ]"
                                         />
@@ -204,14 +193,24 @@
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
                                     <a-form-item label="Maxium Date">
-                                        <a-input
+                                        <a-date-picker
+                                            show-time
                                             size="large"
-                                            v-mask="{
-                                                mask: '9999-99-99',
-                                                greedy: false
-                                            }"
-                                            v-model="date_max"
+                                            format="YYYY-MM-DD"
+                                            @change="handleDateMaxChange"
                                             placeholder="max date"
+                                            v-decorator="[
+                                                'date_max',
+                                                {
+                                                    rules: [
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Please select Max Date!'
+                                                        }
+                                                    ]
+                                                }
+                                            ]"
                                         />
                                     </a-form-item>
                                 </div>
@@ -281,7 +280,7 @@
                     </a-drawer>
                     <a-layout-content>
                         <div>
-                            <div>
+                            <div style="width: 80vw;margin: auto;">
                                 <apexchart
                                     v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
@@ -291,7 +290,7 @@
                                 ></apexchart>
                             </div>
                         </div>
-                        <div>
+                        <div style="width: 80vw;margin: auto;">
                             <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'r_qty'"
@@ -302,7 +301,7 @@
                                 ></apexchart>
                             </div>
                         </div>
-                        <div>
+                        <div style="width: 80vw;margin: auto;">
                             <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'delta'"
@@ -313,7 +312,7 @@
                                 ></apexchart>
                             </div>
                         </div>
-                        <div>
+                        <div style="width: 80vw;margin: auto;">
                             <div>
                                 <apexchart
                                     v-if="selectedOneGraph == 'per_cent'"
@@ -351,6 +350,7 @@ export default {
                 day_date: "day_date",
                 sum: "sum"
             },
+            widthofscreen: window.innerWidth,
             collapsible: true,
             locale: heIL,
             trans_updated: 0,
@@ -367,10 +367,6 @@ export default {
             mone_avs: [],
             fetching: false,
             sidebar: true,
-            date_min: moment()
-                .subtract(1, "months")
-                .format("YYYY-MM-DD"),
-            date_max: moment().format("YYYY-MM-DD"),
             delta_min: -1,
             delta_max: 1,
             per_cent_min: -1,
@@ -384,9 +380,12 @@ export default {
             selectedOneGraph: "qty",
             oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
+                stroke: {
+                    width: 1
+                },
                 dataLabels: {
                     style: {
-                        fontSize: "14px"
+                        fontSize: "24px"
                     }
                 },
                 grid: {
@@ -400,14 +399,15 @@ export default {
                 title: {
                     text: "qty",
                     style: {
-                        fontSize: "20px",
+                        fontSize: "40px",
                         color: "#fff"
                     },
-                    offsetX: 30
+                    offsetX: 200
                 },
                 chart: {
                     background: "#000",
                     id: "vuechart-example",
+                    height: "100%",
                     zoom: {
                         type: "x",
                         enabled: true
@@ -422,7 +422,7 @@ export default {
                     labels: {
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     }
                 },
@@ -465,13 +465,17 @@ export default {
                                 let d = new Date(value - 3)
                                 return d.getFullYear()
                             } else {
-                                const d = new Date(value)
-                                return d.toISOString().split("T")[0]
+                                if (typeof value != "undefined") {
+                                    const d = new Date(value)
+                                    return d.toISOString().split("T")[0]
+                                } else {
+                                    return "0"
+                                }
                             }
                         },
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     },
                     axisBorder: {
@@ -489,7 +493,7 @@ export default {
             chartOptionsRqty: {
                 dataLabels: {
                     style: {
-                        fontSize: "14px"
+                        fontSize: "24px"
                     }
                 },
                 grid: {
@@ -503,12 +507,13 @@ export default {
                 title: {
                     text: "real qty",
                     style: {
-                        fontSize: "20px",
+                        fontSize: "40px",
                         color: "#fff"
                     },
-                    offsetX: 100
+                    offsetX: 300
                 },
                 chart: {
+                    height: "1000px",
                     background: "#000",
                     id: "vuechart-example",
                     zoom: {
@@ -525,7 +530,7 @@ export default {
                     labels: {
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     }
                 },
@@ -574,7 +579,7 @@ export default {
                         },
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     },
                     axisBorder: {
@@ -592,7 +597,7 @@ export default {
             chartOptionsDelta: {
                 dataLabels: {
                     style: {
-                        fontSize: "14px"
+                        fontSize: "24px"
                     }
                 },
                 grid: {
@@ -606,12 +611,13 @@ export default {
                 title: {
                     text: "delta",
                     style: {
-                        fontSize: "20px",
+                        fontSize: "40px",
                         color: "#fff"
                     },
-                    offsetX: 100
+                    offsetX: 300
                 },
                 chart: {
+                    height: "1000px",
                     background: "#000",
                     id: "vuechart-example",
                     zoom: {
@@ -628,7 +634,7 @@ export default {
                     labels: {
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     }
                 },
@@ -677,7 +683,7 @@ export default {
                         },
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     },
                     axisBorder: {
@@ -695,7 +701,7 @@ export default {
             chartOptionsPercent: {
                 dataLabels: {
                     style: {
-                        fontSize: "14px"
+                        fontSize: "24px"
                     }
                 },
                 grid: {
@@ -709,12 +715,13 @@ export default {
                 title: {
                     text: "percent",
                     style: {
-                        fontSize: "20px",
+                        fontSize: "40px",
                         color: "#fff"
                     },
-                    offsetX: 100
+                    offsetX: 300
                 },
                 chart: {
+                    height: "1000px",
                     background: "#000",
                     id: "vuechart-example",
                     zoom: {
@@ -731,7 +738,7 @@ export default {
                     labels: {
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     }
                 },
@@ -780,7 +787,7 @@ export default {
                         },
                         style: {
                             colors: "#fff",
-                            fontSize: "16px"
+                            fontSize: "24px"
                         }
                     },
                     axisBorder: {
@@ -812,6 +819,7 @@ export default {
             if (!this.moneavChecked) toCheck.push("selectedMoneavs")
 
             toCheck.push("date_min")
+            toCheck.push("date_max")
             this.form.validateFields(toCheck, (err, values) => {
                 if (!err) {
                     this.updateChart()
@@ -828,8 +836,15 @@ export default {
         handleMoneavChange(value) {
             this.selectedMoneavs = value
         },
-        handleDateMinChange(e) {
-            this.date_min = e.target.value
+        handleDateMinChange(d, s) {
+            this.form.setFieldsValue({
+                date_min: s
+            })
+        },
+        handleDateMaxChange(d, s) {
+            this.form.setFieldsValue({
+                date_max: s
+            })
         },
         handleStackedChange(value) {
             this.$apexcharts.exec("vuechart-example", "updateOptions", {
@@ -850,8 +865,8 @@ export default {
 
             let moneavs = this.selectedMoneavs
             if (this.moneavChecked) moneavs = this.selectedMoneavs
-            let date_min = this.date_min
-            let date_max = this.date_max
+            let date_min = this.form.getFieldValue("date_min")
+            let date_max = this.form.getFieldValue("date_max")
             let delta = this.delta
             let per_cent_min = this.per_cent_min
             let per_cent_max = this.per_cent_max
@@ -866,12 +881,12 @@ export default {
                     zones: zones,
                     groups: groups,
                     moneavs: moneavs,
-                    date_max: date_max,
-                    date_min: date_min,
                     delta_min: delta_min,
                     delta_max: delta_max,
                     per_cent_max: per_cent_max,
                     per_cent_min: per_cent_min,
+                    date_max: date_max,
+                    date_min: date_min,
                     xaxis: xaxis,
                     sum: sum,
                     graphType: graphType
@@ -949,15 +964,14 @@ export default {
             this.chartOptionsPercent.title.text = this.trans.per_cent
             this.trans_updated = 1
         })
-        // axios.get("/api/delta_range").then(res => {
-        //     this.delta_min = parseFloat(res.data.min)
-        //     this.delta_max = parseFloat(res.data.max)
-        // })
-        // axios.get("/api/per_cent_range").then(res => {
-        //     this.per_cent_min = parseFloat(res.data.min)
-        //     this.per_cent_max = parseFloat(res.data.max)
-        // })
+        axios.get("/api/delta_range").then(res => {
+            this.delta_min = parseFloat(res.data.min)
+            this.delta_max = parseFloat(res.data.max)
+        })
+        axios.get("/api/per_cent_range").then(res => {
+            this.per_cent_min = parseFloat(res.data.min)
+            this.per_cent_max = parseFloat(res.data.max)
+        })
     }
 }
 </script>
-wwww

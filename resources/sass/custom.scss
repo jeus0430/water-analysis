@@ -9,11 +9,10 @@
 #components-layout-demo-basic .ant-layout-header {
     background: white;
     display: flex;
-    height: 100px;
     align-items: center;
     h1 {
         margin: 0 0 0 10px;
-        font-size: 80px;
+        font-size: 40px;
     }
 }
 #components-layout-demo-basic .ant-layout-sider {
@@ -23,7 +22,6 @@
     padding: 1rem;
 }
 #components-layout-demo-basic .ant-layout-content {
-    padding: 2rem 3rem 0;
     min-height: 120px;
     // background: rgba(16, 142, 233, 1);
 }
@@ -132,7 +130,7 @@
 }
 
 .ant-drawer-content-wrapper {
-    width: 100% !important;
+    // width: 100% !important;
 }
 
 .ant-input {
