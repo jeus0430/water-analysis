@@ -21,7 +21,7 @@
                             @submit="handleSubmit"
                         >
                             <div
-                                style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 24px; align-items: flex-end;text-align:center;justify-items: center;"
+                                style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 20px; align-items: flex-end;text-align:center;justify-items: center;"
                             >
                                 <div style="grid-column: 1/5;width: 100%;">
                                     <a-form-item :label="trans.waste_zone">
@@ -269,7 +269,6 @@
                                             size="large"
                                             type="primary"
                                             html-type="submit"
-                                            style="font-size: 50px;line-height: 60px;height: 70px;"
                                         >
                                             Show
                                         </a-button>

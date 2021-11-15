@@ -596,7 +596,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -1356,7 +1355,7 @@ var render = function() {
                               display: "grid",
                               "grid-template": "auto / 1fr 1fr 1fr 1fr",
                               "grid-column-gap": "24px",
-                              "grid-row-gap": "24px",
+                              "grid-row-gap": "20px",
                               "align-items": "flex-end",
                               "text-align": "center",
                               "justify-items": "center"
@@ -2010,11 +2009,6 @@ var render = function() {
                                     _c(
                                       "a-button",
                                       {
-                                        staticStyle: {
-                                          "font-size": "50px",
-                                          "line-height": "60px",
-                                          height: "70px"
-                                        },
                                         attrs: {
                                           size: "large",
                                           type: "primary",
