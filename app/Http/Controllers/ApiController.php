@@ -70,23 +70,19 @@ class ApiController extends Controller
         // Get All data according to criteria
         $query = ViewYomi::query();
         $ind_field = '';
-        $des_field = '';
         $sql_part  = '';
 
         switch ($xaxis) {
             case 'ezor':
                 $ind_field = 'waste_zone';
-                $des_field = 'waste_description';
                 $sql_part = $ind_field . ', ';
                 break;
             case 'group':
                 $ind_field = 'waste_group';
-                $des_field = 'waste_description';
                 $sql_part = $ind_field . ', ';
                 break;
             case 'mone_av':
-                $ind_field = 'mone_av';
-                $des_field = 'mone_av';
+                $ind_field = 'mone';
                 $sql_part = $ind_field . ', ';
                 break;
             default:
@@ -112,16 +108,17 @@ class ApiController extends Controller
 
         $zones && $query = $query->whereIn('waste_zone', $zones);
         $groups && $query = $query->whereIn('waste_group', $groups);
-        $mone_avs && $query = $query->whereIn('mone_av', $mone_avs);
-        if ($date_min)
-            $query = $query->where(DB::raw('DATE(day_date)'), '>=', $date_min);
-        if ($date_max)
-            $query = $query->where(DB::raw('DATE(day_date)'), '<=', $date_max);
-        (is_null($percent_max) || is_null(($percent_min))) || $query = $query->whereBetween('per_cent', [$percent_max, $percent_min]);
-        (is_null($delta_max) || is_null(($delta_min))) || $query = $query->whereBetween('delta', [$delta_max, $delta_min]);
+        $mone_avs && $query = $query->whereIn('mone', $mone_avs);
+        is_null($date_min) || $query = $query->where(DB::raw('DATE(day_date)'), '>=', $date_min);
+        is_null($date_max) || $query = $query->where(DB::raw('DATE(day_date)'), '<=', $date_max);
+        is_null($percent_max) || $query = $query->where('per_cent', '<=', $percent_max);
+        is_null($percent_min) || $query = $query->where('per_cent', '>=', $percent_min);
+        is_null($delta_max) || $query = $query->where('delta', '<=', $delta_max);
+        is_null($delta_min) || $query = $query->where('delta', '>=', $delta_min);
+
         switch ($xaxis) {
             case "mone_av":
-                $query = $query->groupByRaw('dt, mone_av');
+                $query = $query->groupByRaw('dt, mone');
                 break;
             case "ezor":
                 $query = $query->groupByRaw('dt, waste_zone');
@@ -134,8 +131,10 @@ class ApiController extends Controller
         }
         $result = $query->get()->toArray();
 
+
         // X-Axis data for return
         $tmp = $this->_getDtsFromRang($date_min, $date_max, $sum);
+
         $taxis = array_map(function ($e) use ($sum) {
             switch ($sum) {
                 case 'daily':
@@ -151,25 +150,32 @@ class ApiController extends Controller
             }
         }, $tmp);
 
-
         if ($xaxis != 'date') {
             $column = [];
             $column_i = [];
             switch ($xaxis) {
                 case "mone_av":
-                    $column = DB::select("SELECT DISTINCT mone_av AS descr, mone_av AS ind FROM monim WHERE mone_av <> ''");
+                    $sql = "SELECT DISTINCT mone_av AS descr, mone_av FROM monim WHERE mone_av <> ''";
+                    if ($mone_avs)
+                        $sql .= ' AND mone_av IN (' . implode(',', $mone_avs) . ')';
+                    $column = DB::select($sql);
                     $column_i = array_column($column, 'mone_av');
                     break;
                 case 'ezor':
-                    $column = DB::select("SELECT *, waste_description AS descr, waste_zone AS ind FROM index_waste_zone");
+                    $sql = "SELECT *, waste_description AS descr, waste_zone FROM index_waste_zone";
+                    if ($zones)
+                        $sql .= ' WHERE waste_zone IN (' . implode(',', $zones) . ')';
+                    $column = DB::select($sql);
                     $column_i = array_column($column, 'waste_zone');
                     break;
                 case 'group':
-                    $column = DB::select("SELECT *, waste_description AS descr, waste_group AS ind FROM index_waste_group");
+                    $sql = "SELECT *, waste_description AS descr, waste_group FROM index_waste_group";
+                    if ($groups)
+                        $sql .= " WHERE waste_group IN (" . implode(',', $groups) . ')';
+                    $column = DB::select($sql);
                     $column_i = array_column($column, 'waste_group');
                     break;
             }
-
 
             // Calculate Y-Axis data for return
             $yaxis  = [

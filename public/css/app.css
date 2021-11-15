@@ -24152,3 +24152,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected:hover .ant-select-selected-icon {
   color: black;
 }
+
+.ant-form-explain {
+  font-size: 40px;
+}

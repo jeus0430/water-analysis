@@ -597,6 +597,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -633,7 +634,7 @@ __webpack_require__.r(__webpack_exports__);
       mone_avs: [],
       fetching: false,
       sidebar: true,
-      date_min: moment__WEBPACK_IMPORTED_MODULE_1___default()(),
+      date_min: moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(1, "months").format("YYYY-MM-DD"),
       date_max: moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD"),
       delta_min: -1,
       delta_max: 1,
@@ -1035,8 +1036,6 @@ __webpack_require__.r(__webpack_exports__);
       toCheck.push("date_min");
       this.form.validateFields(toCheck, function (err, values) {
         if (!err) {
-          console.log("Received values of form: ", values);
-
           _this.updateChart();
         }
       });
@@ -1051,8 +1050,8 @@ __webpack_require__.r(__webpack_exports__);
     handleMoneavChange: function handleMoneavChange(value) {
       this.selectedMoneavs = value;
     },
-    handleDateMinChange: function handleDateMinChange(date, dateString) {
-      this.date_min = dateString;
+    handleDateMinChange: function handleDateMinChange(e) {
+      this.date_min = e.target.value;
     },
     handleStackedChange: function handleStackedChange(value) {
       this.$apexcharts.exec("vuechart-example", "updateOptions", {
@@ -1114,6 +1113,10 @@ __webpack_require__.r(__webpack_exports__);
             return e.waste_zone;
           })
         });
+      } else {
+        this.form.setFieldsValue({
+          selectedZones: []
+        });
       }
     },
     handleAllGroups: function handleAllGroups(e) {
@@ -1123,6 +1126,10 @@ __webpack_require__.r(__webpack_exports__);
             return e.waste_group;
           })
         });
+      } else {
+        this.form.setFieldsValue({
+          selectedGroups: []
+        });
       }
     },
     handleAllMones: function handleAllMones(e) {
@@ -1131,6 +1138,10 @@ __webpack_require__.r(__webpack_exports__);
           selectedMoneavs: this.mone_avs.map(function (e) {
             return e.mone_av;
           })
+        });
+      } else {
+        this.form.setFieldsValue({
+          selectedMoneavs: []
         });
       }
     }
@@ -1758,7 +1769,8 @@ var render = function() {
                                       ],
                                       attrs: {
                                         placeholder: "Basic usage",
-                                        size: "large"
+                                        size: "large",
+                                        format: "YYYY-MM-DD"
                                       },
                                       on: { change: _vm.handleDateMinChange }
                                     })

@@ -183,6 +183,7 @@
                                             placeholder="Basic usage"
                                             size="large"
                                             @change="handleDateMinChange"
+                                            format="YYYY-MM-DD"
                                             v-decorator="[
                                                 'date_min',
                                                 {
@@ -366,7 +367,9 @@ export default {
             mone_avs: [],
             fetching: false,
             sidebar: true,
-            date_min: moment(),
+            date_min: moment()
+                .subtract(1, "months")
+                .format("YYYY-MM-DD"),
             date_max: moment().format("YYYY-MM-DD"),
             delta_min: -1,
             delta_max: 1,
@@ -811,7 +814,6 @@ export default {
             toCheck.push("date_min")
             this.form.validateFields(toCheck, (err, values) => {
                 if (!err) {
-                    console.log("Received values of form: ", values)
                     this.updateChart()
                 }
             })
@@ -826,8 +828,8 @@ export default {
         handleMoneavChange(value) {
             this.selectedMoneavs = value
         },
-        handleDateMinChange(date, dateString) {
-            this.date_min = dateString
+        handleDateMinChange(e) {
+            this.date_min = e.target.value
         },
         handleStackedChange(value) {
             this.$apexcharts.exec("vuechart-example", "updateOptions", {
@@ -848,7 +850,6 @@ export default {
 
             let moneavs = this.selectedMoneavs
             if (this.moneavChecked) moneavs = this.selectedMoneavs
-
             let date_min = this.date_min
             let date_max = this.date_max
             let delta = this.delta
@@ -891,6 +892,10 @@ export default {
                 this.form.setFieldsValue({
                     selectedZones: this.zones.map(e => e.waste_zone)
                 })
+            } else {
+                this.form.setFieldsValue({
+                    selectedZones: []
+                })
             }
         },
         handleAllGroups(e) {
@@ -898,12 +903,20 @@ export default {
                 this.form.setFieldsValue({
                     selectedGroups: this.groups.map(e => e.waste_group)
                 })
+            } else {
+                this.form.setFieldsValue({
+                    selectedGroups: []
+                })
             }
         },
         handleAllMones(e) {
             if (e.target.checked) {
                 this.form.setFieldsValue({
                     selectedMoneavs: this.mone_avs.map(e => e.mone_av)
+                })
+            } else {
+                this.form.setFieldsValue({
+                    selectedMoneavs: []
                 })
             }
         }
