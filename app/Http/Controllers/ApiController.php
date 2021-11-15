@@ -93,16 +93,16 @@ class ApiController extends Controller
 
         switch ($sum) {
             case "daily":
-                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(qty) AS s_qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
+                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(qty) AS s_qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,ROUND(SUM(delta)/SUM(qty) * 100,2)) AS percent");
                 break;
             case "weekly":
-                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
+                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,ROUND(SUM(delta)/SUM(qty) * 100, 2)) AS percent");
                 break;
             case "monthly";
-                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
+                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,ROUND(SUM(delta)/SUM(qty) * 100, 2)) AS percent");
                 break;
             case "yearly":
-                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
+                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,ROUND(SUM(delta)/SUM(qty) * 100, 2)) AS percent");
                 break;
         }
 
