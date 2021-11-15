@@ -26,8 +26,8 @@
     "dependencies": {
         "ant-design-vue": "^1.7.8",
         "apexcharts": "^3.29.0",
+        "path": "^0.12.7",
         "vue-apexcharts": "^1.6.2",
-        "vue-inputmask": "^0.2.1",
         "vue-router": "^3.5.2"
     }
 }
