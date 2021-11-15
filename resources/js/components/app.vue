@@ -233,9 +233,7 @@
                                         />
                                     </a-form-item>
                                 </div>
-                                <div
-                                    style="grid-column: 1/3;width: 100%;align-self: baseline;"
-                                >
+                                <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item label="Graph Type:">
                                         <a-radio-group
                                             name="graph"
@@ -379,12 +377,29 @@ export default {
             selectedOneGraph: "qty",
             oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
+                theme: {
+                    mode: "light",
+                    palette: "palette7"
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 1,
+                        stops: [30, 70, 100],
+                        shade: "dark"
+                    }
+                },
                 stroke: {
                     width: 1
                 },
                 dataLabels: {
                     style: {
                         fontSize: "24px"
+                    },
+                    background: {
+                        opacity: 0.8
                     }
                 },
                 grid: {
@@ -412,7 +427,6 @@ export default {
                         enabled: true
                     }
                 },
-                colors: ["#00ff00"],
                 yaxis: {
                     axisBorder: {
                         show: true,
@@ -468,7 +482,7 @@ export default {
                                     const d = new Date(value)
                                     return d.toISOString().split("T")[0]
                                 } else {
-                                    return "0"
+                                    return ""
                                 }
                             }
                         },
@@ -490,9 +504,29 @@ export default {
                 }
             ],
             chartOptionsRqty: {
+                theme: {
+                    mode: "light",
+                    palette: "palette1"
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 1,
+                        stops: [30, 70, 100],
+                        shade: "dark"
+                    }
+                },
+                stroke: {
+                    width: 1
+                },
                 dataLabels: {
                     style: {
                         fontSize: "24px"
+                    },
+                    background: {
+                        opacity: 0.8
                     }
                 },
                 grid: {
@@ -520,7 +554,6 @@ export default {
                         enabled: true
                     }
                 },
-                colors: ["#0000ff"],
                 yaxis: {
                     axisBorder: {
                         show: true,
@@ -572,8 +605,12 @@ export default {
                                 let d = new Date(value - 3)
                                 return d.getFullYear()
                             } else {
-                                const d = new Date(value)
-                                return d.toISOString().split("T")[0]
+                                if (typeof value != "undefined") {
+                                    const d = new Date(value)
+                                    return d.toISOString().split("T")[0]
+                                } else {
+                                    return ""
+                                }
                             }
                         },
                         style: {
@@ -594,9 +631,29 @@ export default {
                 }
             ],
             chartOptionsDelta: {
+                theme: {
+                    mode: "light",
+                    palette: "palette10"
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 1,
+                        stops: [30, 70, 100],
+                        shade: "dark"
+                    }
+                },
+                stroke: {
+                    width: 1
+                },
                 dataLabels: {
                     style: {
                         fontSize: "24px"
+                    },
+                    background: {
+                        opacity: 0.8
                     }
                 },
                 grid: {
@@ -624,7 +681,6 @@ export default {
                         enabled: true
                     }
                 },
-                colors: ["#ff0000"],
                 yaxis: {
                     axisBorder: {
                         show: true,
@@ -676,8 +732,12 @@ export default {
                                 let d = new Date(value - 3)
                                 return d.getFullYear()
                             } else {
-                                const d = new Date(value)
-                                return d.toISOString().split("T")[0]
+                                if (typeof value != "undefined") {
+                                    const d = new Date(value)
+                                    return d.toISOString().split("T")[0]
+                                } else {
+                                    return ""
+                                }
                             }
                         },
                         style: {
@@ -698,9 +758,29 @@ export default {
                 }
             ],
             chartOptionsPercent: {
+                theme: {
+                    mode: "light",
+                    palette: "palette4"
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.9,
+                        opacityTo: 1,
+                        stops: [30, 70, 100],
+                        shade: "dark"
+                    }
+                },
+                stroke: {
+                    width: 1
+                },
                 dataLabels: {
                     style: {
                         fontSize: "24px"
+                    },
+                    background: {
+                        opacity: 0.8
                     }
                 },
                 grid: {
@@ -728,7 +808,6 @@ export default {
                         enabled: true
                     }
                 },
-                colors: ["#ffff00"],
                 yaxis: {
                     axisBorder: {
                         show: true,
@@ -780,8 +859,12 @@ export default {
                                 let d = new Date(value - 3)
                                 return d.getFullYear()
                             } else {
-                                const d = new Date(value)
-                                return d.toISOString().split("T")[0]
+                                if (typeof value != "undefined") {
+                                    const d = new Date(value)
+                                    return d.toISOString().split("T")[0]
+                                } else {
+                                    return ""
+                                }
                             }
                         },
                         style: {

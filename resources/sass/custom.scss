@@ -57,12 +57,19 @@
     // border-radius: 32px;
     // top: 4px;
 }
+
 .ant-input,
 .ant-input-number-input,
 .ant-radio-wrapper span {
+    position: relative;
+    top: 0px;
     color: #f00;
     font-weight: bold;
     font-size: 24px;
+}
+.ant-radio-wrapper span {
+    position: relative;
+    top: -4px;
 }
 .ant-checkbox-wrapper {
     font-size: 20px;
@@ -152,6 +159,8 @@
     height: 24px;
 }
 .ant-checkbox + span {
+    position: relative;
+    top: 3px;
     font-size: 20px;
 }
 .ant-select-dropdown-menu {
@@ -188,4 +197,9 @@
 .has-error .ant-input,
 .has-error .ant-input:hover {
     border-width: 3px;
+}
+
+.ant-form-item-required::before {
+    position: relative;
+    bottom: 4px;
 }

@@ -24033,9 +24033,16 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-input,
 .ant-input-number-input,
 .ant-radio-wrapper span {
+  position: relative;
+  top: 0px;
   color: #f00;
   font-weight: bold;
   font-size: 24px;
+}
+
+.ant-radio-wrapper span {
+  position: relative;
+  top: -4px;
 }
 
 .ant-checkbox-wrapper {
@@ -24078,6 +24085,8 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 
 .ant-checkbox + span {
+  position: relative;
+  top: 3px;
   font-size: 20px;
 }
 
@@ -24108,4 +24117,9 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .has-error .ant-input,
 .has-error .ant-input:hover {
   border-width: 3px;
+}
+
+.ant-form-item-required::before {
+  position: relative;
+  bottom: 4px;
 }

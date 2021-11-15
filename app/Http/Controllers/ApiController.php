@@ -93,16 +93,16 @@ class ApiController extends Controller
 
         switch ($sum) {
             case "daily":
-                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
+                $query = $query->selectRaw($sql_part . "DATE(day_date) AS dt, SUM(qty) AS qty, SUM(qty) AS s_qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
                 break;
             case "weekly":
-                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
+                $query = $query->selectRaw($sql_part . "CONCAT(YEAR(day_date), '-', WEEK(day_date)) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
                 break;
             case "monthly";
-                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
+                $query = $query->selectRaw($sql_part . "MONTH(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
                 break;
             case "yearly":
-                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(qty=0, 0, delta/qty) AS percent");
+                $query = $query->selectRaw($sql_part . "YEAR(day_date) AS dt, SUM(qty) AS qty, SUM(delta) AS delta, SUM(real_qty) AS real_qty, IF(SUM(qty)=0,0,SUM(delta)/SUM(qty) * 100) AS percent");
                 break;
         }
 
@@ -132,7 +132,6 @@ class ApiController extends Controller
                 $query = $query->groupByRaw('dt');
         }
         $result = $query->get()->toArray();
-
 
         // X-Axis data for return
         $tmp = $this->_getDtsFromRang($date_min, $date_max, $sum);

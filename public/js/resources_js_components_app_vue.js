@@ -594,8 +594,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -646,12 +644,29 @@ __webpack_require__.r(__webpack_exports__);
       selectedOneGraph: "qty",
       oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
       chartOptionsQty: {
+        theme: {
+          mode: "light",
+          palette: "palette7"
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 1,
+            stops: [30, 70, 100],
+            shade: "dark"
+          }
+        },
         stroke: {
           width: 1
         },
         dataLabels: {
           style: {
             fontSize: "24px"
+          },
+          background: {
+            opacity: 0.8
           }
         },
         grid: {
@@ -679,7 +694,6 @@ __webpack_require__.r(__webpack_exports__);
             enabled: true
           }
         },
-        colors: ["#00ff00"],
         yaxis: {
           axisBorder: {
             show: true,
@@ -726,7 +740,7 @@ __webpack_require__.r(__webpack_exports__);
 
                   return _d3.toISOString().split("T")[0];
                 } else {
-                  return "0";
+                  return "";
                 }
               }
             },
@@ -746,9 +760,29 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsRqty: {
+        theme: {
+          mode: "light",
+          palette: "palette1"
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 1,
+            stops: [30, 70, 100],
+            shade: "dark"
+          }
+        },
+        stroke: {
+          width: 1
+        },
         dataLabels: {
           style: {
             fontSize: "24px"
+          },
+          background: {
+            opacity: 0.8
           }
         },
         grid: {
@@ -776,7 +810,6 @@ __webpack_require__.r(__webpack_exports__);
             enabled: true
           }
         },
-        colors: ["#0000ff"],
         yaxis: {
           axisBorder: {
             show: true,
@@ -818,9 +851,13 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d5.getFullYear();
               } else {
-                var _d6 = new Date(value);
+                if (typeof value != "undefined") {
+                  var _d6 = new Date(value);
 
-                return _d6.toISOString().split("T")[0];
+                  return _d6.toISOString().split("T")[0];
+                } else {
+                  return "";
+                }
               }
             },
             style: {
@@ -839,9 +876,29 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsDelta: {
+        theme: {
+          mode: "light",
+          palette: "palette10"
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 1,
+            stops: [30, 70, 100],
+            shade: "dark"
+          }
+        },
+        stroke: {
+          width: 1
+        },
         dataLabels: {
           style: {
             fontSize: "24px"
+          },
+          background: {
+            opacity: 0.8
           }
         },
         grid: {
@@ -869,7 +926,6 @@ __webpack_require__.r(__webpack_exports__);
             enabled: true
           }
         },
-        colors: ["#ff0000"],
         yaxis: {
           axisBorder: {
             show: true,
@@ -911,9 +967,13 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d8.getFullYear();
               } else {
-                var _d9 = new Date(value);
+                if (typeof value != "undefined") {
+                  var _d9 = new Date(value);
 
-                return _d9.toISOString().split("T")[0];
+                  return _d9.toISOString().split("T")[0];
+                } else {
+                  return "";
+                }
               }
             },
             style: {
@@ -932,9 +992,29 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       }],
       chartOptionsPercent: {
+        theme: {
+          mode: "light",
+          palette: "palette4"
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.9,
+            opacityTo: 1,
+            stops: [30, 70, 100],
+            shade: "dark"
+          }
+        },
+        stroke: {
+          width: 1
+        },
         dataLabels: {
           style: {
             fontSize: "24px"
+          },
+          background: {
+            opacity: 0.8
           }
         },
         grid: {
@@ -962,7 +1042,6 @@ __webpack_require__.r(__webpack_exports__);
             enabled: true
           }
         },
-        colors: ["#ffff00"],
         yaxis: {
           axisBorder: {
             show: true,
@@ -1004,9 +1083,13 @@ __webpack_require__.r(__webpack_exports__);
 
                 return _d11.getFullYear();
               } else {
-                var _d12 = new Date(value);
+                if (typeof value != "undefined") {
+                  var _d12 = new Date(value);
 
-                return _d12.toISOString().split("T")[0];
+                  return _d12.toISOString().split("T")[0];
+                } else {
+                  return "";
+                }
               }
             },
             style: {
@@ -1896,8 +1979,7 @@ var render = function() {
                               {
                                 staticStyle: {
                                   "grid-column": "1/3",
-                                  width: "100%",
-                                  "align-self": "baseline"
+                                  width: "100%"
                                 }
                               },
                               [
