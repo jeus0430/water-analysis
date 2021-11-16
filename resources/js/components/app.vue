@@ -425,6 +425,15 @@ export default {
                     zoom: {
                         type: "x",
                         enabled: true
+                    },
+                    toolbar: {
+                        export: {
+                            csv: {
+                                dateFormatter(timestamp) {
+                                    return tFormat(timestamp)
+                                }
+                            }
+                        }
                     }
                 },
                 yaxis: {
@@ -552,6 +561,15 @@ export default {
                     zoom: {
                         type: "x",
                         enabled: true
+                    },
+                    toolbar: {
+                        export: {
+                            csv: {
+                                dateFormatter(timestamp) {
+                                    return tFormat(timestamp)
+                                }
+                            }
+                        }
                     }
                 },
                 yaxis: {
@@ -679,6 +697,15 @@ export default {
                     zoom: {
                         type: "x",
                         enabled: true
+                    },
+                    toolbar: {
+                        export: {
+                            csv: {
+                                dateFormatter(timestamp) {
+                                    return tFormat(timestamp)
+                                }
+                            }
+                        }
                     }
                 },
                 yaxis: {
@@ -806,6 +833,15 @@ export default {
                     zoom: {
                         type: "x",
                         enabled: true
+                    },
+                    toolbar: {
+                        export: {
+                            csv: {
+                                dateFormatter(timestamp) {
+                                    return tFormat(timestamp)
+                                }
+                            }
+                        }
                     }
                 },
                 yaxis: {
@@ -1055,5 +1091,26 @@ export default {
             this.per_cent_max = parseFloat(res.data.max)
         })
     }
+}
+const tFormat = t => {
+    // unix timestamp
+    var ts = 1565605570
+
+    // convert unix timestamp to milliseconds
+    var ts_ms = ts * 1000
+
+    // initialize new Date object
+    var date_ob = new Date(ts_ms)
+
+    // year as 4 digits (YYYY)
+    var year = date_ob.getFullYear()
+
+    // month as 2 digits (MM)
+    var month = ("0" + (date_ob.getMonth() + 1)).slice(-2)
+
+    // date as 2 digits (DD)
+    var date = ("0" + date_ob.getDate()).slice(-2)
+
+    return year + "-" + month + "-" + date
 }
 </script>
