@@ -24014,7 +24014,6 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 
 .ant-form-item-label label {
-  font-weight: bold;
   font-size: 30px;
 }
 
@@ -24036,7 +24035,6 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   position: relative;
   top: 0px;
   color: #f00;
-  font-weight: bold;
   font-size: 24px;
 }
 

@@ -35,7 +35,6 @@
     margin-bottom: 0;
 }
 .ant-form-item-label label {
-    font-weight: bold;
     font-size: 30px;
 }
 
@@ -47,24 +46,13 @@
 }
 .ant-radio-inner {
     top: -5px;
-    // width: 30px;
-    // height: 30px;
 }
-.ant-radio-inner::after {
-    // left: 4px;
-    // width: 20px;
-    // height: 20px;
-    // border-radius: 32px;
-    // top: 4px;
-}
-
 .ant-input,
 .ant-input-number-input,
 .ant-radio-wrapper span {
     position: relative;
     top: 0px;
     color: #f00;
-    font-weight: bold;
     font-size: 24px;
 }
 .ant-radio-wrapper span {
