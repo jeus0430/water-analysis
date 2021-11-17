@@ -343,6 +343,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -436,122 +437,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toolbar: {
             "export": {
               csv: {
-                dateFormatter: function dateFormatter(timestamp) {
-                  return tFormat(timestamp);
-                }
-              }
-            }
-          }
-        },
-        yaxis: {
-          axisBorder: {
-            show: false
-          },
-          labels: {
-            style: {
-              fontSize: "20px",
-              colors: "#eee"
-            }
-          }
-        },
-        xaxis: {
-          axisTicks: {
-            height: true
-          },
-          type: "datetime",
-          labels: {
-            formatter: function formatter(value, timestamp, opts) {
-              if (value % 10 == 1) {
-                var d = new Date(value - 1); // Copy date so don't modify original
+                dateFormatter: function dateFormatter(value) {
+                  console.log(value);
 
-                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
-                // Make Sunday's day number 7
+                  if (value % 10 == 1) {
+                    var d = new Date(value - 1); // Copy date so don't modify original
 
-                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+                    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                    // Make Sunday's day number 7
 
-                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+                    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
 
-                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+                    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
 
-                return d.getUTCFullYear() + "-" + weekNo + "W";
-              } else if (value % 10 == 2) {
-                var _d = new Date(value - 2);
+                    var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
 
-                return _d.getFullYear() + "-" + _d.getMonth();
-              } else if (value % 10 == 3) {
-                var _d2 = new Date(value - 3);
+                    return d.getUTCFullYear() + "-" + weekNo + "W";
+                  } else if (value % 10 == 2) {
+                    var _d = new Date(value - 2);
 
-                return _d2.getFullYear();
-              } else {
-                if (typeof value != "undefined") {
-                  var _d3 = new Date(value);
+                    return _d.getFullYear() + "-" + _d.getMonth();
+                  } else if (value % 10 == 3) {
+                    var _d2 = new Date(value - 3);
 
-                  return _d3.toISOString().split("T")[0];
-                } else {
-                  return "";
-                }
-              }
-            },
-            style: {
-              colors: "#eee",
-              fontSize: "20px"
-            }
-          },
-          axisBorder: {
-            show: false
-          }
-        }
-      },
-      seriesQty: [{
-        name: "Qty Chart",
-        data: []
-      }],
-      chartOptionsRqty: {
-        fill: {
-          colors: "#918672"
-        },
-        colors: ["#d784d2"],
-        stroke: {
-          width: 2
-        },
-        dataLabels: {
-          style: {
-            fontSize: "18px"
-          },
-          background: {
-            opacity: 0.8
-          }
-        },
-        grid: {
-          borderColor: "#aaa",
-          xaxis: {
-            lines: {
-              show: true
-            }
-          }
-        },
-        title: {
-          text: "real_qty",
-          style: {
-            fontSize: "40px",
-            color: "#fff"
-          },
-          offsetX: 300
-        },
-        chart: {
-          background: "#444",
-          id: "vuechart-example",
-          height: "100%",
-          zoom: {
-            type: "x",
-            enabled: true
-          },
-          toolbar: {
-            "export": {
-              csv: {
-                dateFormatter: function dateFormatter(timestamp) {
-                  return tFormat(timestamp);
-                }
+                    return _d2.getFullYear();
+                  } else {
+                    if (typeof value != "undefined") {
+                      var _d3 = new Date(value);
+
+                      return _d3.toISOString().split("T")[0];
+                    } else {
+                      return "";
+                    }
+                  }
+                },
+                headerCategory: "date"
               }
             }
           }
@@ -615,6 +535,151 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }
       },
+      seriesQty: [{
+        name: "Qty Chart",
+        data: []
+      }],
+      chartOptionsRqty: {
+        fill: {
+          colors: "#918672"
+        },
+        colors: ["#d784d2"],
+        stroke: {
+          width: 2
+        },
+        dataLabels: {
+          style: {
+            fontSize: "18px"
+          },
+          background: {
+            opacity: 0.8
+          }
+        },
+        grid: {
+          borderColor: "#aaa",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
+        title: {
+          text: "real_qty",
+          style: {
+            fontSize: "40px",
+            color: "#fff"
+          },
+          offsetX: 300
+        },
+        chart: {
+          background: "#444",
+          id: "vuechart-example",
+          height: "100%",
+          zoom: {
+            type: "x",
+            enabled: true
+          },
+          toolbar: {
+            "export": {
+              csv: {
+                dateFormatter: function dateFormatter(value) {
+                  console.log(value);
+
+                  if (value % 10 == 1) {
+                    var d = new Date(value - 1); // Copy date so don't modify original
+
+                    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                    // Make Sunday's day number 7
+
+                    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                    var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                    return d.getUTCFullYear() + "-" + weekNo + "W";
+                  } else if (value % 10 == 2) {
+                    var _d7 = new Date(value - 2);
+
+                    return _d7.getFullYear() + "-" + _d7.getMonth();
+                  } else if (value % 10 == 3) {
+                    var _d8 = new Date(value - 3);
+
+                    return _d8.getFullYear();
+                  } else {
+                    if (typeof value != "undefined") {
+                      var _d9 = new Date(value);
+
+                      return _d9.toISOString().split("T")[0];
+                    } else {
+                      return "";
+                    }
+                  }
+                },
+                headerCategory: "date"
+              }
+            }
+          }
+        },
+        yaxis: {
+          axisBorder: {
+            show: false
+          },
+          labels: {
+            style: {
+              fontSize: "20px",
+              colors: "#eee"
+            }
+          }
+        },
+        xaxis: {
+          axisTicks: {
+            height: true
+          },
+          type: "datetime",
+          labels: {
+            formatter: function formatter(value, timestamp, opts) {
+              if (value % 10 == 1) {
+                var d = new Date(value - 1); // Copy date so don't modify original
+
+                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                // Make Sunday's day number 7
+
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                return d.getUTCFullYear() + "-" + weekNo + "W";
+              } else if (value % 10 == 2) {
+                var _d10 = new Date(value - 2);
+
+                return _d10.getFullYear() + "-" + _d10.getMonth();
+              } else if (value % 10 == 3) {
+                var _d11 = new Date(value - 3);
+
+                return _d11.getFullYear();
+              } else {
+                if (typeof value != "undefined") {
+                  var _d12 = new Date(value);
+
+                  return _d12.toISOString().split("T")[0];
+                } else {
+                  return "";
+                }
+              }
+            },
+            style: {
+              colors: "#eee",
+              fontSize: "20px"
+            }
+          },
+          axisBorder: {
+            show: false
+          }
+        }
+      },
       seriesRqty: [{
         name: "Real Chart",
         data: []
@@ -662,9 +727,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toolbar: {
             "export": {
               csv: {
-                dateFormatter: function dateFormatter(timestamp) {
-                  return tFormat(timestamp);
-                }
+                dateFormatter: function dateFormatter(value) {
+                  console.log(value);
+
+                  if (value % 10 == 1) {
+                    var d = new Date(value - 1); // Copy date so don't modify original
+
+                    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                    // Make Sunday's day number 7
+
+                    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                    var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                    return d.getUTCFullYear() + "-" + weekNo + "W";
+                  } else if (value % 10 == 2) {
+                    var _d13 = new Date(value - 2);
+
+                    return _d13.getFullYear() + "-" + _d13.getMonth();
+                  } else if (value % 10 == 3) {
+                    var _d14 = new Date(value - 3);
+
+                    return _d14.getFullYear();
+                  } else {
+                    if (typeof value != "undefined") {
+                      var _d15 = new Date(value);
+
+                      return _d15.toISOString().split("T")[0];
+                    } else {
+                      return "";
+                    }
+                  }
+                },
+                headerCategory: "date"
               }
             }
           }
@@ -701,18 +798,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 return d.getUTCFullYear() + "-" + weekNo + "W";
               } else if (value % 10 == 2) {
-                var _d7 = new Date(value - 2);
+                var _d16 = new Date(value - 2);
 
-                return _d7.getFullYear() + "-" + _d7.getMonth();
+                return _d16.getFullYear() + "-" + _d16.getMonth();
               } else if (value % 10 == 3) {
-                var _d8 = new Date(value - 3);
+                var _d17 = new Date(value - 3);
 
-                return _d8.getFullYear();
+                return _d17.getFullYear();
               } else {
                 if (typeof value != "undefined") {
-                  var _d9 = new Date(value);
+                  var _d18 = new Date(value);
 
-                  return _d9.toISOString().split("T")[0];
+                  return _d18.toISOString().split("T")[0];
                 } else {
                   return "";
                 }
@@ -775,9 +872,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toolbar: {
             "export": {
               csv: {
-                dateFormatter: function dateFormatter(timestamp) {
-                  return tFormat(timestamp);
-                }
+                dateFormatter: function dateFormatter(value) {
+                  console.log(value);
+
+                  if (value % 10 == 1) {
+                    var d = new Date(value - 1); // Copy date so don't modify original
+
+                    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+                    // Make Sunday's day number 7
+
+                    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+                    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+                    var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+                    return d.getUTCFullYear() + "-" + weekNo + "W";
+                  } else if (value % 10 == 2) {
+                    var _d19 = new Date(value - 2);
+
+                    return _d19.getFullYear() + "-" + _d19.getMonth();
+                  } else if (value % 10 == 3) {
+                    var _d20 = new Date(value - 3);
+
+                    return _d20.getFullYear();
+                  } else {
+                    if (typeof value != "undefined") {
+                      var _d21 = new Date(value);
+
+                      return _d21.toISOString().split("T")[0];
+                    } else {
+                      return "";
+                    }
+                  }
+                },
+                headerCategory: "date"
               }
             }
           }
@@ -814,18 +943,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 return d.getUTCFullYear() + "-" + weekNo + "W";
               } else if (value % 10 == 2) {
-                var _d10 = new Date(value - 2);
+                var _d22 = new Date(value - 2);
 
-                return _d10.getFullYear() + "-" + _d10.getMonth();
+                return _d22.getFullYear() + "-" + _d22.getMonth();
               } else if (value % 10 == 3) {
-                var _d11 = new Date(value - 3);
+                var _d23 = new Date(value - 3);
 
-                return _d11.getFullYear();
+                return _d23.getFullYear();
               } else {
                 if (typeof value != "undefined") {
-                  var _d12 = new Date(value);
+                  var _d24 = new Date(value);
 
-                  return _d12.toISOString().split("T")[0];
+                  return _d24.toISOString().split("T")[0];
                 } else {
                   return "";
                 }
@@ -904,9 +1033,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var zones = this.selectedZones;
       if (this.zoneChecked) zones = [];
       var groups = this.selectedGroups;
-      if (this.groupChecked) groups = this.selectedGroups;
+      if (this.groupChecked) groups = [];
       var moneavs = this.selectedMoneavs;
-      if (this.moneavChecked) moneavs = this.selectedMoneavs;
+      if (this.moneavChecked) moneavs = [];
       var date_min_org = this.form.getFieldValue("date_min");
       var date_min = moment__WEBPACK_IMPORTED_MODULE_1___default()(date_min_org, "MMMM D YYYY").format("YYYY-MM-DD");
       var date_max_org = this.form.getFieldValue("date_max");
@@ -1039,22 +1168,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   }
 });
-
-var tFormat = function tFormat(t) {
-  // unix timestamp
-  var ts = 1565605570; // convert unix timestamp to milliseconds
-
-  var ts_ms = ts * 1000; // initialize new Date object
-
-  var date_ob = new Date(ts_ms); // year as 4 digits (YYYY)
-
-  var year = date_ob.getFullYear(); // month as 2 digits (MM)
-
-  var month = ("0" + (date_ob.getMonth() + 1)).slice(-2); // date as 2 digits (DD)
-
-  var date = ("0" + date_ob.getDate()).slice(-2);
-  return year + "-" + month + "-" + date;
-};
 
 /***/ }),
 
@@ -2296,6 +2409,7 @@ var render = function() {
                         _vm.selectedOneGraph == "qty"
                           ? _c("apexchart", {
                               key: _vm.trans_updated,
+                              ref: "qtyChart",
                               attrs: {
                                 options: _vm.chartOptionsQty,
                                 series: _vm.seriesQty,

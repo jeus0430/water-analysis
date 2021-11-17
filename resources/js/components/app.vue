@@ -274,6 +274,7 @@
                         <div>
                             <div style="width: 80vw;margin: auto;">
                                 <apexchart
+                                    ref="qtyChart"
                                     v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
                                     :key="trans_updated"
@@ -401,9 +402,58 @@ export default {
                     toolbar: {
                         export: {
                             csv: {
-                                dateFormatter(timestamp) {
-                                    return tFormat(timestamp)
-                                }
+                                dateFormatter(value) {
+                                    console.log(value)
+                                    if (value % 10 == 1) {
+                                        let d = new Date(value - 1)
+                                        // Copy date so don't modify original
+                                        d = new Date(
+                                            Date.UTC(
+                                                d.getFullYear(),
+                                                d.getMonth(),
+                                                d.getDate()
+                                            )
+                                        )
+                                        // Set to nearest Thursday: current date + 4 - current day number
+                                        // Make Sunday's day number 7
+                                        d.setUTCDate(
+                                            d.getUTCDate() +
+                                                4 -
+                                                (d.getUTCDay() || 7)
+                                        )
+                                        // Get first day of year
+                                        var yearStart = new Date(
+                                            Date.UTC(d.getUTCFullYear(), 0, 1)
+                                        )
+                                        // Calculate full weeks to nearest Thursday
+                                        var weekNo = Math.ceil(
+                                            ((d - yearStart) / 86400000 + 1) / 7
+                                        )
+                                        // Return array of year and week number
+                                        return (
+                                            d.getUTCFullYear() +
+                                            "-" +
+                                            weekNo +
+                                            "W"
+                                        )
+                                    } else if (value % 10 == 2) {
+                                        let d = new Date(value - 2)
+                                        return (
+                                            d.getFullYear() + "-" + d.getMonth()
+                                        )
+                                    } else if (value % 10 == 3) {
+                                        let d = new Date(value - 3)
+                                        return d.getFullYear()
+                                    } else {
+                                        if (typeof value != "undefined") {
+                                            const d = new Date(value)
+                                            return d.toISOString().split("T")[0]
+                                        } else {
+                                            return ""
+                                        }
+                                    }
+                                },
+                                headerCategory: "date"
                             }
                         }
                     }
@@ -510,9 +560,58 @@ export default {
                     toolbar: {
                         export: {
                             csv: {
-                                dateFormatter(timestamp) {
-                                    return tFormat(timestamp)
-                                }
+                                dateFormatter(value) {
+                                    console.log(value)
+                                    if (value % 10 == 1) {
+                                        let d = new Date(value - 1)
+                                        // Copy date so don't modify original
+                                        d = new Date(
+                                            Date.UTC(
+                                                d.getFullYear(),
+                                                d.getMonth(),
+                                                d.getDate()
+                                            )
+                                        )
+                                        // Set to nearest Thursday: current date + 4 - current day number
+                                        // Make Sunday's day number 7
+                                        d.setUTCDate(
+                                            d.getUTCDate() +
+                                                4 -
+                                                (d.getUTCDay() || 7)
+                                        )
+                                        // Get first day of year
+                                        var yearStart = new Date(
+                                            Date.UTC(d.getUTCFullYear(), 0, 1)
+                                        )
+                                        // Calculate full weeks to nearest Thursday
+                                        var weekNo = Math.ceil(
+                                            ((d - yearStart) / 86400000 + 1) / 7
+                                        )
+                                        // Return array of year and week number
+                                        return (
+                                            d.getUTCFullYear() +
+                                            "-" +
+                                            weekNo +
+                                            "W"
+                                        )
+                                    } else if (value % 10 == 2) {
+                                        let d = new Date(value - 2)
+                                        return (
+                                            d.getFullYear() + "-" + d.getMonth()
+                                        )
+                                    } else if (value % 10 == 3) {
+                                        let d = new Date(value - 3)
+                                        return d.getFullYear()
+                                    } else {
+                                        if (typeof value != "undefined") {
+                                            const d = new Date(value)
+                                            return d.toISOString().split("T")[0]
+                                        } else {
+                                            return ""
+                                        }
+                                    }
+                                },
+                                headerCategory: "date"
                             }
                         }
                     }
@@ -619,9 +718,58 @@ export default {
                     toolbar: {
                         export: {
                             csv: {
-                                dateFormatter(timestamp) {
-                                    return tFormat(timestamp)
-                                }
+                                dateFormatter(value) {
+                                    console.log(value)
+                                    if (value % 10 == 1) {
+                                        let d = new Date(value - 1)
+                                        // Copy date so don't modify original
+                                        d = new Date(
+                                            Date.UTC(
+                                                d.getFullYear(),
+                                                d.getMonth(),
+                                                d.getDate()
+                                            )
+                                        )
+                                        // Set to nearest Thursday: current date + 4 - current day number
+                                        // Make Sunday's day number 7
+                                        d.setUTCDate(
+                                            d.getUTCDate() +
+                                                4 -
+                                                (d.getUTCDay() || 7)
+                                        )
+                                        // Get first day of year
+                                        var yearStart = new Date(
+                                            Date.UTC(d.getUTCFullYear(), 0, 1)
+                                        )
+                                        // Calculate full weeks to nearest Thursday
+                                        var weekNo = Math.ceil(
+                                            ((d - yearStart) / 86400000 + 1) / 7
+                                        )
+                                        // Return array of year and week number
+                                        return (
+                                            d.getUTCFullYear() +
+                                            "-" +
+                                            weekNo +
+                                            "W"
+                                        )
+                                    } else if (value % 10 == 2) {
+                                        let d = new Date(value - 2)
+                                        return (
+                                            d.getFullYear() + "-" + d.getMonth()
+                                        )
+                                    } else if (value % 10 == 3) {
+                                        let d = new Date(value - 3)
+                                        return d.getFullYear()
+                                    } else {
+                                        if (typeof value != "undefined") {
+                                            const d = new Date(value)
+                                            return d.toISOString().split("T")[0]
+                                        } else {
+                                            return ""
+                                        }
+                                    }
+                                },
+                                headerCategory: "date"
                             }
                         }
                     }
@@ -728,9 +876,58 @@ export default {
                     toolbar: {
                         export: {
                             csv: {
-                                dateFormatter(timestamp) {
-                                    return tFormat(timestamp)
-                                }
+                                dateFormatter(value) {
+                                    console.log(value)
+                                    if (value % 10 == 1) {
+                                        let d = new Date(value - 1)
+                                        // Copy date so don't modify original
+                                        d = new Date(
+                                            Date.UTC(
+                                                d.getFullYear(),
+                                                d.getMonth(),
+                                                d.getDate()
+                                            )
+                                        )
+                                        // Set to nearest Thursday: current date + 4 - current day number
+                                        // Make Sunday's day number 7
+                                        d.setUTCDate(
+                                            d.getUTCDate() +
+                                                4 -
+                                                (d.getUTCDay() || 7)
+                                        )
+                                        // Get first day of year
+                                        var yearStart = new Date(
+                                            Date.UTC(d.getUTCFullYear(), 0, 1)
+                                        )
+                                        // Calculate full weeks to nearest Thursday
+                                        var weekNo = Math.ceil(
+                                            ((d - yearStart) / 86400000 + 1) / 7
+                                        )
+                                        // Return array of year and week number
+                                        return (
+                                            d.getUTCFullYear() +
+                                            "-" +
+                                            weekNo +
+                                            "W"
+                                        )
+                                    } else if (value % 10 == 2) {
+                                        let d = new Date(value - 2)
+                                        return (
+                                            d.getFullYear() + "-" + d.getMonth()
+                                        )
+                                    } else if (value % 10 == 3) {
+                                        let d = new Date(value - 3)
+                                        return d.getFullYear()
+                                    } else {
+                                        if (typeof value != "undefined") {
+                                            const d = new Date(value)
+                                            return d.toISOString().split("T")[0]
+                                        } else {
+                                            return ""
+                                        }
+                                    }
+                                },
+                                headerCategory: "date"
                             }
                         }
                     }
@@ -867,10 +1064,10 @@ export default {
             if (this.zoneChecked) zones = []
 
             let groups = this.selectedGroups
-            if (this.groupChecked) groups = this.selectedGroups
+            if (this.groupChecked) groups = []
 
             let moneavs = this.selectedMoneavs
-            if (this.moneavChecked) moneavs = this.selectedMoneavs
+            if (this.moneavChecked) moneavs = []
             const date_min_org = this.form.getFieldValue("date_min")
             let date_min = moment(date_min_org, "MMMM D YYYY").format(
                 "YYYY-MM-DD"
@@ -997,27 +1194,6 @@ export default {
             this.per_cent_max = parseFloat(res.data.max)
         })
     }
-}
-const tFormat = t => {
-    // unix timestamp
-    var ts = 1565605570
-
-    // convert unix timestamp to milliseconds
-    var ts_ms = ts * 1000
-
-    // initialize new Date object
-    var date_ob = new Date(ts_ms)
-
-    // year as 4 digits (YYYY)
-    var year = date_ob.getFullYear()
-
-    // month as 2 digits (MM)
-    var month = ("0" + (date_ob.getMonth() + 1)).slice(-2)
-
-    // date as 2 digits (DD)
-    var date = ("0" + date_ob.getDate()).slice(-2)
-
-    return year + "-" + month + "-" + date
 }
 </script>
 
