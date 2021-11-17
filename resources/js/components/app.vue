@@ -170,11 +170,8 @@
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
                                     <a-form-item label="Minium Date">
-                                        <a-date-picker
-                                            show-time
-                                            size="large"
-                                            format="MMMM D YYYY"
-                                            @change="handleDateMinChange"
+                                        <datepicker
+                                            @selected="handleDateMinChange"
                                             placeholder="min date"
                                             v-decorator="[
                                                 'date_min',
@@ -188,16 +185,14 @@
                                                     ]
                                                 }
                                             ]"
-                                        />
+                                        >
+                                        </datepicker>
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
                                     <a-form-item label="Maxium Date">
-                                        <a-date-picker
-                                            show-time
-                                            size="large"
-                                            format="MMMM D YYYY"
-                                            @change="handleDateMaxChange"
+                                        <datepicker
+                                            @selected="handleDateMaxChange"
                                             placeholder="max date"
                                             v-decorator="[
                                                 'date_max',
@@ -211,7 +206,7 @@
                                                     ]
                                                 }
                                             ]"
-                                        />
+                                        ></datepicker>
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
@@ -331,9 +326,12 @@
 <script>
 import axios from "axios"
 import moment from "moment"
-import VueApexCharts from "vue-apexcharts"
+import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js"
 
 export default {
+    components: {
+        Datepicker
+    },
     data() {
         return {
             trans: {
@@ -814,7 +812,6 @@ export default {
         }
     },
     methods: {
-        moment,
         onClose() {
             this.sidebar = false
         },
@@ -845,14 +842,14 @@ export default {
         handleMoneavChange(value) {
             this.selectedMoneavs = value
         },
-        handleDateMinChange(d, s) {
+        handleDateMinChange(d) {
             this.form.setFieldsValue({
-                date_min: d.format("MMMM D YYYY")
+                date_min: moment(d).format("MMMM D YYYY")
             })
         },
         handleDateMaxChange(d, s) {
             this.form.setFieldsValue({
-                date_max: d.format("MMMM D YYYY")
+                date_max: moment(d).format("MMMM D YYYY")
             })
         },
         handleStackedChange(value) {
@@ -874,8 +871,14 @@ export default {
 
             let moneavs = this.selectedMoneavs
             if (this.moneavChecked) moneavs = this.selectedMoneavs
-            let date_min = this.form.getFieldValue("date_min")
-            let date_max = this.form.getFieldValue("date_max")
+            const date_min_org = this.form.getFieldValue("date_min")
+            let date_min = moment(date_min_org, "MMMM D YYYY").format(
+                "YYYY-MM-DD"
+            )
+            const date_max_org = this.form.getFieldValue("date_max")
+            let date_max = moment(date_max_org, "MMMM D YYYY").format(
+                "YYYY-MM-DD"
+            )
             let delta = this.delta
             let per_cent_min = this.per_cent_min
             let per_cent_max = this.per_cent_max
@@ -1017,3 +1020,21 @@ const tFormat = t => {
     return year + "-" + month + "-" + date
 }
 </script>
+
+<style>
+.vdp-datepicker {
+    display: flex;
+    justify-content: center;
+}
+.vdp-datepicker input {
+    width: 300px;
+    border-radius: 4px;
+    padding-left: 10px;
+    color: #f00;
+    font-size: 24px;
+    border: none;
+}
+.vdp-datepicker input:focus-visible {
+    outline: none;
+}
+</style>

@@ -17,12 +17,14 @@ window.Fire = new Vue()
 import Antd from "ant-design-vue"
 import VueApexCharts from "vue-apexcharts"
 import Notifications from 'vue-notification'
-
+import DatePicker from 'vuejs-datepicker'
 Vue.use(Antd)
 Vue.use(VueApexCharts)
 Vue.use(Notifications)
+Vue.use(DatePicker)
 
 Vue.component("apexchart", VueApexCharts)
+Vue.component("datepicker", Date)
 
 const app = new Vue({
     el: "#app",
