@@ -1,253 +1,6 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_app_vue"],{
 
-/***/ "./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var _he_IL = __webpack_require__(/*! ../../date-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js");
-
-var _he_IL2 = _interopRequireDefault(_he_IL);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-exports["default"] = _he_IL2['default'];
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ "./node_modules/babel-runtime/helpers/extends.js");
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _he_IL = __webpack_require__(/*! ../../vc-calendar/src/locale/he_IL */ "./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js");
-
-var _he_IL2 = _interopRequireDefault(_he_IL);
-
-var _he_IL3 = __webpack_require__(/*! ../../time-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js");
-
-var _he_IL4 = _interopRequireDefault(_he_IL3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-// Merge into a locale object
-var locale = {
-  lang: (0, _extends3['default'])({
-    placeholder: 'בחר תאריך',
-    rangePlaceholder: ['תאריך התחלה', 'תאריך סיום']
-  }, _he_IL2['default']),
-  timePickerLocale: (0, _extends3['default'])({}, _he_IL4['default'])
-};
-
-// All settings at:
-// https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json
-
-exports["default"] = locale;
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/locale-provider/he_IL.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var _he_IL = __webpack_require__(/*! ../locale/he_IL */ "./node_modules/ant-design-vue/lib/locale/he_IL.js");
-
-var _he_IL2 = _interopRequireDefault(_he_IL);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-exports["default"] = _he_IL2['default'];
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/locale/he_IL.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/locale/he_IL.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var _he_IL = __webpack_require__(/*! ../vc-pagination/locale/he_IL */ "./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js");
-
-var _he_IL2 = _interopRequireDefault(_he_IL);
-
-var _he_IL3 = __webpack_require__(/*! ../date-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/date-picker/locale/he_IL.js");
-
-var _he_IL4 = _interopRequireDefault(_he_IL3);
-
-var _he_IL5 = __webpack_require__(/*! ../time-picker/locale/he_IL */ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js");
-
-var _he_IL6 = _interopRequireDefault(_he_IL5);
-
-var _he_IL7 = __webpack_require__(/*! ../calendar/locale/he_IL */ "./node_modules/ant-design-vue/lib/calendar/locale/he_IL.js");
-
-var _he_IL8 = _interopRequireDefault(_he_IL7);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-exports["default"] = {
-  locale: 'he',
-  Pagination: _he_IL2['default'],
-  DatePicker: _he_IL4['default'],
-  TimePicker: _he_IL6['default'],
-  Calendar: _he_IL8['default'],
-  Table: {
-    filterTitle: 'תפריט סינון',
-    filterConfirm: 'אישור',
-    filterReset: 'איפוס',
-    selectAll: 'בחר הכל',
-    selectInvert: 'הפוך בחירה'
-  },
-  Modal: {
-    okText: 'אישור',
-    cancelText: 'ביטול',
-    justOkText: 'אישור'
-  },
-  Popconfirm: {
-    okText: 'אישור',
-    cancelText: 'ביטול'
-  },
-  Transfer: {
-    searchPlaceholder: 'חפש כאן',
-    itemUnit: 'פריט',
-    itemsUnit: 'פריטים'
-  },
-  Upload: {
-    uploading: 'מעלה...',
-    removeFile: 'הסר קובץ',
-    uploadError: 'שגיאת העלאה',
-    previewFile: 'הצג קובץ',
-    downloadFile: 'הורד קובץ'
-  },
-  Empty: {
-    description: 'אין מידע'
-  }
-};
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/time-picker/locale/he_IL.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var locale = {
-  placeholder: 'בחר שעה'
-};
-
-exports["default"] = locale;
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/vc-calendar/src/locale/he_IL.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = {
-  today: 'היום',
-  now: 'עכשיו',
-  backToToday: 'חזור להיום',
-  ok: 'אישור',
-  clear: 'איפוס',
-  month: 'חודש',
-  year: 'שנה',
-  timeSelect: 'בחר שעה',
-  dateSelect: 'בחר תאריך',
-  weekSelect: 'בחר שבוע',
-  monthSelect: 'בחר חודש',
-  yearSelect: 'בחר שנה',
-  decadeSelect: 'בחר עשור',
-  yearFormat: 'YYYY',
-  dateFormat: 'M/D/YYYY',
-  dayFormat: 'D',
-  dateTimeFormat: 'M/D/YYYY HH:mm:ss',
-  monthBeforeYear: true,
-  previousMonth: 'חודש קודם (PageUp)',
-  nextMonth: 'חודש הבא (PageDown)',
-  previousYear: 'שנה שעברה (Control + left)',
-  nextYear: 'שנה הבאה (Control + right)',
-  previousDecade: 'העשור הקודם',
-  nextDecade: 'העשור הבא',
-  previousCentury: 'המאה הקודמת',
-  nextCentury: 'המאה הבאה'
-};
-
-/***/ }),
-
-/***/ "./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/ant-design-vue/lib/vc-pagination/locale/he_IL.js ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = {
-  // Options.jsx
-  items_per_page: '/ עמוד',
-  jump_to: 'עבור אל',
-  jump_to_confirm: 'אישור',
-  page: '',
-
-  // Pagination.jsx
-  prev_page: 'העמוד הקודם',
-  next_page: 'העמוד הבא',
-  prev_5: '5 עמודים קודמים',
-  next_5: '5 עמודים הבאים',
-  prev_3: '3 עמודים קודמים',
-  next_3: '3 עמודים הבאים'
-};
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/app.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/app.vue?vue&type=script&lang=js& ***!
@@ -262,345 +15,346 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ant-design-vue/lib/locale-provider/he_IL */ "./node_modules/ant-design-vue/lib/locale-provider/he_IL.js");
 /* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
 /* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
+    return _defineProperty({
       trans: {
         qty: "qty",
         real_qty: "real qty",
@@ -614,7 +368,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       widthofscreen: window.innerWidth,
       collapsible: true,
-      locale: ant_design_vue_lib_locale_provider_he_IL__WEBPACK_IMPORTED_MODULE_3__["default"],
       trans_updated: 0,
       form: this.$form.createForm(this, {
         name: "coordinated"
@@ -644,33 +397,23 @@ __webpack_require__.r(__webpack_exports__);
       selectedOneGraph: "qty",
       oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
       chartOptionsQty: {
-        theme: {
-          mode: "light",
-          palette: "palette7"
-        },
         fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 1,
-            stops: [30, 70, 100],
-            shade: "dark"
-          }
+          colors: "#8d5e6b"
         },
+        colors: ["#ff6663"],
         stroke: {
-          width: 1
+          width: 2
         },
         dataLabels: {
           style: {
-            fontSize: "24px"
+            fontSize: "18px"
           },
           background: {
             opacity: 0.8
           }
         },
         grid: {
-          borderColor: "#fff",
+          borderColor: "#aaa",
           xaxis: {
             lines: {
               show: true
@@ -683,10 +426,10 @@ __webpack_require__.r(__webpack_exports__);
             fontSize: "40px",
             color: "#fff"
           },
-          offsetX: 200
+          offsetX: 300
         },
         chart: {
-          background: "#000",
+          background: "#444",
           id: "vuechart-example",
           height: "100%",
           zoom: {
@@ -705,19 +448,18 @@ __webpack_require__.r(__webpack_exports__);
         },
         yaxis: {
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           },
           labels: {
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              fontSize: "20px",
+              colors: "#eee"
             }
           }
         },
         xaxis: {
           axisTicks: {
-            show: false
+            height: true
           },
           type: "datetime",
           labels: {
@@ -754,48 +496,37 @@ __webpack_require__.r(__webpack_exports__);
               }
             },
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              colors: "#eee",
+              fontSize: "20px"
             }
           },
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           }
         }
       },
       seriesQty: [{
-        name: "Vue Chart",
+        name: "Qty Chart",
         data: []
       }],
       chartOptionsRqty: {
-        theme: {
-          mode: "light",
-          palette: "palette1"
-        },
         fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 1,
-            stops: [30, 70, 100],
-            shade: "dark"
-          }
+          colors: "#918672"
         },
+        colors: ["#d784d2"],
         stroke: {
-          width: 1
+          width: 2
         },
         dataLabels: {
           style: {
-            fontSize: "24px"
+            fontSize: "18px"
           },
           background: {
             opacity: 0.8
           }
         },
         grid: {
-          borderColor: "#fff",
+          borderColor: "#aaa",
           xaxis: {
             lines: {
               show: true
@@ -803,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         title: {
-          text: "real qty",
+          text: "real_qty",
           style: {
             fontSize: "40px",
             color: "#fff"
@@ -811,9 +542,9 @@ __webpack_require__.r(__webpack_exports__);
           offsetX: 300
         },
         chart: {
-          height: "1000px",
-          background: "#000",
+          background: "#444",
           id: "vuechart-example",
+          height: "100%",
           zoom: {
             type: "x",
             enabled: true
@@ -830,19 +561,18 @@ __webpack_require__.r(__webpack_exports__);
         },
         yaxis: {
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           },
           labels: {
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              fontSize: "20px",
+              colors: "#eee"
             }
           }
         },
         xaxis: {
           axisTicks: {
-            show: false
+            height: true
           },
           type: "datetime",
           labels: {
@@ -879,48 +609,37 @@ __webpack_require__.r(__webpack_exports__);
               }
             },
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              colors: "#eee",
+              fontSize: "20px"
             }
           },
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           }
         }
       },
       seriesRqty: [{
-        name: "Vue Chart",
+        name: "Real Chart",
         data: []
       }],
-      chartOptionsDelta: {
-        theme: {
-          mode: "light",
-          palette: "palette10"
-        },
+      chartOptionsPercent: {
         fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 1,
-            stops: [30, 70, 100],
-            shade: "dark"
-          }
+          colors: "#5e4739"
         },
+        colors: ["#d18c2a"],
         stroke: {
-          width: 1
+          width: 2
         },
         dataLabels: {
           style: {
-            fontSize: "24px"
+            fontSize: "18px"
           },
           background: {
             opacity: 0.8
           }
         },
         grid: {
-          borderColor: "#fff",
+          borderColor: "#aaa",
           xaxis: {
             lines: {
               show: true
@@ -928,7 +647,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         title: {
-          text: "delta",
+          text: "per_cent",
           style: {
             fontSize: "40px",
             color: "#fff"
@@ -936,9 +655,9 @@ __webpack_require__.r(__webpack_exports__);
           offsetX: 300
         },
         chart: {
-          height: "1000px",
-          background: "#000",
+          background: "#444",
           id: "vuechart-example",
+          height: "100%",
           zoom: {
             type: "x",
             enabled: true
@@ -955,19 +674,18 @@ __webpack_require__.r(__webpack_exports__);
         },
         yaxis: {
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           },
           labels: {
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              fontSize: "20px",
+              colors: "#eee"
             }
           }
         },
         xaxis: {
           axisTicks: {
-            show: false
+            height: true
           },
           type: "datetime",
           labels: {
@@ -1004,48 +722,37 @@ __webpack_require__.r(__webpack_exports__);
               }
             },
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              colors: "#eee",
+              fontSize: "20px"
             }
           },
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           }
         }
       },
-      seriesDelta: [{
-        name: "Vue Chart",
+      seriesPercent: [{
+        name: "Percent Chart",
         data: []
       }],
-      chartOptionsPercent: {
-        theme: {
-          mode: "light",
-          palette: "palette4"
-        },
+      chartOptionsDelta: {
         fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.9,
-            opacityTo: 1,
-            stops: [30, 70, 100],
-            shade: "dark"
-          }
+          colors: "#717052"
         },
+        colors: ["#fefd97"],
         stroke: {
-          width: 1
+          width: 2
         },
         dataLabels: {
           style: {
-            fontSize: "24px"
+            fontSize: "18px"
           },
           background: {
             opacity: 0.8
           }
         },
         grid: {
-          borderColor: "#fff",
+          borderColor: "#aaa",
           xaxis: {
             lines: {
               show: true
@@ -1053,7 +760,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         title: {
-          text: "percent",
+          text: "delta",
           style: {
             fontSize: "40px",
             color: "#fff"
@@ -1061,9 +768,9 @@ __webpack_require__.r(__webpack_exports__);
           offsetX: 300
         },
         chart: {
-          height: "1000px",
-          background: "#000",
+          background: "#444",
           id: "vuechart-example",
+          height: "100%",
           zoom: {
             type: "x",
             enabled: true
@@ -1080,19 +787,18 @@ __webpack_require__.r(__webpack_exports__);
         },
         yaxis: {
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           },
           labels: {
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              fontSize: "20px",
+              colors: "#eee"
             }
           }
         },
         xaxis: {
           axisTicks: {
-            show: false
+            height: true
           },
           type: "datetime",
           labels: {
@@ -1129,21 +835,19 @@ __webpack_require__.r(__webpack_exports__);
               }
             },
             style: {
-              colors: "#fff",
-              fontSize: "24px"
+              colors: "#eee",
+              fontSize: "20px"
             }
           },
           axisBorder: {
-            show: true,
-            color: "#fff"
+            show: false
           }
         }
-      },
-      seriesPercent: [{
-        name: "Vue Chart",
-        data: []
-      }]
-    };
+      }
+    }, "seriesPercent", [{
+      name: "Percent Chart",
+      data: []
+    }]);
   },
   methods: {
     moment: (moment__WEBPACK_IMPORTED_MODULE_1___default()),
@@ -1180,12 +884,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleDateMinChange: function handleDateMinChange(d, s) {
       this.form.setFieldsValue({
-        date_min: s
+        date_min: d.format("MMMM D YYYY")
       });
     },
     handleDateMaxChange: function handleDateMaxChange(d, s) {
       this.form.setFieldsValue({
-        date_max: s
+        date_max: d.format("MMMM D YYYY")
       });
     },
     handleStackedChange: function handleStackedChange(value) {
@@ -1292,6 +996,13 @@ __webpack_require__.r(__webpack_exports__);
         selectedZones: _this3.zones.map(function (e) {
           return e.waste_zone;
         })
+      });
+    }, function () {
+      _this3.$notify({
+        type: "warn",
+        group: "foo",
+        title: "<h1 style='font-size: 24px;color: white'>Warning Message:</h1>",
+        text: "<p style='font-size: 16px'>Error to fetch data from Server. Please check your server options file.</p>"
       });
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/groups").then(function (res) {
@@ -1433,7 +1144,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a-config-provider", { attrs: { locale: _vm.locale } }, [
+  return _c("a-config-provider", [
     _c(
       "div",
       { attrs: { id: "components-layout-demo-basic" } },
@@ -1906,7 +1617,7 @@ var render = function() {
                                       attrs: {
                                         "show-time": "",
                                         size: "large",
-                                        format: "YYYY-MM-DD",
+                                        format: "MMMM D YYYY",
                                         placeholder: "min date"
                                       },
                                       on: { change: _vm.handleDateMinChange }
@@ -1955,7 +1666,7 @@ var render = function() {
                                       attrs: {
                                         "show-time": "",
                                         size: "large",
-                                        format: "YYYY-MM-DD",
+                                        format: "MMMM D YYYY",
                                         placeholder: "max date"
                                       },
                                       on: { change: _vm.handleDateMaxChange }
@@ -2261,7 +1972,9 @@ var render = function() {
                 ])
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _c("notifications", { attrs: { group: "foo", width: "400px" } })
           ],
           1
         )

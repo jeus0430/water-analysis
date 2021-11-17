@@ -1,5 +1,5 @@
 <template>
-    <a-config-provider :locale="locale">
+    <a-config-provider>
         <div id="components-layout-demo-basic">
             <a-layout>
                 <a-layout-header>
@@ -173,7 +173,7 @@
                                         <a-date-picker
                                             show-time
                                             size="large"
-                                            format="YYYY-MM-DD"
+                                            format="MMMM D YYYY"
                                             @change="handleDateMinChange"
                                             placeholder="min date"
                                             v-decorator="[
@@ -196,7 +196,7 @@
                                         <a-date-picker
                                             show-time
                                             size="large"
-                                            format="YYYY-MM-DD"
+                                            format="MMMM D YYYY"
                                             @change="handleDateMaxChange"
                                             placeholder="max date"
                                             v-decorator="[
@@ -322,6 +322,7 @@
                         </div>
                     </a-layout-content>
                 </a-layout>
+                <notifications group="foo" width="400px" />
             </a-layout>
         </div>
     </a-config-provider>
@@ -330,7 +331,6 @@
 <script>
 import axios from "axios"
 import moment from "moment"
-import heIL from "ant-design-vue/lib/locale-provider/he_IL"
 import VueApexCharts from "vue-apexcharts"
 
 export default {
@@ -349,7 +349,6 @@ export default {
             },
             widthofscreen: window.innerWidth,
             collapsible: true,
-            locale: heIL,
             trans_updated: 0,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
@@ -377,49 +376,24 @@ export default {
             selectedOneGraph: "qty",
             oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
             chartOptionsQty: {
-                theme: {
-                    mode: "light",
-                    palette: "palette7"
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.7,
-                        opacityTo: 1,
-                        stops: [30, 70, 100],
-                        shade: "dark"
-                    }
-                },
-                stroke: {
-                    width: 1
-                },
+                fill: { colors: "#8d5e6b" },
+                colors: ["#ff6663"],
+                stroke: { width: 2 },
                 dataLabels: {
-                    style: {
-                        fontSize: "24px"
-                    },
-                    background: {
-                        opacity: 0.8
-                    }
+                    style: { fontSize: "18px" },
+                    background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#fff",
-                    xaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
+                    borderColor: "#aaa",
+                    xaxis: { lines: { show: true } }
                 },
                 title: {
                     text: "qty",
-                    style: {
-                        fontSize: "40px",
-                        color: "#fff"
-                    },
-                    offsetX: 200
+                    style: { fontSize: "40px", color: "#fff" },
+                    offsetX: 300
                 },
                 chart: {
-                    background: "#000",
+                    background: "#444",
                     id: "vuechart-example",
                     height: "100%",
                     zoom: {
@@ -438,19 +412,18 @@ export default {
                 },
                 yaxis: {
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     },
                     labels: {
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            fontSize: "20px",
+                            colors: "#eee"
                         }
                     }
                 },
                 xaxis: {
                     axisTicks: {
-                        show: false
+                        height: true
                     },
                     type: "datetime",
                     labels: {
@@ -496,68 +469,42 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            colors: "#eee",
+                            fontSize: "20px"
                         }
                     },
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     }
                 }
             },
             seriesQty: [
                 {
-                    name: "Vue Chart",
+                    name: "Qty Chart",
                     data: []
                 }
             ],
             chartOptionsRqty: {
-                theme: {
-                    mode: "light",
-                    palette: "palette1"
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.7,
-                        opacityTo: 1,
-                        stops: [30, 70, 100],
-                        shade: "dark"
-                    }
-                },
-                stroke: {
-                    width: 1
-                },
+                fill: { colors: "#918672" },
+                colors: ["#d784d2"],
+                stroke: { width: 2 },
                 dataLabels: {
-                    style: {
-                        fontSize: "24px"
-                    },
-                    background: {
-                        opacity: 0.8
-                    }
+                    style: { fontSize: "18px" },
+                    background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#fff",
-                    xaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
+                    borderColor: "#aaa",
+                    xaxis: { lines: { show: true } }
                 },
                 title: {
-                    text: "real qty",
-                    style: {
-                        fontSize: "40px",
-                        color: "#fff"
-                    },
+                    text: "real_qty",
+                    style: { fontSize: "40px", color: "#fff" },
                     offsetX: 300
                 },
                 chart: {
-                    height: "1000px",
-                    background: "#000",
+                    background: "#444",
                     id: "vuechart-example",
+                    height: "100%",
                     zoom: {
                         type: "x",
                         enabled: true
@@ -574,19 +521,18 @@ export default {
                 },
                 yaxis: {
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     },
                     labels: {
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            fontSize: "20px",
+                            colors: "#eee"
                         }
                     }
                 },
                 xaxis: {
                     axisTicks: {
-                        show: false
+                        height: true
                     },
                     type: "datetime",
                     labels: {
@@ -632,204 +578,42 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            colors: "#eee",
+                            fontSize: "20px"
                         }
                     },
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     }
                 }
             },
             seriesRqty: [
                 {
-                    name: "Vue Chart",
-                    data: []
-                }
-            ],
-            chartOptionsDelta: {
-                theme: {
-                    mode: "light",
-                    palette: "palette10"
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.7,
-                        opacityTo: 1,
-                        stops: [30, 70, 100],
-                        shade: "dark"
-                    }
-                },
-                stroke: {
-                    width: 1
-                },
-                dataLabels: {
-                    style: {
-                        fontSize: "24px"
-                    },
-                    background: {
-                        opacity: 0.8
-                    }
-                },
-                grid: {
-                    borderColor: "#fff",
-                    xaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
-                },
-                title: {
-                    text: "delta",
-                    style: {
-                        fontSize: "40px",
-                        color: "#fff"
-                    },
-                    offsetX: 300
-                },
-                chart: {
-                    height: "1000px",
-                    background: "#000",
-                    id: "vuechart-example",
-                    zoom: {
-                        type: "x",
-                        enabled: true
-                    },
-                    toolbar: {
-                        export: {
-                            csv: {
-                                dateFormatter(timestamp) {
-                                    return tFormat(timestamp)
-                                }
-                            }
-                        }
-                    }
-                },
-                yaxis: {
-                    axisBorder: {
-                        show: true,
-                        color: "#fff"
-                    },
-                    labels: {
-                        style: {
-                            colors: "#fff",
-                            fontSize: "24px"
-                        }
-                    }
-                },
-                xaxis: {
-                    axisTicks: {
-                        show: false
-                    },
-                    type: "datetime",
-                    labels: {
-                        formatter: function(value, timestamp, opts) {
-                            if (value % 10 == 1) {
-                                let d = new Date(value - 1)
-                                // Copy date so don't modify original
-                                d = new Date(
-                                    Date.UTC(
-                                        d.getFullYear(),
-                                        d.getMonth(),
-                                        d.getDate()
-                                    )
-                                )
-                                // Set to nearest Thursday: current date + 4 - current day number
-                                // Make Sunday's day number 7
-                                d.setUTCDate(
-                                    d.getUTCDate() + 4 - (d.getUTCDay() || 7)
-                                )
-                                // Get first day of year
-                                var yearStart = new Date(
-                                    Date.UTC(d.getUTCFullYear(), 0, 1)
-                                )
-                                // Calculate full weeks to nearest Thursday
-                                var weekNo = Math.ceil(
-                                    ((d - yearStart) / 86400000 + 1) / 7
-                                )
-                                // Return array of year and week number
-                                return d.getUTCFullYear() + "-" + weekNo + "W"
-                            } else if (value % 10 == 2) {
-                                let d = new Date(value - 2)
-                                return d.getFullYear() + "-" + d.getMonth()
-                            } else if (value % 10 == 3) {
-                                let d = new Date(value - 3)
-                                return d.getFullYear()
-                            } else {
-                                if (typeof value != "undefined") {
-                                    const d = new Date(value)
-                                    return d.toISOString().split("T")[0]
-                                } else {
-                                    return ""
-                                }
-                            }
-                        },
-                        style: {
-                            colors: "#fff",
-                            fontSize: "24px"
-                        }
-                    },
-                    axisBorder: {
-                        show: true,
-                        color: "#fff"
-                    }
-                }
-            },
-            seriesDelta: [
-                {
-                    name: "Vue Chart",
+                    name: "Real Chart",
                     data: []
                 }
             ],
             chartOptionsPercent: {
-                theme: {
-                    mode: "light",
-                    palette: "palette4"
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.9,
-                        opacityTo: 1,
-                        stops: [30, 70, 100],
-                        shade: "dark"
-                    }
-                },
-                stroke: {
-                    width: 1
-                },
+                fill: { colors: "#5e4739" },
+                colors: ["#d18c2a"],
+                stroke: { width: 2 },
                 dataLabels: {
-                    style: {
-                        fontSize: "24px"
-                    },
-                    background: {
-                        opacity: 0.8
-                    }
+                    style: { fontSize: "18px" },
+                    background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#fff",
-                    xaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
+                    borderColor: "#aaa",
+                    xaxis: { lines: { show: true } }
                 },
                 title: {
-                    text: "percent",
-                    style: {
-                        fontSize: "40px",
-                        color: "#fff"
-                    },
+                    text: "per_cent",
+                    style: { fontSize: "40px", color: "#fff" },
                     offsetX: 300
                 },
                 chart: {
-                    height: "1000px",
-                    background: "#000",
+                    background: "#444",
                     id: "vuechart-example",
+                    height: "100%",
                     zoom: {
                         type: "x",
                         enabled: true
@@ -846,19 +630,18 @@ export default {
                 },
                 yaxis: {
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     },
                     labels: {
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            fontSize: "20px",
+                            colors: "#eee"
                         }
                     }
                 },
                 xaxis: {
                     axisTicks: {
-                        show: false
+                        height: true
                     },
                     type: "datetime",
                     labels: {
@@ -904,19 +687,127 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#fff",
-                            fontSize: "24px"
+                            colors: "#eee",
+                            fontSize: "20px"
                         }
                     },
                     axisBorder: {
-                        show: true,
-                        color: "#fff"
+                        show: false
                     }
                 }
             },
             seriesPercent: [
                 {
-                    name: "Vue Chart",
+                    name: "Percent Chart",
+                    data: []
+                }
+            ],
+            chartOptionsDelta: {
+                fill: { colors: "#717052" },
+                colors: ["#fefd97"],
+                stroke: { width: 2 },
+                dataLabels: {
+                    style: { fontSize: "18px" },
+                    background: { opacity: 0.8 }
+                },
+                grid: {
+                    borderColor: "#aaa",
+                    xaxis: { lines: { show: true } }
+                },
+                title: {
+                    text: "delta",
+                    style: { fontSize: "40px", color: "#fff" },
+                    offsetX: 300
+                },
+                chart: {
+                    background: "#444",
+                    id: "vuechart-example",
+                    height: "100%",
+                    zoom: {
+                        type: "x",
+                        enabled: true
+                    },
+                    toolbar: {
+                        export: {
+                            csv: {
+                                dateFormatter(timestamp) {
+                                    return tFormat(timestamp)
+                                }
+                            }
+                        }
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    labels: {
+                        style: {
+                            fontSize: "20px",
+                            colors: "#eee"
+                        }
+                    }
+                },
+                xaxis: {
+                    axisTicks: {
+                        height: true
+                    },
+                    type: "datetime",
+                    labels: {
+                        formatter: function(value, timestamp, opts) {
+                            if (value % 10 == 1) {
+                                let d = new Date(value - 1)
+                                // Copy date so don't modify original
+                                d = new Date(
+                                    Date.UTC(
+                                        d.getFullYear(),
+                                        d.getMonth(),
+                                        d.getDate()
+                                    )
+                                )
+                                // Set to nearest Thursday: current date + 4 - current day number
+                                // Make Sunday's day number 7
+                                d.setUTCDate(
+                                    d.getUTCDate() + 4 - (d.getUTCDay() || 7)
+                                )
+                                // Get first day of year
+                                var yearStart = new Date(
+                                    Date.UTC(d.getUTCFullYear(), 0, 1)
+                                )
+                                // Calculate full weeks to nearest Thursday
+                                var weekNo = Math.ceil(
+                                    ((d - yearStart) / 86400000 + 1) / 7
+                                )
+                                // Return array of year and week number
+                                return d.getUTCFullYear() + "-" + weekNo + "W"
+                            } else if (value % 10 == 2) {
+                                let d = new Date(value - 2)
+                                return d.getFullYear() + "-" + d.getMonth()
+                            } else if (value % 10 == 3) {
+                                let d = new Date(value - 3)
+                                return d.getFullYear()
+                            } else {
+                                if (typeof value != "undefined") {
+                                    const d = new Date(value)
+                                    return d.toISOString().split("T")[0]
+                                } else {
+                                    return ""
+                                }
+                            }
+                        },
+                        style: {
+                            colors: "#eee",
+                            fontSize: "20px"
+                        }
+                    },
+                    axisBorder: {
+                        show: false
+                    }
+                }
+            },
+            seriesPercent: [
+                {
+                    name: "Percent Chart",
                     data: []
                 }
             ]
@@ -956,12 +847,12 @@ export default {
         },
         handleDateMinChange(d, s) {
             this.form.setFieldsValue({
-                date_min: s
+                date_min: d.format("MMMM D YYYY")
             })
         },
         handleDateMaxChange(d, s) {
             this.form.setFieldsValue({
-                date_max: s
+                date_max: d.format("MMMM D YYYY")
             })
         },
         handleStackedChange(value) {
@@ -1055,13 +946,25 @@ export default {
         }
     },
     mounted: function() {
-        axios.get("/api/zones").then(res => {
-            let data = res.data
-            this.zones = data
-            this.form.setFieldsValue({
-                selectedZones: this.zones.map(e => e.waste_zone)
-            })
-        })
+        axios.get("/api/zones").then(
+            res => {
+                let data = res.data
+                this.zones = data
+                this.form.setFieldsValue({
+                    selectedZones: this.zones.map(e => e.waste_zone)
+                })
+            },
+            () => {
+                this.$notify({
+                    type: "warn",
+                    group: "foo",
+                    title:
+                        "<h1 style='font-size: 24px;color: white'>Warning Message:</h1>",
+                    text:
+                        "<p style='font-size: 16px'>Error to fetch data from Server. Please check your server options file.</p>"
+                })
+            }
+        )
         axios.get("/api/groups").then(res => {
             this.groups = res.data
             this.form.setFieldsValue({

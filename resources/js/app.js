@@ -16,9 +16,11 @@ window.Fire = new Vue()
 
 import Antd from "ant-design-vue"
 import VueApexCharts from "vue-apexcharts"
+import Notifications from 'vue-notification'
 
 Vue.use(Antd)
 Vue.use(VueApexCharts)
+Vue.use(Notifications)
 
 Vue.component("apexchart", VueApexCharts)
 
