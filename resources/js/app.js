@@ -27,7 +27,7 @@ Vue.use(Notifications)
 Vue.use(DatePicker)
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-    locale: 'de',
+    locale: 'he',
     fallbackLocale: 'en',
     messages
 });
