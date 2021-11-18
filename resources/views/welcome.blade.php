@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel Vue</title>
+    <title>Water Difference Analytics</title>
+    <link rel="icon" type="image/x-icon" href="<?= asset('favicon.ico') ?>">
 
     <script>
         window.baseURI = "<?= config('app.url') ?>";
@@ -23,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{  config('app.url') . mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ config('app.url') . mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
