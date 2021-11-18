@@ -3,9 +3,9 @@
         <div id="components-layout-demo-basic">
             <a-layout>
                 <a-layout-header>
-                    <h1>Water Differences Analytics</h1>
+                    <h1>{{ $t("water_difference_analytics") }}</h1>
                     <a-button type="primary" @click="showDrawer" size="large">
-                        Show Sidebar
+                        {{ $t("show_sidebar") }}
                     </a-button>
                 </a-layout-header>
                 <a-layout>
