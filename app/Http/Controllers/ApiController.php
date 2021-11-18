@@ -111,10 +111,10 @@ class ApiController extends Controller
         is_null($delta_min) || $query = $query->where('delta', '>=', $delta_min);
 
         switch ($xaxis) {
-            case "mone_av":
+            case "mone":
                 $query = $query->groupByRaw('dt, mone');
                 break;
-            case "ezor":
+            case "zone":
                 $query = $query->groupByRaw('dt, waste_zone');
                 break;
             case 'group':
