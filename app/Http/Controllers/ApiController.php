@@ -67,7 +67,7 @@ class ApiController extends Controller
         $sql_part  = '';
 
         switch ($xaxis) {
-            case 'ezor':
+            case 'zone':
                 $ind_field = 'waste_zone';
                 $sql_part = $ind_field . ', ';
                 break;
@@ -75,7 +75,7 @@ class ApiController extends Controller
                 $ind_field = 'waste_group';
                 $sql_part = $ind_field . ', ';
                 break;
-            case 'mone_av':
+            case 'mone':
                 $ind_field = 'mone';
                 $sql_part = $ind_field . ', ';
                 break;
@@ -147,14 +147,14 @@ class ApiController extends Controller
             $column = [];
             $column_i = [];
             switch ($xaxis) {
-                case "mone_av":
+                case "mone":
                     $sql = "SELECT DISTINCT mone_av AS descr, mone_av FROM monim WHERE mone_av <> ''";
                     if ($mone_avs)
                         $sql .= ' AND mone_av IN (' . implode(',', $mone_avs) . ')';
                     $column = DB::select($sql);
                     $column_i = array_column($column, 'mone_av');
                     break;
-                case 'ezor':
+                case 'zone':
                     $sql = "SELECT *, waste_description AS descr, waste_zone FROM index_waste_zone";
                     if ($zones)
                         $sql .= ' WHERE waste_zone IN (' . implode(',', $zones) . ')';
