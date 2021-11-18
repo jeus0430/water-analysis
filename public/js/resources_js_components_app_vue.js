@@ -15,7 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuejs_datepicker_dist_vuejs_datepicker_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker/dist/vuejs-datepicker.esm.js */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -344,29 +343,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    Datepicker: vuejs_datepicker_dist_vuejs_datepicker_esm_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
   data: function data() {
     return _defineProperty({
-      trans: {
-        qty: "qty",
-        real_qty: "real qty",
-        delta: "delta",
-        per_cent: "percent",
-        waste_zone: "waste_zone",
-        mone_av: "mone_av",
-        belongs_to_group: "belongs_to_group",
-        day_date: "day_date",
-        sum: "sum"
-      },
       widthofscreen: window.innerWidth,
       collapsible: true,
-      trans_updated: 0,
       form: this.$form.createForm(this, {
         name: "coordinated"
       }),
@@ -386,19 +372,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       delta_max: 1,
       per_cent_min: -1,
       per_cent_max: 1,
-      xOptions: ["date", "ezor", "group", "mone_av"],
+      xOptions: [{
+        label: this.$i18n.t("date"),
+        value: "date"
+      }, {
+        label: this.$i18n.t("zone"),
+        value: "zone"
+      }, {
+        label: this.$i18n.t("group"),
+        value: "group"
+      }, {
+        label: this.$i18n.t("mone"),
+        value: "mone"
+      }],
       selectedX: "date",
       sum: "daily",
-      sumOptions: ["daily", "weekly", "monthly", "yearly"],
+      sumOptions: [{
+        label: this.$i18n.t("daily"),
+        value: "daily"
+      }, {
+        label: this.$i18n.t("weekly"),
+        value: "weekly"
+      }, {
+        label: this.$i18n.t("monthly"),
+        value: "monthly"
+      }, {
+        label: this.$i18n.t("yearly"),
+        value: "yearly"
+      }],
       graphType: "area",
-      graphOptions: ["line", "bar", "area"],
+      graphOptions: [{
+        label: this.$i18n.t("line"),
+        value: "line"
+      }, {
+        label: this.$i18n.t("bar"),
+        value: "bar"
+      }, {
+        label: this.$i18n.t("area"),
+        value: "area"
+      }],
       selectedOneGraph: "qty",
-      oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
+      oneGraphOptions: [{
+        label: this.$i18n.t("qty"),
+        value: "qty"
+      }, {
+        label: this.$i18n.t("real_qty"),
+        value: "r_qty"
+      }, {
+        label: this.$i18n.t("delta"),
+        value: "delta"
+      }, {
+        label: this.$i18n.t("percent"),
+        value: "percent"
+      }],
       chartOptionsQty: {
-        fill: {
-          colors: "#8d5e6b"
+        theme: {
+          palette: "palette7"
         },
-        colors: ["#ff6663"],
         stroke: {
           width: 2
         },
@@ -410,24 +440,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             opacity: 0.8
           }
         },
-        grid: {
-          borderColor: "#aaa",
-          xaxis: {
-            lines: {
-              show: true
-            }
-          }
-        },
         title: {
-          text: "qty",
+          text: this.$i18n.t("qty"),
           style: {
-            fontSize: "40px",
-            color: "#fff"
+            fontSize: "50px",
+            color: "#000"
           },
           offsetX: 300
         },
         chart: {
-          background: "#444",
+          background: "#b1b1b1",
           id: "vuechart-example",
           height: "100%",
           zoom: {
@@ -477,17 +499,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         yaxis: {
+          tickAmount: 30,
           axisBorder: {
             show: false
           },
           labels: {
             style: {
               fontSize: "20px",
-              colors: "#eee"
+              colors: "#444"
+            }
+          }
+        },
+        grid: {
+          borderColor: "#777",
+          xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          yaxis: {
+            lines: {
+              show: true
             }
           }
         },
         xaxis: {
+          tickAmount: 30,
           axisTicks: {
             height: true
           },
@@ -526,7 +563,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               }
             },
             style: {
-              colors: "#eee",
+              colors: "#444",
               fontSize: "20px"
             }
           },
@@ -540,10 +577,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         data: []
       }],
       chartOptionsRqty: {
-        fill: {
-          colors: "#918672"
+        theme: {
+          palette: "palette1"
         },
-        colors: ["#d784d2"],
         stroke: {
           width: 2
         },
@@ -556,23 +592,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         grid: {
-          borderColor: "#aaa",
+          borderColor: "#777",
           xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          yaxis: {
             lines: {
               show: true
             }
           }
         },
         title: {
-          text: "real_qty",
+          text: this.$i18n.t("real_qty"),
           style: {
-            fontSize: "40px",
-            color: "#fff"
+            fontSize: "50px",
+            color: "#000"
           },
           offsetX: 300
         },
         chart: {
-          background: "#444",
+          background: "#b1b1b1",
           id: "vuechart-example",
           height: "100%",
           zoom: {
@@ -622,17 +663,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         yaxis: {
+          tickAmount: 30,
           axisBorder: {
             show: false
           },
           labels: {
             style: {
               fontSize: "20px",
-              colors: "#eee"
+              colors: "#444"
             }
           }
         },
         xaxis: {
+          tickAmount: 30,
           axisTicks: {
             height: true
           },
@@ -671,7 +714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               }
             },
             style: {
-              colors: "#eee",
+              colors: "#444",
               fontSize: "20px"
             }
           },
@@ -685,10 +728,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         data: []
       }],
       chartOptionsPercent: {
-        fill: {
-          colors: "#5e4739"
+        theme: {
+          palette: "palette10"
         },
-        colors: ["#d18c2a"],
         stroke: {
           width: 2
         },
@@ -701,23 +743,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         grid: {
-          borderColor: "#aaa",
+          borderColor: "#777",
           xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          yaxis: {
             lines: {
               show: true
             }
           }
         },
         title: {
-          text: "per_cent",
+          text: this.$i18n.t("percent"),
           style: {
-            fontSize: "40px",
-            color: "#fff"
+            fontSize: "50px",
+            color: "#000"
           },
           offsetX: 300
         },
         chart: {
-          background: "#444",
+          background: "#b1b1b1",
           id: "vuechart-example",
           height: "100%",
           zoom: {
@@ -767,17 +814,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         yaxis: {
+          tickAmount: 30,
           axisBorder: {
             show: false
           },
           labels: {
             style: {
               fontSize: "20px",
-              colors: "#eee"
+              colors: "#444"
             }
           }
         },
         xaxis: {
+          tickAmount: 30,
           axisTicks: {
             height: true
           },
@@ -816,7 +865,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               }
             },
             style: {
-              colors: "#eee",
+              colors: "#444",
               fontSize: "20px"
             }
           },
@@ -830,10 +879,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         data: []
       }],
       chartOptionsDelta: {
-        fill: {
-          colors: "#717052"
+        theme: {
+          palette: "palette8"
         },
-        colors: ["#fefd97"],
         stroke: {
           width: 2
         },
@@ -846,23 +894,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         grid: {
-          borderColor: "#aaa",
+          borderColor: "#777",
           xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          yaxis: {
             lines: {
               show: true
             }
           }
         },
         title: {
-          text: "delta",
+          text: this.$i18n.t("delta"),
           style: {
-            fontSize: "40px",
-            color: "#fff"
+            fontSize: "50px",
+            color: "#000"
           },
           offsetX: 300
         },
         chart: {
-          background: "#444",
+          background: "#b1b1b1",
           id: "vuechart-example",
           height: "100%",
           zoom: {
@@ -912,17 +965,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         yaxis: {
+          tickAmount: 30,
           axisBorder: {
             show: false
           },
           labels: {
             style: {
               fontSize: "20px",
-              colors: "#eee"
+              colors: "#444"
             }
           }
         },
         xaxis: {
+          tickAmount: 30,
           axisTicks: {
             height: true
           },
@@ -961,7 +1016,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               }
             },
             style: {
-              colors: "#eee",
+              colors: "#444",
               fontSize: "20px"
             }
           },
@@ -1149,14 +1204,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return e.mone_av;
         })
       });
-    });
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/trans").then(function (res) {
-      _this3.trans = Object.assign(_this3.trans, res.data);
-      _this3.chartOptionsQty.title.text = _this3.trans.qty;
-      _this3.chartOptionsRqty.title.text = _this3.trans.real_qty;
-      _this3.chartOptionsDelta.title.text = _this3.trans.delta;
-      _this3.chartOptionsPercent.title.text = _this3.trans.per_cent;
-      _this3.trans_updated = 1;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/delta_range").then(function (res) {
       _this3.delta_min = parseFloat(res.data.min);
@@ -1749,7 +1796,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: _vm.trans.waste_zone } },
+                                  { attrs: { label: _vm.$t("zone") } },
                                   [
                                     _c(
                                       "a-checkbox",
@@ -1765,7 +1812,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Select All\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(_vm.$t("select_all")) +
+                                            "\n                                    "
                                         )
                                       ]
                                     ),
@@ -1795,7 +1844,9 @@ var render = function() {
                                         ],
                                         attrs: {
                                           mode: "multiple",
-                                          placeholder: "Select zones",
+                                          placeholder: _vm.$t(
+                                            "select_zones_placeholder"
+                                          ),
                                           size: "large",
                                           disabled: _vm.zoneChecked
                                         },
@@ -1829,14 +1880,12 @@ var render = function() {
                                 staticStyle: {
                                   "grid-column": "1/5",
                                   width: "100%"
-                                }
+                                },
+                                attrs: { label: _vm.$t("group") }
                               },
                               [
                                 _c(
                                   "a-form-item",
-                                  {
-                                    attrs: { label: _vm.trans.belongs_to_group }
-                                  },
                                   [
                                     _c(
                                       "a-checkbox",
@@ -1852,7 +1901,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Select All\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(_vm.$t("select_all")) +
+                                            "\n                                    "
                                         )
                                       ]
                                     ),
@@ -1883,7 +1934,9 @@ var render = function() {
                                         attrs: {
                                           mode: "multiple",
                                           size: "large",
-                                          placeholder: "Select group",
+                                          placeholder: _vm.$t(
+                                            "select_groups_placeholder"
+                                          ),
                                           disabled: _vm.groupChecked
                                         },
                                         on: { change: _vm.handleGroupChange }
@@ -1925,7 +1978,7 @@ var render = function() {
                                   "a-form-item",
                                   {
                                     staticClass: "sm-ch",
-                                    attrs: { label: _vm.trans.mone_av }
+                                    attrs: { label: _vm.$t("mone") }
                                   },
                                   [
                                     _c(
@@ -1942,7 +1995,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Select All\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(_vm.$t("select_all")) +
+                                            "\n                                    "
                                         )
                                       ]
                                     ),
@@ -1973,7 +2028,9 @@ var render = function() {
                                         attrs: {
                                           mode: "multiple",
                                           size: "large",
-                                          placeholder: "Select Mone_av",
+                                          placeholder: _vm.$t(
+                                            "select_mones_placeholder"
+                                          ),
                                           disabled: _vm.moneavChecked
                                         },
                                         on: { change: _vm.handleMoneavChange }
@@ -2011,7 +2068,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: _vm.trans.delta } },
+                                  { attrs: { label: _vm.$t("delta") } },
                                   [
                                     _c("a-input-number", {
                                       staticStyle: {
@@ -2019,7 +2076,7 @@ var render = function() {
                                         "text-align": "center"
                                       },
                                       attrs: {
-                                        placeholder: "Minium Delta",
+                                        placeholder: _vm.$t("minimum"),
                                         size: "large"
                                       },
                                       model: {
@@ -2038,7 +2095,7 @@ var render = function() {
                                       },
                                       attrs: {
                                         size: "large",
-                                        placeholder: "Maximum Delta"
+                                        placeholder: _vm.$t("maximum")
                                       },
                                       model: {
                                         value: _vm.delta_max,
@@ -2066,7 +2123,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: _vm.trans.per_cent } },
+                                  { attrs: { label: _vm.$t("percent") } },
                                   [
                                     _c("a-input-number", {
                                       staticStyle: {
@@ -2075,7 +2132,7 @@ var render = function() {
                                       },
                                       attrs: {
                                         size: "large",
-                                        placeholder: "Minium Percent"
+                                        placeholder: _vm.$t("minimum")
                                       },
                                       model: {
                                         value: _vm.per_cent_min,
@@ -2093,7 +2150,7 @@ var render = function() {
                                       },
                                       attrs: {
                                         size: "large",
-                                        placeholder: "Maximum Percent"
+                                        placeholder: _vm.$t("maximum")
                                       },
                                       model: {
                                         value: _vm.per_cent_max,
@@ -2121,7 +2178,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "Minium Date" } },
+                                  { attrs: { label: _vm.$t("minimum") } },
                                   [
                                     _c("datepicker", {
                                       directives: [
@@ -2144,7 +2201,7 @@ var render = function() {
                                             "[\n                                            'date_min',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Min Date!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
                                         }
                                       ],
-                                      attrs: { placeholder: "min date" },
+                                      attrs: { placeholder: _vm.$t("minimum") },
                                       on: { selected: _vm.handleDateMinChange }
                                     })
                                   ],
@@ -2165,7 +2222,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "Maxium Date" } },
+                                  { attrs: { label: _vm.$t("maximum") } },
                                   [
                                     _c("datepicker", {
                                       directives: [
@@ -2188,7 +2245,7 @@ var render = function() {
                                             "[\n                                            'date_max',\n                                            {\n                                                rules: [\n                                                    {\n                                                        required: true,\n                                                        message:\n                                                            'Please select Max Date!'\n                                                    }\n                                                ]\n                                            }\n                                        ]"
                                         }
                                       ],
-                                      attrs: { placeholder: "max date" },
+                                      attrs: { placeholder: _vm.$t("maximum") },
                                       on: { selected: _vm.handleDateMaxChange }
                                     })
                                   ],
@@ -2209,7 +2266,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "X-axis:" } },
+                                  { attrs: { label: _vm.$t("x_axis") } },
                                   [
                                     _c("a-radio-group", {
                                       attrs: {
@@ -2238,7 +2295,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: _vm.trans.sum } },
+                                  { attrs: { label: _vm.$t("sum") } },
                                   [
                                     _c("a-radio-group", {
                                       attrs: { options: _vm.sumOptions },
@@ -2268,7 +2325,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "Graph Type:" } },
+                                  { attrs: { label: _vm.$t("graph_type") } },
                                   [
                                     _c("a-radio-group", {
                                       attrs: {
@@ -2301,7 +2358,7 @@ var render = function() {
                               [
                                 _c(
                                   "a-form-item",
-                                  { attrs: { label: "Graph:" } },
+                                  { attrs: { label: _vm.$t("graph_data") } },
                                   [
                                     _c("a-radio-group", {
                                       attrs: { options: _vm.oneGraphOptions },
@@ -2342,7 +2399,9 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                        Stacked\n                                    "
+                                              "\n                                        " +
+                                                _vm._s(_vm.$t("stacked")) +
+                                                "\n                                    "
                                             )
                                           ]
                                         )
@@ -2382,7 +2441,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Show\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(_vm.$t("show")) +
+                                            "\n                                    "
                                         )
                                       ]
                                     )
@@ -2408,7 +2469,6 @@ var render = function() {
                       [
                         _vm.selectedOneGraph == "qty"
                           ? _c("apexchart", {
-                              key: _vm.trans_updated,
                               ref: "qtyChart",
                               attrs: {
                                 options: _vm.chartOptionsQty,
@@ -2431,7 +2491,6 @@ var render = function() {
                         [
                           _vm.selectedOneGraph == "r_qty"
                             ? _c("apexchart", {
-                                key: _vm.trans_updated,
                                 attrs: {
                                   options: _vm.chartOptionsRqty,
                                   series: _vm.seriesRqty,
@@ -2454,7 +2513,6 @@ var render = function() {
                         [
                           _vm.selectedOneGraph == "delta"
                             ? _c("apexchart", {
-                                key: _vm.trans_updated,
                                 attrs: {
                                   options: _vm.chartOptionsDelta,
                                   series: _vm.seriesDelta,
@@ -2475,9 +2533,8 @@ var render = function() {
                       _c(
                         "div",
                         [
-                          _vm.selectedOneGraph == "per_cent"
+                          _vm.selectedOneGraph == "percent"
                             ? _c("apexchart", {
-                                key: _vm.trans_updated,
                                 attrs: {
                                   options: _vm.chartOptionsPercent,
                                   series: _vm.seriesPercent,

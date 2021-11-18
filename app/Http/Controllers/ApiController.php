@@ -15,14 +15,6 @@ class ApiController extends Controller
         return response()->json($zones, 200);
     }
 
-    public function trans()
-    {
-        $sql    = "SELECT * FROM translation";
-        $trans  = DB::select($sql);
-        $trans  = array_column($trans, 'hebrew_name', 'field_name');
-        return response()->json($trans);
-    }
-
     public function groups()
     {
         $sql  = "SELECT * FROM index_waste_group";

@@ -18,15 +18,25 @@ import Antd from "ant-design-vue"
 import VueApexCharts from "vue-apexcharts"
 import Notifications from 'vue-notification'
 import DatePicker from 'vuejs-datepicker'
+import VueI18n from 'vue-i18n'
+import messages from "./messages.json"
+
 Vue.use(Antd)
 Vue.use(VueApexCharts)
 Vue.use(Notifications)
 Vue.use(DatePicker)
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+    locale: 'de',
+    fallbackLocale: 'en',
+    messages
+});
 
 Vue.component("apexchart", VueApexCharts)
-Vue.component("datepicker", Date)
+Vue.component("datepicker", DatePicker)
 
 const app = new Vue({
     el: "#app",
-    router
+    router,
+    i18n
 }).$mount("#app")

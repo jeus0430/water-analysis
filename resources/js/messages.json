@@ -1,0 +1,35 @@
+{
+    "en": {
+        "zone": "Waste Zone",
+        "group": "Waste Group",
+        "mone": "Mone",
+        "select_all": "Select All",
+        "delta": "Delta",
+        "percent": "Percent",
+        "minimum": "Minimum",
+        "maximum": "Maximum",
+        "x_axis": "X-Axis",
+        "sum": "Sum",
+        "graph_type": "Graph Type",
+        "graph_data": "Graph Data",
+        "show": "Show",
+        "stacked": "Stacked",
+        "select_zones_placeholder": "Select Zones",
+        "select_groups_placeholder": "Select Groups",
+        "select_mones_placeholder": "Select Mones",
+        "date": "Date",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "line": "Line",
+        "bar": "Bar",
+        "area": "Area",
+        "qty": "QTY",
+        "real_qty": "Real QTY"
+    },
+    "de": {
+        "hello": "Guten Tag, {name}!",
+        "there": "Guten t!"
+    }
+}

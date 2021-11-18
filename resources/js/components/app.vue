@@ -24,16 +24,18 @@
                                 style="display: grid;grid-template: auto / 1fr 1fr 1fr 1fr;grid-column-gap: 24px;grid-row-gap: 20px; align-items: flex-end;text-align:center;justify-items: center;"
                             >
                                 <div style="grid-column: 1/5;width: 100%;">
-                                    <a-form-item :label="trans.waste_zone">
+                                    <a-form-item :label="$t('zone')">
                                         <a-checkbox
                                             v-model="zoneChecked"
                                             @change="handleAllZones"
                                         >
-                                            Select All
+                                            {{ $t("select_all") }}
                                         </a-checkbox>
                                         <a-select
                                             mode="multiple"
-                                            placeholder="Select zones"
+                                            :placeholder="
+                                                $t('select_zones_placeholder')
+                                            "
                                             size="large"
                                             @change="handleZoneChange"
                                             :disabled="zoneChecked"
@@ -59,20 +61,23 @@
                                         </a-select>
                                     </a-form-item>
                                 </div>
-                                <div style="grid-column: 1/5;width: 100%;">
-                                    <a-form-item
-                                        :label="trans.belongs_to_group"
-                                    >
+                                <div
+                                    style="grid-column: 1/5;width: 100%;"
+                                    :label="$t('group')"
+                                >
+                                    <a-form-item>
                                         <a-checkbox
                                             v-model="groupChecked"
                                             @change="handleAllGroups"
                                         >
-                                            Select All
+                                            {{ $t("select_all") }}
                                         </a-checkbox>
                                         <a-select
                                             mode="multiple"
                                             size="large"
-                                            placeholder="Select group"
+                                            :placeholder="
+                                                $t('select_groups_placeholder')
+                                            "
                                             @change="handleGroupChange"
                                             :disabled="groupChecked"
                                             v-decorator="[
@@ -99,19 +104,21 @@
                                 </div>
                                 <div style="grid-column: 1/5;width: 100%">
                                     <a-form-item
-                                        :label="trans.mone_av"
                                         class="sm-ch"
+                                        :label="$t('mone')"
                                     >
                                         <a-checkbox
                                             v-model="moneavChecked"
                                             @change="handleAllMones"
                                         >
-                                            Select All
+                                            {{ $t("select_all") }}
                                         </a-checkbox>
                                         <a-select
                                             mode="multiple"
                                             size="large"
-                                            placeholder="Select Mone_av"
+                                            :placeholder="
+                                                $t('select_mones_placeholder')
+                                            "
                                             @change="handleMoneavChange"
                                             :disabled="moneavChecked"
                                             v-decorator="[
@@ -137,42 +144,42 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
-                                    <a-form-item :label="trans.delta">
+                                    <a-form-item :label="$t('delta')">
                                         <a-input-number
                                             v-model="delta_min"
                                             style="width: 265px; text-align: center"
-                                            placeholder="Minium Delta"
+                                            :placeholder="$t('minimum')"
                                             size="large"
                                         />
                                         <a-input-number
                                             style="width: 265px; text-align: center"
                                             size="large"
                                             v-model="delta_max"
-                                            placeholder="Maximum Delta"
+                                            :placeholder="$t('maximum')"
                                         />
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
-                                    <a-form-item :label="trans.per_cent">
+                                    <a-form-item :label="$t('percent')">
                                         <a-input-number
                                             size="large"
                                             v-model="per_cent_min"
                                             style=" width: 265px; text-align: center"
-                                            placeholder="Minium Percent"
+                                            :placeholder="$t('minimum')"
                                         />
                                         <a-input-number
                                             style="width: 265px; text-align: center"
                                             size="large"
                                             v-model="per_cent_max"
-                                            placeholder="Maximum Percent"
+                                            :placeholder="$t('maximum')"
                                         />
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
-                                    <a-form-item label="Minium Date">
+                                    <a-form-item :label="$t('minimum')">
                                         <datepicker
                                             @selected="handleDateMinChange"
-                                            placeholder="min date"
+                                            :placeholder="$t('minimum')"
                                             v-decorator="[
                                                 'date_min',
                                                 {
@@ -190,10 +197,10 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
-                                    <a-form-item label="Maxium Date">
+                                    <a-form-item :label="$t('maximum')">
                                         <datepicker
                                             @selected="handleDateMaxChange"
-                                            placeholder="max date"
+                                            :placeholder="$t('maximum')"
                                             v-decorator="[
                                                 'date_max',
                                                 {
@@ -210,7 +217,7 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
-                                    <a-form-item label="X-axis:">
+                                    <a-form-item :label="$t('x_axis')">
                                         <a-radio-group
                                             name="xaxis"
                                             :value="selectedX"
@@ -221,7 +228,7 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
-                                    <a-form-item :label="trans.sum">
+                                    <a-form-item :label="$t('sum')">
                                         <a-radio-group
                                             v-model="sum"
                                             :options="sumOptions"
@@ -229,7 +236,7 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 1/3;width: 100%;">
-                                    <a-form-item label="Graph Type:">
+                                    <a-form-item :label="$t('graph_type')">
                                         <a-radio-group
                                             name="graph"
                                             v-model="graphType"
@@ -238,7 +245,7 @@
                                     </a-form-item>
                                 </div>
                                 <div style="grid-column: 3/5;width: 100%;">
-                                    <a-form-item label="Graph:">
+                                    <a-form-item :label="$t('graph_data')">
                                         <a-radio-group
                                             v-model="selectedOneGraph"
                                             :options="oneGraphOptions"
@@ -250,7 +257,7 @@
                                         <a-checkbox
                                             @change="handleStackedChange"
                                         >
-                                            Stacked
+                                            {{ $t("stacked") }}
                                         </a-checkbox>
                                     </a-form-item>
                                 </div>
@@ -263,7 +270,7 @@
                                             type="primary"
                                             html-type="submit"
                                         >
-                                            Show
+                                            {{ $t("show") }}
                                         </a-button>
                                     </a-form-item>
                                 </div>
@@ -277,7 +284,6 @@
                                     ref="qtyChart"
                                     v-if="selectedOneGraph == 'qty'"
                                     :options="chartOptionsQty"
-                                    :key="trans_updated"
                                     :series="seriesQty"
                                     :type="graphType"
                                 ></apexchart>
@@ -290,7 +296,6 @@
                                     :options="chartOptionsRqty"
                                     :series="seriesRqty"
                                     :type="graphType"
-                                    :key="trans_updated"
                                 ></apexchart>
                             </div>
                         </div>
@@ -300,7 +305,6 @@
                                     v-if="selectedOneGraph == 'delta'"
                                     :options="chartOptionsDelta"
                                     :series="seriesDelta"
-                                    :key="trans_updated"
                                     :type="graphType"
                                 ></apexchart>
                             </div>
@@ -308,9 +312,8 @@
                         <div style="width: 80vw;margin: auto;">
                             <div>
                                 <apexchart
-                                    v-if="selectedOneGraph == 'per_cent'"
+                                    v-if="selectedOneGraph == 'percent'"
                                     :options="chartOptionsPercent"
-                                    :key="trans_updated"
                                     :series="seriesPercent"
                                     :type="graphType"
                                 ></apexchart>
@@ -327,28 +330,12 @@
 <script>
 import axios from "axios"
 import moment from "moment"
-import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js"
 
 export default {
-    components: {
-        Datepicker
-    },
     data() {
         return {
-            trans: {
-                qty: "qty",
-                real_qty: "real qty",
-                delta: "delta",
-                per_cent: "percent",
-                waste_zone: "waste_zone",
-                mone_av: "mone_av",
-                belongs_to_group: "belongs_to_group",
-                day_date: "day_date",
-                sum: "sum"
-            },
             widthofscreen: window.innerWidth,
             collapsible: true,
-            trans_updated: 0,
             form: this.$form.createForm(this, { name: "coordinated" }),
             data: [],
             zoneChecked: true,
@@ -366,33 +353,50 @@ export default {
             delta_max: 1,
             per_cent_min: -1,
             per_cent_max: 1,
-            xOptions: ["date", "ezor", "group", "mone_av"],
+
+            xOptions: [
+                { label: this.$i18n.t("date"), value: "date" },
+                { label: this.$i18n.t("zone"), value: "zone" },
+                { label: this.$i18n.t("group"), value: "group" },
+                { label: this.$i18n.t("mone"), value: "mone" }
+            ],
             selectedX: "date",
             sum: "daily",
-            sumOptions: ["daily", "weekly", "monthly", "yearly"],
+            sumOptions: [
+                { label: this.$i18n.t("daily"), value: "daily" },
+                { label: this.$i18n.t("weekly"), value: "weekly" },
+                { label: this.$i18n.t("monthly"), value: "monthly" },
+                { label: this.$i18n.t("yearly"), value: "yearly" }
+            ],
             graphType: "area",
-            graphOptions: ["line", "bar", "area"],
+            graphOptions: [
+                { label: this.$i18n.t("line"), value: "line" },
+                { label: this.$i18n.t("bar"), value: "bar" },
+                { label: this.$i18n.t("area"), value: "area" }
+            ],
             selectedOneGraph: "qty",
-            oneGraphOptions: ["qty", "r_qty", "delta", "per_cent"],
+            oneGraphOptions: [
+                { label: this.$i18n.t("qty"), value: "qty" },
+                { label: this.$i18n.t("real_qty"), value: "r_qty" },
+                { label: this.$i18n.t("delta"), value: "delta" },
+                { label: this.$i18n.t("percent"), value: "percent" }
+            ],
             chartOptionsQty: {
-                fill: { colors: "#8d5e6b" },
-                colors: ["#ff6663"],
+                theme: {
+                    palette: "palette7"
+                },
                 stroke: { width: 2 },
                 dataLabels: {
                     style: { fontSize: "18px" },
                     background: { opacity: 0.8 }
                 },
-                grid: {
-                    borderColor: "#aaa",
-                    xaxis: { lines: { show: true } }
-                },
                 title: {
-                    text: "qty",
-                    style: { fontSize: "40px", color: "#fff" },
+                    text: this.$i18n.t("qty"),
+                    style: { fontSize: "50px", color: "#000" },
                     offsetX: 300
                 },
                 chart: {
-                    background: "#444",
+                    background: "#b1b1b1",
                     id: "vuechart-example",
                     height: "100%",
                     zoom: {
@@ -459,17 +463,24 @@ export default {
                     }
                 },
                 yaxis: {
+                    tickAmount: 30,
                     axisBorder: {
                         show: false
                     },
                     labels: {
                         style: {
                             fontSize: "20px",
-                            colors: "#eee"
+                            colors: "#444"
                         }
                     }
                 },
+                grid: {
+                    borderColor: "#777",
+                    xaxis: { lines: { show: true } },
+                    yaxis: { lines: { show: true } }
+                },
                 xaxis: {
+                    tickAmount: 30,
                     axisTicks: {
                         height: true
                     },
@@ -517,7 +528,7 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#eee",
+                            colors: "#444",
                             fontSize: "20px"
                         }
                     },
@@ -533,24 +544,26 @@ export default {
                 }
             ],
             chartOptionsRqty: {
-                fill: { colors: "#918672" },
-                colors: ["#d784d2"],
+                theme: {
+                    palette: "palette1"
+                },
                 stroke: { width: 2 },
                 dataLabels: {
                     style: { fontSize: "18px" },
                     background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#aaa",
-                    xaxis: { lines: { show: true } }
+                    borderColor: "#777",
+                    xaxis: { lines: { show: true } },
+                    yaxis: { lines: { show: true } }
                 },
                 title: {
-                    text: "real_qty",
-                    style: { fontSize: "40px", color: "#fff" },
+                    text: this.$i18n.t("real_qty"),
+                    style: { fontSize: "50px", color: "#000" },
                     offsetX: 300
                 },
                 chart: {
-                    background: "#444",
+                    background: "#b1b1b1",
                     id: "vuechart-example",
                     height: "100%",
                     zoom: {
@@ -617,17 +630,19 @@ export default {
                     }
                 },
                 yaxis: {
+                    tickAmount: 30,
                     axisBorder: {
                         show: false
                     },
                     labels: {
                         style: {
                             fontSize: "20px",
-                            colors: "#eee"
+                            colors: "#444"
                         }
                     }
                 },
                 xaxis: {
+                    tickAmount: 30,
                     axisTicks: {
                         height: true
                     },
@@ -675,7 +690,7 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#eee",
+                            colors: "#444",
                             fontSize: "20px"
                         }
                     },
@@ -691,24 +706,26 @@ export default {
                 }
             ],
             chartOptionsPercent: {
-                fill: { colors: "#5e4739" },
-                colors: ["#d18c2a"],
+                theme: {
+                    palette: "palette10"
+                },
                 stroke: { width: 2 },
                 dataLabels: {
                     style: { fontSize: "18px" },
                     background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#aaa",
-                    xaxis: { lines: { show: true } }
+                    borderColor: "#777",
+                    xaxis: { lines: { show: true } },
+                    yaxis: { lines: { show: true } }
                 },
                 title: {
-                    text: "per_cent",
-                    style: { fontSize: "40px", color: "#fff" },
+                    text: this.$i18n.t("percent"),
+                    style: { fontSize: "50px", color: "#000" },
                     offsetX: 300
                 },
                 chart: {
-                    background: "#444",
+                    background: "#b1b1b1",
                     id: "vuechart-example",
                     height: "100%",
                     zoom: {
@@ -775,17 +792,19 @@ export default {
                     }
                 },
                 yaxis: {
+                    tickAmount: 30,
                     axisBorder: {
                         show: false
                     },
                     labels: {
                         style: {
                             fontSize: "20px",
-                            colors: "#eee"
+                            colors: "#444"
                         }
                     }
                 },
                 xaxis: {
+                    tickAmount: 30,
                     axisTicks: {
                         height: true
                     },
@@ -833,7 +852,7 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#eee",
+                            colors: "#444",
                             fontSize: "20px"
                         }
                     },
@@ -849,24 +868,26 @@ export default {
                 }
             ],
             chartOptionsDelta: {
-                fill: { colors: "#717052" },
-                colors: ["#fefd97"],
+                theme: {
+                    palette: "palette8"
+                },
                 stroke: { width: 2 },
                 dataLabels: {
                     style: { fontSize: "18px" },
                     background: { opacity: 0.8 }
                 },
                 grid: {
-                    borderColor: "#aaa",
-                    xaxis: { lines: { show: true } }
+                    borderColor: "#777",
+                    xaxis: { lines: { show: true } },
+                    yaxis: { lines: { show: true } }
                 },
                 title: {
-                    text: "delta",
-                    style: { fontSize: "40px", color: "#fff" },
+                    text: this.$i18n.t("delta"),
+                    style: { fontSize: "50px", color: "#000" },
                     offsetX: 300
                 },
                 chart: {
-                    background: "#444",
+                    background: "#b1b1b1",
                     id: "vuechart-example",
                     height: "100%",
                     zoom: {
@@ -933,17 +954,19 @@ export default {
                     }
                 },
                 yaxis: {
+                    tickAmount: 30,
                     axisBorder: {
                         show: false
                     },
                     labels: {
                         style: {
                             fontSize: "20px",
-                            colors: "#eee"
+                            colors: "#444"
                         }
                     }
                 },
                 xaxis: {
+                    tickAmount: 30,
                     axisTicks: {
                         height: true
                     },
@@ -991,7 +1014,7 @@ export default {
                             }
                         },
                         style: {
-                            colors: "#eee",
+                            colors: "#444",
                             fontSize: "20px"
                         }
                     },
@@ -1176,14 +1199,6 @@ export default {
             this.form.setFieldsValue({
                 selectedMoneavs: this.mone_avs.map(e => e.mone_av)
             })
-        })
-        axios.get("/api/trans").then(res => {
-            this.trans = Object.assign(this.trans, res.data)
-            this.chartOptionsQty.title.text = this.trans.qty
-            this.chartOptionsRqty.title.text = this.trans.real_qty
-            this.chartOptionsDelta.title.text = this.trans.delta
-            this.chartOptionsPercent.title.text = this.trans.per_cent
-            this.trans_updated = 1
         })
         axios.get("/api/delta_range").then(res => {
             this.delta_min = parseFloat(res.data.min)
